@@ -1,4 +1,3 @@
-<!-- ### Hi there 👋 -->
 ![Jidoka](./jidoka.jpg)<br/>
 Saya saat ini bekerja di <span style="color:blue"><a href="https://jidokasystem.co.id/" style="color:blue" target="_blank"><code>**PT. Jidoka System Indonesia**</code></a></span>. Di sana saya menjadi <code>**Website Developer**</code> yang menguasai <code>**Python**</code> dan Front end-nya <code>**Odoo**</code>, ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white) dan Framework-nya ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white), ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white) dan teknologinya ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white).
 
@@ -19,6 +18,7 @@ Contact Me on:<br/>
 </details>
 -->
 
+<!-- ### font size-->
 ## 📈 Raditya Statistic ![Profile View Counter](https://komarev.com/ghpvc/?username=raditya2010631170111&color=green)
 <p align="left">
 <a href="https://github.com/raditya2010631170111">
