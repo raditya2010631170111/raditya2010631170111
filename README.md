@@ -1,5 +1,5 @@
-<!-- ### Hi there 👋
-![Null Banner](./NULL.png) -->
+<!-- ### Hi there 👋 -->
+![Null Banner](./jidoka.jpg)
 Saya saat ini bekerja di <span style="color:blue"><a href="https://jidokasystem.co.id/" style="color:blue" target="_blank"><code>**PT. Jidoka System Indonesia**</code></a></span>. Di sana saya menjadi <code>**Website Developer**</code> yang menguasai <code>**Python**</code> dan Front end-nya <code>**Odoo**</code>, <code>**PHP**</code> dan Framework-nya <code>**Flutter**</code>, <code>**Dart**</code> dan teknologinya <code>**Flutter**</code>.
 
 ## :trophy: Award ![Award](https://img.shields.io/badge/Dicoding-Best%20Capstone-blue)
