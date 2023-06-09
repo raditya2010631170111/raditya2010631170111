@@ -25,7 +25,7 @@ Contact Me on:<br/>
 
 [![discordBadge]][Discord]
  -->
-## :trophy: Top Repositories ![Top Repositories](https://img.shields.io/badge/Dicoding-Best%20Capstone-blue)
+## :trophy: Personal Repositories ![Personal Repositories](https://img.shields.io/badge/Dicoding-Best%20Capstone-blue)
 <a href="https://github.com/raditya2010631170111/flutter-dart">
   <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=raditya2010631170111&repo=flutter-dart&theme=dark" alt="GitHub Stats" />
 </a>
@@ -33,7 +33,12 @@ Contact Me on:<br/>
   <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=raditya2010631170111&repo=laravel&theme=dark" alt="GitHub Stats" />
 </a>
 
-<!-- ### font size-->
+## :trophy: Company Repositories ![Company Repositories]
+<a href="https://github.com/arisnew/ckwi">
+  <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=arisnew&repo=ckwi&theme=dark" alt="GitHub Stats" />
+</a>
+
+<!-- ### font size - Enter between code=no error-->
 ## 📈 Raditya Statistic ![Profile View Counter](https://komarev.com/ghpvc/?username=raditya2010631170111&color=green)
 <p align="left">
 <a href="https://github.com/raditya2010631170111">
