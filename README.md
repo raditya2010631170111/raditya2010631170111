@@ -33,10 +33,15 @@ Contact Me on:<br/>
   <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=raditya2010631170111&repo=laravel&theme=dark" alt="GitHub Stats" />
 </a>
 
-## :trophy: Company Repositories ![Company Repositories]
+## :trophy: Company Repositories ![Company Repositories](https://img.shields.io/badge/Dicoding-Best%20Capstone-blue)
 <a href="https://github.com/arisnew/ckwi">
   <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=arisnew&repo=ckwi&theme=dark" alt="GitHub Stats" />
 </a>
+
+<details>
+  <summary><em>Only Developers of Jidoka can view this repository.</em></summary>
+  <p><em>If you are a member of Jidoka, make sure you are signed in to GitHub and have access to this private repository to view its contents.</em></p>
+</details>
 
 <!-- ### font size - Enter between code=no error-->
 ## 📈 Raditya Statistic ![Profile View Counter](https://komarev.com/ghpvc/?username=raditya2010631170111&color=green)
