@@ -32,12 +32,13 @@ Contact Me on:<br/>
 <a href="https://github.com/raditya2010631170111/laravel">
   <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=raditya2010631170111&repo=laravel&theme=dark" alt="GitHub Stats" />
 </a>
+
 <!-- ### font size-->
 ## 📈 Raditya Statistic ![Profile View Counter](https://komarev.com/ghpvc/?username=raditya2010631170111&color=green)
 <p align="left">
 <a href="https://github.com/raditya2010631170111">
-  <img width="99%" src="https://github-readme-stats-eight-theta.vercel.app/api?username=raditya2010631170111&show_icons=true&theme=dark&include_all_commits=true&count_private=true&icon_color=000000&bg_color=000000"/>
-  <img width="38%" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=raditya2010631170111&layout=compact&langs_count=10&theme=dark&bg_color=000000"/>
+  <img width="99%" src="https://github-readme-stats-eight-theta.vercel.app/api?username=raditya2010631170111&show_icons=true&theme=dark&include_all_commits=true&count_private=true&icon"/>
+  <img width="38%" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=raditya2010631170111&layout=compact&langs_count=10&theme=dark"/>
   <img width="60%" src="https://github-readme-streak-stats.herokuapp.com/?user=raditya2010631170111&theme=dark&fire=000000&ring=000000&currStreakLabel=000000"/>
 </a>
 </p>
