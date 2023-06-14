@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record model="jidokaacademy.course" id="course_odoo">
+            <field name="name">Course Technical Odoo</field>
+            <field name="description">Course Technical Odoo V16 Community</field>
+        </record>
+
+        <record model="jidokaacademy.course" id="course_python">
+            <field name="name">Course Python</field>
+            <field name="description">Course Python Beginner Level</field>
+        </record>
+    </data>
+</odoo>

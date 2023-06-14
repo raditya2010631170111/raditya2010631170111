@@ -1,0 +1,768 @@
+﻿./ckwi-addons
+./odoo14/server/odoo/addons
+
+Task 1 Report pdf sample request: padding, width
+Task 2 Fields attachment modul crm
+Task 3 button state [crm.sample.request]
+Task 4 Report Voucher In & Voucher Out [account.voucher]
+Task 5 Error btn Confirm [RND] kecuali user Administrator
+Task 6 menu Defect & computed [jidoka_inventory]
+Task 7 kanban [crm.lead]
+Task 8 Report xls 
+Task 9 Report xls convert to pdf size
+
+framework/front end: PHP: 43% Laravel, 15% Code Igniter/Python odoo
+composer/docker, Laragon/service PostgreSQL, extension: odoo snippet
+muk_web_theme, ibo icon builder for odoo
+init=py,conf=restart & manifest=csv,xml=upgrade - .xml can change .py=restart
+update apps/favorite dashboard/install
+addons: 1 directory before modul, 1 coma
+'psql not found' pg_path
+pgadmin user pwd odoo16pwd=conf db_user = odoo install user pwd, privileges=blue icon
+master pwd (X admin)=.conf admin_passwd "access denied"
+git > odoo16 > postgresql 15 > pgadmin port random 5432 8069 8072>properties create 
+environment>edit>path C:\jidoka\odoo16\phyton & \Scripts 
+.\server python .\odoo-bin 
+.\odoo_training_jidoka python .\odoo-bin scaffold jidokaacademy
+python .\odoo-bin -u modulename (data files after table) -c .\odoo.conf -d databasename --stop-after-init
+main>dev>clone>HTTP>main>dev/dev-raditya
+merge/pull>dev-r/dev>compare>uncheck delete>create>ask/merge
+git pull>upgrade - depends ['stock', 'base']
+Reyhan: qa_qc/level.aql/categ_id = Many2one product = depends ['product']
+'depends': ['base','crm','product', 'stock', 'resource','sale','jidoka_marketing','sale_crm','mrp','report_xlsx','hr'],
+design_process - crm_sample_request - jidoka_marketing
+debug=odoo running on >edit>model, external - object=foreach/inheret, method=button
+msu_rooster = search menu: technical/views model, click views, find "ir_holiday" = msu_holiday
+restart .py = init - upgrade .xml .csv = manifest
+clone staging2 > python -m pip install "PyJWT===1.7.1" simplejson pyfcm xlsxwriter --user/copy lib/site-packages> restore database
+upgrade: 1st view > 2nd menuitem
+ask chatgpt always state "odoo 14" > google
+all my task backup somewhere > push
+stop mid-action: git commit > alt+f4/upgrade
+
+E:\jidoka\odoo14\ckwi-addons git clone https://github.com/arisnew/ckwi.git E:/jidoka/ckwi-addons
+<link> <directory> 
+git/python --version
+git branch <create_branch> (git branch), git checkout <enter_branch> 
+git config --global user.name raditya2010631170111 | as205303
+git config --global user.email 2010631170111@student.unsika.ac.id | key-ckwi
+git branch -m = rename -d/-D = delete 
+git push origin --delete <branch>
+git diff .\jidoka_purchase\models\purchase_order.py = worktree
+git blame .\jidoka_purchase\models\purchase_order.py (git blame)
+git reset --hard = discard all
+git status
+git add . git commit -m "" git push origin dev-raditya
+git restore .\jidoka_purchase\report\m.xml --staged = unstage
+git checkout .\jidoka_purchase\report\m.xml = undo commit
+git --no-pager log -n <limit> (git lens's tabs commit)
+q ctrl+c = exit
+git reset --soft HEAD~ / ~2 = 2 push before
+
+open folder & add f to workspace, File>Auto Save
+$=python
+ctrl+d=block
+ctrl+c>v/ctrl+d=copy 1line
+terminal=ctrl+`
+ctrl+f > esc
+ctrl+page=tabs
+alt+tab=windows
+win+v=clipboard
+shift+home
+shift+tab=reverse
+cmd = instance
+
+reset: contact issue = delete database=activate/line codes error=false making modul
+✓ Demo=auto dummy=long load
+-modular: fields & override, cons, method & override
+-delegation: link record of models to parent
+compute=based field, dependencies=computed based computed 
+onchange=warning invalid value
+make value without adding to database:
+constraints verified invariant by python/SQL
+emp_id = error Python
+
+case-sensitif - model_stock_picking = snake_case
+fields.Float = camelCase
+CONTRAINT_ = ALL_CAPS
+#/""" """"
+	
+constraint
+@api.constrains('rounding') : Method yang memiliki decorator ini berfungsi untuk membuat constraints (pengecekan batasan/aturan) value sebuah field
+if self.rounding <= 0:
+    raise ValidationError
+
+sql constrains - attribute class
+_sql_constraints = [
+	('name_description_check', 'CHECK(name != description)', 'The title of the course should not be the description'),
+	('name_unique', 'UNIQUE(name)', 'Category name must be unique!'),
+]
+
+inventory/transfer & purchase/order = purchase/stock_picking.xml
+method: button_validate ('grading_done', '=', True)
+
+rnd_flow/wiz/design_detail state-s
+samwill/wiz/_multi_line
+design_process, crm_sample, marketing/wiz/approval & contract_review
+inventory, manufacturing,  material/wiz/tag_card
+_sale/sale.py
+odoo/sale/sale.py
+/mail/mail_activity.py state =
+
+widget="priority"/"radio"/"selection"=X create edit/readonly='1'
+.Float(digit=(12,6), track_visibility='onchange')
+.Datetime/Dateorder
+<width="33"> default
+after, before, replace, inside menyisipkan, attribute: readonly/domain
+invisible, required, column_invisible
+	self.write({'state': 'draft_to_approval'})
+	OR
+	if self.state == 'to_approve':
+				self.state = 'approved'
+
+status noupdate=True > False
+
+		advanced view/default btn Filters
+		<record id="jidokaacademy.course_view_search" model="ir.ui.view">
+			<field name="name">jidokaacademy.course.view.search</field>
+			<field name="model">jidokaacademy.course</field>
+			<field name="arch" type="xml">
+		inherit view = no <form> 
+				<search string="Search Description">
+					<field name="name"></field>
+						<filter name="my_course" string="Active"
+							domain="[('user_id', '=', uid)]"/>
+						<group string="Group By">
+							<filter name="group_by_user" string="Responsible"
+								context="{'group_by': 'user_id'}"/>
+						</group> </search></field></record>
+						
+		<field model>hr.contract</field>
+			<field name="tax_id" widget="many2one/many2many_tags" options="{'no_create_edit':True}" optional="hide"/"show"/> 3 titik
+			<field name="user_id" widget="many2one_avatar_user"/>
+		.=@name='order_line'
+		form//field=form/group/group
+		tree/field
+		_sale/sale.xml .line
+		<xpath expr="//notebook/page[]/field[]/tree[1]/field[@name='name']" position="after">
+		<field name="" attrs="{'column_invisible': [('parent.state','not in',['.'])]}"/>
+		Open: Order Lines
+		<xpath expr="//notebook/page[]/field[]/form/group/group[2]" position="replace">
+		<field name="" attrs="{'invisible': [('state','not in',('.'))] }"/>
+		unknown
+		<xpath expr="//notebook/page[]/field[]/form/group/group/field[@name='product_id']">
+		<xpath expr="//field[]/form//field[@name='product_id']">
+		<xpath expr="//field[]/tree/field[@name='name']">
+		<xpath expr="//field[]/tree">
+		<xpath expr="//notebook/page[]/field/tree/field[@name='product_template_id']">
+		
+		<xpath expr="//field[@name='default_code']" position="after"> 
+			<field name="code"/>
+		<xpath expr="//field[@name='origin']" position="attributes">
+			<attribute name="string">Source Document</attribute>
+			<attribute name="attrs">{ 'readonly': [('state','in',('assigned','grading','done','cancel'))], 'invisible': [('is_tagcard','=', True)]} </attribute></xpath>
+		OR <invisible="1"/> <force_save="1"/>
+		OR <position="inside">
+			<button type="object"  name="action_view_grading_summary" class="oe_stat_button"
+				icon="fa-list" attrs="{'invisible':['|', ('grading_summary_count', '=', 0), ('state', 'not in', ('assigned','grading','done'))]}">
+				<field name="grading_summary_count" widget="statinfo" string="Grading Summary"/>
+				<field name='grading_summary_ids' invisible="1"/>
+			</button></xpath>
+						
+btn top right corner: 
+<div name="button_box" position="inside">
+	<button class="oe_stat_button" attrs="{'invisible'}" type="object" name= icon="fa-comment">
+		<field string= name=" widget="statinfo"/></button></div>
+		
+column invisible = unless written on state-s
+
+in button states = if self.field not 
+ValidationError("")
+
+    _name = 'design.detail.bom.line' size_panjang = fields.Float("P") size_lebar = fields.Float("L") size_tebal = fields.Float("T")
+    
+    @api.depends('size_panjang', 'size_lebar','size_tebal','product_qty')
+    def get_calc(self):
+        for cal in self:
+            meter3 = cal.size_panjang * cal.size_lebar * cal.size_tebal
+            meter2 = (cal.size_panjang * cal.size_lebar) + (cal.size_panjang * cal.size_tebal) + (cal.size_lebar * cal.size_tebal)
+    # size_cm
+    #       cal.total_meter_cubic = ((meter3) / 1000000) * cal.product_qty if meter3 > 0 else 0.00
+    #       cal.total_meter_persegi = ((meter2) / 10000) * cal.product_qty if meter2 > 0 else 0.00
+    # size_mm
+            cal.total_meter_cubic = ((meter3) / 1000000000) * cal.product_qty if meter3 > 0 else 0.00
+            cal.total_meter_persegi = ((meter2) / 1000000) * cal.product_qty if meter2 > 0 else 0.0
+
+desin_process/product.product
+size = fields.Selection([('size_cm', 'cm'),('size_mm', 'mm'),], 'Dimensi Uom')
+    @api.depends('rasio', 'size','size_panjang','size_lebar', 'size_tebal')
+    def get_calc_mcubic(self):
+        for record in self:
+            if record.size == 'size_cm':
+                record.total_meter_cubic = (((record.size_panjang * record.size_lebar) * record.size_tebal )/ record.rasio)  / 1000000 if record.rasio != 0 else 0.00
+            else:
+                record.total_meter_cubic = (((record.size_panjang * record.size_lebar) * record.size_tebal ) / record.rasio) / 1000000000 if record.rasio != 0 else 0.00
+    @api.depends('rasio', 'size','size_panjang','size_lebar', 'size_tebal')
+    def get_calc_mpersegi(self):
+        for record in self:
+            if record.size == 'size_cm':
+                record.total_meter_persegi = (((record.size_panjang/record.rasio) * (record.size_lebar/record.rasio)* 2 ) + ((record.size_panjang/record.rasio) * (record.size_tebal/record.rasio) * 2 ) + ((record.size_lebar/record.rasio) * (record.size_tebal/record.rasio) * 2 ))/ 10000 if record.rasio != 0 else 0.00
+            else:
+                record.total_meter_persegi = (((record.size_panjang/record.rasio) * (record.size_lebar/record.rasio)* 2 ) + ((record.size_panjang/record.rasio) * (record.size_tebal/record.rasio) * 2 ) + ((record.size_lebar/record.rasio) * (record.size_tebal/record.rasio) * 2 ))/ 1000000 if record.rasio != 0 else 0.00
+		
+unit internal: botol & unit subcount: liter, ml they both connect
+fleet.vehicle: X model V views of module
+============================================================================================================================================================================
+localhost:8069/report/html/jidokaacademy.report_session/1
+print Action dialog & btn Print dialog rearrage: change previous's id
+
+	<record id="report_reporting_action" model="ir.actions.report">
+		<field name="name"></field>
+		<field name="model"></field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_file">jidoka_awb.report_training_session</field>
+		<field name="print_report_name">'Surat Jalan Pabrik - %s' % (object.name)</field>
+		<field name="binding_model_id" ref="jidoka_awb.model_stock_picking_batch"/> = model_id:id = error model
+		<field name="binding_view_types">report</field></record>
+report/report.xml
+	<template id="report_picking">
+        <t t-call="web.html_container">
+			field.One2many
+			picking_ids = stock.picking
+			move_ids_without_package = line/stock.move
+			o.picking_ids.move_ids_without_package
+			<t t-foreach="docs"/"o.object in model" t-as="o"/"move" 
+				t=o.field.field</t>
+			default=vertical <tr>=horizontal
+        </t></template>
+		
+		<report id="sample_request_xlsx"
+            model="crm.sample.request"
+            string="Sample Request (XLS)"
+            report_type="xlsx"
+            name="jidoka_crm_sample_request.report_sample_request_xlsx"
+            file="jidoka_crm_sample_request"
+            print_report_name="('%s' % (object.name))"
+            attachment_use="False"/>
+		
+    _name = 'report.jidoka_crm_sample_request.report_sample_request_xlsx'
+	def generate_xlsx_report(self, workbook, data, objects):
+		format
+		sheet = workbook.add_worksheet('Spec Design Excel')
+		for obj/quant in objects:
+			formatted_quantity = format(quant.quantity, ',')
+			formatted_total = format(round(quant.total, 2), ',')
+			worksheet.write(row, 2, formatted_quantity)
+			<span t-esc="'{0:,.2f}'.format(int(o.amount_total))"/>
+			number_format = workbook.add_format({'num_format':'[$Rp-421]#,##0.00','font_size':10,'align':'center','valign':'vcenter'})
+			number_format.set_right(1)  = border-right
+			
+			sheet.set_column(0, 0, 30) 0-0
+            sheet.set_column(1, 6, 14) 1-6 width
+			row = row + 4 (jarak empat dari data's first data)
+			sheet.write('D9',obj.name) / (row, column, value, format)
+			sheet.write_string
+			sheet.merge_range('A9:A11', 'UKURAN INVOICE \n (LUAS PENAMPANG)',table_header)
+			for line in obj.line_ids:
+			sheet.merge_range('I%s:J%s' % (row, row + 5), obj.equal_symbol, header)
+			write=2, merge_range=4, false=Xdata - TypeError: merge_range() missing 2 required positional arguments: 'last_col' and 'data'
+			
+			row,number=column 0-10
+			sheet.merge_range(row,0,row,1,'R&D MANAGER',ttd_format)
+            sheet.merge_range(row,2,row,4,'R&D DEPT.',ttd_format)
+            sheet.merge_range(row,5,row,7,'MARKETING MANAGER',ttd_format_center)
+            sheet.merge_range(row,8,row,10,'MARKETING DEPT.',ttd_format_center)
+			
+			erase row + 1
+			sheet.merge_range(row,0,row,0,'',table_header) #1st column 
+            notes_name = obj.internal_notes
+            sheet.merge_range(row,1,row,5,'NOTES : %s' % notes_name, table_content_center2)
+            sheet.merge_range(row,6,'',table_header) #3rd column 
+            sheet.merge_range(row,7,row,8,'',table_header) #4th column 
+
+server 36px local 30px			
+			+3 = merged with 3 attachment below it
+			sheet.merge_range('B%s:F%s' % (row, row + 3), line.description or '', table_content)
+			A:I A4 pdf 8.43=75.87 - page 2: J-R
+
+header: 
+page: <table> 
+<table>: form
+<thead><tbody>: .line
+<tfoot>grand total, signature
+field unappear=false o.
+_purch.o/receipt = _inventory
+_inv/batch = _awb
+_purch/req = _purch_req
+no closing tag can't used inside closed tag <span></span> <hr>
+report: stacked </>=no spacing		
+table, th, td style:"font-family:'Times New Roman', serif;border-collapse = X border has range
+<div class=table_responsive>
+header isn't displaying <div style="position:relative;">
+t-esc="l.get('field', 0)"
+<td><t t-esc="o.phone or 0"/></td>
+style="line-height:20%;"
+<t t-esc="o.env.user.name" />
+										Nested if else
+										<t t-if="o.invoice_address_id.zip">
+											<span t-esc="o.invoice_address_id.zip"/><br/>
+											<t t-if="o.invoice_address_id.state_id.name">
+												<span t-esc="o.invoice_address_id.state_id.name"/>,
+											</t>
+											<t t-else="">
+												<span t-esc="o.invoice_address_id.zip"/>,<br/>
+											</t>
+											
+											<t-esc/> datetime, binary/image</t>
+											information = fields.Text('Information', strip_style=True)
+											<t t-foreach="move.remark.split('\n')" t-as="remark_line">
+												<span t-esc="remark_line"/><br/>
+											</t>
+										</t>
+										<t t-elif="docs.country_of_deliver_id.name">
+											<span t-esc="docs.country_of_deliver_id.name"/>
+										</t>
+										<t t-esc="sum(line.product_qty for line in o.order_line)"/>
+										<t t-field="line.product_uom.name" groups="uom.group_uom" />
+			if obj.partner_shipping_id.display_name:
+                sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.display_name, field_text)
+				sheet.merge_range('D11:D12', obj.partner_id.name,table_remark)
+            else:
+                if obj.partner_shipping_id.name:
+                    sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.name, field_text)
+                else:
+                    sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.parent_id.name, field_text)
+					
+			if obj.partner_id.name:
+                sheet.merge_range('B10:E11', obj.partner_id.name, buyer_style)
+            elif obj.partner_id.parent_id.name and obj.partner_id.name:
+                sheet.merge_range('B10:E11', f"{obj.partner_id.parent_id.name}, {obj.partner_id.name}", buyer_style)
+            elif obj.partner_id.parent_id.name and obj.partner_id.type:
+                sheet.merge_range('B10:E11', f"{obj.partner_id.parent_id.name}, {obj.partner_id.type}", buyer_style)
+				
+				if line.attachment3:
+                    row += 1
+                else:
+                    row += 1
+
+&gt; > &lt; < &amp; & &rarr; &#8594; -> &larr; <- &#42; * asterisk
+<![CDATA[&nbsp;]] OR &#160; space
+<t t-esc="o.name and ' (' + o.name + ')' or ''"/> = if no value = parentheses wouldn't appear
+
+	def action_print(self):
+        return self.env.ref('stock.action_report_inventory').report_action(self)
+                <button name="action_print" string="Print Count Sheet" type="object" attrs="{'invisible': [('state', '=', 'draft')]}" groups="stock.group_stock_user"/>
+        <record id="action_report_inventory" model="ir.actions.report">	
+		
+						col/rowspan=destroy border
+							<t t-set="first_part" t-value="' '.join(o.vendor_id.name.split(' ')[0:-2]) if vendor_name.split(' ')[0:-2] else ''"/>
+							<tr>
+								<td style="border-left:2px solid black;border-top:1px solid black;"></td>
+								<td style="border-top:1px solid black;"></td>
+								<td style="border-top: 1px solid black;border-bottom:1px solid black;" t-if="first_part"><t t-esc="first_part"/></td>
+							</tr>
+							<t t-set="second_part" t-value="o.vendor_id.name.split(' ')[-2:][0] + ' ' + vendor_name.split(' ')[-2:][1] if vendor_name.split(' ')[-2:] else ''"/>
+							<tr>
+								<td style="border-left:2px solid black;border-top:1px solid black;"></td>
+								<td style="border-top:1px solid black;"></td>
+								<td style="border-top: 1px solid black;border-bottom:1px solid black;" t-if="vendor_name"><t t-esc="second_part"/></td>
+								
+								
+							.image {max-height:8cm;max-width:8cm;}
+							
+							<thead style="color:black;text-align:center;border:1px solid black;">
+                                <tr>
+                                    <td width="15%" style="border:1px solid black;">Item No.</td>
+                                    <td wdith="50%" style="border:1px solid black;">Description</td>
+                                    <td width="10%" style="border:1px solid black;">Qty</td>
+                                    <td width="25%" style="border:1px solid black;">Remark</td>
+                                </tr>
+								
+									<td style="padding-left:5px;vertical-align:top;border:1px solid black;">
+                                        <t t-esc="move.description"/><br/>
+										<table>
+											<t t-if="move.attachment and move.attachment2">
+												<tr>
+													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment)" class="image"/></td>
+													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment2)" class="image"/></td>
+												</tr>
+											</t>
+											<t t-elseif="move.attachment and move.attachment3">
+												<tr>
+													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment)" class="image"/></td>
+													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment3)" class="image"/></td>
+												</tr>
+											</t>
+											<t t-elseif="move.attachment2 and move.attachment3">
+												<tr>
+													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment2)" class="image"/></td>
+													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment3)" class="image"/></td>
+												</tr>
+											</t>
+										</table>
+									</td>
+									
+Total: packing_list
+record: pack/means/gross_weight/net_weight
+
+	@api.depends('product_line_ids.record')
+    def _compute_total_record(self):
+		subtotal_record = sum(float(record) for record in self.product_line_ids.mapped('record'))* self.product_line_ids.product_uom_qty
+        self.record = subtotal_record
+shipping.list
+record: pack/means/gross_weight/net_weight
+
+	@api.depends('product_line_ids.pack') #,'product_line_ids.product_uom_qty'
+    def _compute_total_pack(self):
+		subtotal_pack = sum(self.product_line_ids.mapped('pack')) * self.product_line_ids.product_uom_qty
+        self.total_pack = subtotal_pack
+============================================================================================================================================================================
+design_process/manufacture_order.py mrp.bom = total_meter_ mrp.bom.line = total_meter_1
+/static/src/xml
+							
+fik_equipment_maintenance/m_timetable
+start_d
+end_d
+interval.Integer & i_step: Day/Week/Month/Year
+m_t_horizon.Integer & t_step: Day/Week/Month/Year
+
+last_poll = fields.Datetime('Last Poll', default=lambda self: fields.Datetime.now())
+method = def
+store=True, computed = Save can give back old value
+
+class Picking(models.Model):
+    _name = "stock.picking"
+    show_check_availability = fields.Boolean
+    show_validate = fields.Boolean
+        
+			<field name="model">stock.picking</field>
+				<field name="show_check_availability" invisible="1"/>
+                <field name="show_validate" invisible="1"/>
+                    <button name="action_assign" attrs="{'invisible': [('show_check_availability', '=', False)]}" string="Check Availability" type="object" class="oe_highlight" groups="base.group_user"/><button name="button_validate" attrs="{'invisible': ['|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False)]}" string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"/>
+
+	'stock.picking'
+	show_c = fields.Boolean
+	def generate_operation(self):
+        self.show_check_availability= False
+        self.show_c = False
+        self.show_validate = False
+	
+	<field name="show_c" invisible="1"/>
+	<xpath expr="//header/button[@name='button_validate'][1]" position="attributes">
+		<attribute name="attrs">{'invisible': ['|','|',('is_kayu','=', True),('show_validate','=', False), ('show_c','=', False)]}</attribute>
+	<xpath expr="//button[@name='action_assign']" position="attributes">
+		<attribute name="attrs">{'invisible': [('show_c', '=', False)]}</attribute>
+	</xpath>
+ 
+<notebook><page string=>
+Line 1st=<field><tree><field>
+Under it = <group><div><label></div><field></group><div>
+field icon trash = <div class="oe_clear"/>
+OR
+<group string=>
+2-3rd Form = <field><tree><field>
+Under it = ...
+<div class="oe_chatter"> 
+============================================================================================================================================================================
+Master data =  Selection.Many2one ('jidoka.worklocation''account.account'/'hr.contract'/'mrp.production'/'product.product') = /name = _order = ''
+(<comodel_name=>,<id=>,<string=>) 
+
+make views: ir.action.windows & ir.view.ui: tree & form - UndefinedColumn vs Invalid field
+
+target.py .xml
+    _name = 'hr.salary.rule'						
+	contract = fields.Many2one('hr.contract', string='Contract')
+    currency_id = fields.Many2one(related='contract.currency_id', string='Currency')
+    wage = fields.Monetary(related='contract.wage', store=True, currency_field='currency_id')
+    amount_python_compute = fields.Text(string='Python Code',
+        default=''' ''')
+	@api.depends('amount_python_compute', 'contract.wage') def get_jp(self):
+        if self.contract.wage >= 9500000: self.amount_python_compute = 0.03 * self.contract.wage
+       else: self.amount_python_compute = 0.03 * 9500000
+		   
+                            <separator colspan="4" string="Computation"/>
+                            <field name="wage" invisible="1"/>
+                            <field colspan="4" name="amount_python_compute"
+							<field name="contract" invisible="1"/>
+	
+purchase_req/wizard/.py
+    _name = "purchase.request.line.make.purchase.order"
+btn create RFQ>method = def make_purchase_order(self): 
+	for if not purchase:
+                po_data = self._prepare_purchase_order >
+@api.model
+def _prepare_purchase_order_line(self, po, item):
+	product = item.product_id
+	qty = item.product_uom_id._compute_quantity(
+		item.product_qty, product.uom_po_id or product.uom_id
+	)
+	min_qty = item.line_id._get_supplier_min_qty(product, po.partner_id)
+	qty = max(qty, min_qty)
+	date_required = item.line_id.date_required
+	vals = {
+		"no_purchase_request": item.name,
+	}
+	if item.line_id.analytic_tag_ids:
+		vals["analytic_tag_ids"] = [
+			(4, ati) for ati in item.line_id.analytic_tag_ids.ids
+		]
+	self._execute_purchase_line_onchange(vals)
+	return vals
+
+	_inherit = "account.move"
+	field = fields.Same('', related='.')
+	origin = fields.Char('Source Document', compute='_compute_origin')
+	def _compute_origin(self):
+        sale_orders = self.env['sale.order'].search([('name', '=', self.invoice_origin)])
+        self.origin = sale_orders[0].no_ckwi if sale_orders else ''
+			
+	partner_id = fields.Many2one('res.partner')
+	bank_name = fields.Char('Bank Name', compute='_compute_bank_name', store=True)
+    @api.depends('partner_id')
+    def _compute_bank_name(self):
+        for r in self[0]:
+            r.bank_name = self.partner_id.bank_ids.bank_id.name
+			
+	def _create_design_process #crm.sample.request > design.process
+	search: other module same model > Many2one > method vals > related= > compute= > self.env.user
+
+	categ_id = fields.Many2one('product.category', string='Category Product' , compute='_compute_categ', store=True,)
+	@api.depends('product_id')
+    def _compute_categ(self):
+        for record in self:
+            if record.product_id:
+                record.categ_id = record.product_id.categ_id.id
+
+rnd/spec d/design/sket warna/oe_chatter	
+from datetime import date or datetime, timedelta
+    _name = 'sket.warna'
+    fields.Date("date",default=date.today()) or .Datetime(default=lambda self: fields.Datetime.now())
+    username = fields.Char()
+	password = fields.Char()
+	
+    @api.model
+    def create(self, vals):
+        if 'user_name' not in vals and 'user_id' in vals:
+            user = self.env['res.users'].browse(vals['user_id'])
+            vals['user_name'] = user.name
+            vals['password'] = user.password
+        return super(sket_warna/LoginLogout, self).create(vals)	
+	def write(self, vals):
+        if 'user_id' in vals:
+            user = self.env['res.users'].browse(vals['user_id'])
+            vals['user_name'] = user.name
+            vals['password'] = user.password
+        if attachment_ids:
+            user_name = self.user_name or self.env.user.name
+            self.message_post(body='Attachments added %s<br/> by %s' % (self.date, user_name), attachment_ids=attachment_ids)
+        return super(sket_warna/LoginLogout, self).write(vals)
+		
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+    
+    spec_design_id = fields.Many2one('spec.design', string='Spec Design')
+    attachment = fields.Binary('Design Image',related='spec_design_id.attachment')
+	
+		<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='name']" position="after">
+          <field name="spec_design_id" invisible="1"/>
+		
+Reyhan
+crm.sample > design.process: new/rename field, .line delete, add
+	def coba(self):
+        to_rnd = self.env['design.process'].create({vals
+		})
+        rnd_s_lines = []
+        for line in self.line_ids:
+            rnd_s_lines.append((0, 0, {vals
+			}))
+        to_rnd.write({'spec_design_ids': rnd_s_lines})
+        return to_rnd
+		
+	def action_approve(self):
+        self.is_show= True
+        to_rnd = self.env['design.process'].create({vals
+		})
+
+        rnd_s_lines = []
+        for line in self.line_ids:
+            rnd_s_lines.append((0, 0, {
+			}))
+        to_rnd.write({'spec_design_ids': rnd_s_lines})
+		return {
+		
+				<header>
+                    <button name="coba" type="object" string="tes aza"/>
+	
+	_name = 'invoice'
+	operation_container_line_ids = fields.One2many(comodel_name='invoice.container.line', string='Product Detail', inverse_name='invoice_id')
+	_name = 'invoice.container.line' =  security
+	
+	_name = 'packing.list'	
+	def action_done(self):
+       if self.state == 'ready':
+            self.write({'state': 'done'})
+            invoice_list = self.env['invoice'].create({vals
+                
+            })
+            for line in self.product_line_ids:
+                invoice_line = self.env['invoice.line'].create({vals
+                })
+                invoice_list.write({'product_line_ids': invoice_line})
+            
+            for line in self.operation_container_line_ids:
+                    invoice_c_line = self.env['invoice.container.line'].create({vals
+                    })
+                    invoice_list.write({'operation_container_line_ids': invoice_c_line})
+            return {
+        }
+		
+	mo_no = fields.Char('Mo No.', compute='_compute_mo_no')
+=============================================================
+	many_source_document_ids Many2one >
+	= fields.Many2many(comodel_name='stock.picking', relation='packing_picking_rel', compute='_compute_many_source_document_ids')
+	= delete all method containing it
+	
+    @api.depends('packing_id.no_sc_id.order_line')
+    def _compute_mo_no(self):
+        for record in self:
+            record.mo_no = record.packing_id.no_sc_id.order_line.no_mo
+			
+                            <field name="many_source_document_ids" domain > widget="many2many_tags"/>
+							
+	_name = 'operation.container.line'
+	no_sc_ids = fields.Many2many('stock.picking', 'no_sc_ids_rel', 'container_line_id', 'picking_id', compute='_compute_no_sc_ids', store=True)
+    many_no_sc_ids = fields.Many2many('stock.picking', 'many_no_sc_ids_rel', 'container_line_id', 'picking_id', store=True)
+			
+									<field name="no_sc_ids" widget="many2many_tags" invisible="1"/>
+                                    <field name="many_no_sc_ids" widget="many2many_tags" domain="[('id', 'in', no_sc_ids)]"/>
+			
+	
+	_name = 'packing.list'
+	no_sc_id = fields.Many2one('sale.order', 'SC No.')	
+	source_document_ids = fields.Many2many('stock.picking', compute='_compute_source_document_ids')								
+	@api.depends('no_sc_id')
+    def _compute_source_document_ids(self):
+        for record in self:
+            if record.delivery_address_id:
+                record.source_document_ids = self.env['stock.picking'].search([
+                    ('origin', '=', record.nosc_name),
+                    ('state', '=', 'done'),
+                    ('picking_type_code', '=', 'outgoing')])
+            else:
+                record.source_document_ids = False
+				
+	inspection:/data
+===========================================================================================================================================================================	
+#manufacturing/_samwill/tag_card.xml - model: jenis_kayu: black-border, text-align, auto line-fill
+XPO/rekapitulasi_grading.py
+#inventory /transfers /delivery order /batch transfer/_awb/surat_jalan.xml
+/receipts & PO/receipt
+#rnd/_marketing/spec design.py .xml
+#purchase/purchase_order, quotation, PO reguler
+#Sales/_sale/Sale Confirmation: Total false#CRM/_marketing/sale_confirm.xml 
+
+inventory/inventory adjusment/count .py
+design_process/static/rnd_bom.xml
+_sale/rincian_hardware.py
+/report_hasil_tes_internal_external.py
+qa_qc/qa_qc.xml: Ukuran: pcs
+A. Ukuran & B. Plywood: colspans all
+Sale/ & Purchase/ & Inventory/Product
+Product Label (PDF), (ZPL)
+Product Barcode (PDF), (ZPL)
+Inventory/Lot/Serial Number (PDF), (ZPL)
+CRM & RND
+_crm/sample_req.xml | .py
+_rnd_flow/sample_req.xml
+accounting/customer/invoice, credit notes									
+account.move: INVOICE LOCAL(PDF)
+Shipping Ins: ATTENTION: capital
+
+CRM /Quotation
+/quotation - Sales/Market Quotation or error: footer
+/quotation XLS - Sales/Order to Invoice: collapse, thead column width
+/_sale/sale_mo.xml Sale MO  - Sales/MO
+/_design_process/contract_review [sale.order] - Sales/Contract Review
+/_sale/sale_confirm.xml
+contract_review.xml cr.rv.wizard
+page 1 of 1
+collapse
+ValidationError to print on correct menuitem
+qa_qc/ketidaksesuaian.xml: naming similar to qa_qc report
+Material/_material/tag card
+rename title: B. 1/2 Jadi, Component, Sawn Timber only seq		
+
+report PO: company_id unshown
+Alamat & Item vertical-align:top;
+Tanggal: bulan as word not number
+table: right left border & border-collapse
+kwalitas text: no top border
+
+attachment document qa_qc/.xml
+									<group name="ditolak"  attrs="{'invisible' : [('keputusan', '!=', 'tolak')]}" class="oe_row">
+                                    <label for="attachment_doc" string="Attachment Document" />
+                                    <div class="d-flex ">
+                                       <field name="attachment_doc"  widget="pdf_viewer" style="margin-right:20px;"/> <field name="attachment_doc"  widget="pdf_viewer"/></div></group>
+                                     <group name="ditolak"  attrs="{'invisible' : [('keputusan', '!=', 'tolak')]}" class="oe_row">
+                                       <label for="attachment_doc" string="Attachment Document" />
+                                    <div class="d-flex ">
+                                       <field name="attachment_doc"  widget="pdf_viewer" style="margin-right:20px;"/> <field name="attachment_doc"  widget="pdf_viewer"/></div></group>
+
+user issue = make user based ciptackwi's rnd@gmail.com
+Record does not exist or has been deleted. (Record: res.partner(19,), User: 19) = partner_id = fields.Many2one("res.partner","Customer")
+	_name = 'design.process'
+	def action_confirm(self):
+        return {
+                'name' : _("Confirm With Comment"),'view_type' : 'form',
+                'res_model' : 'approval.history.rnd.wizard',
+                'view_mode' : 'form','type':'ir.actions.act_window','target': 'new',
+            }
+
+	_name = "approval.history.rnd.wizard"
+    def action_confirm(self):
+	lead.message_post(author_id=user.id,body=(message),message_type='notification',subtype_xmlid="mail.mt_comment",notification_ids=notification_ids,
+                           partner_ids=[user.partner_id.id] if user.partner_id else []
+                       )									
+
+_export's invoice data on packing_list
+1. send to _export's invoice > 2. send to _accounting's invoice
+export's invoice=penampung - cause some fields/data isn't exist on _accounting's invoice = error
+
+Rest API: JPayroll >< Odoo >< Mobile ESS: E Self Service
+
+report packing_list, invoice: MO number > 
+smart button
+= d detail/design group: 4x <kanban><form> = kanban view click > view form
+report rnd/sample
+
+	<record model="ir.actions.act_window" id="action_design_process_design">
+      <field name="name">Spec Design</field>
+      <field name="res_model">design.process</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('type_rnd', '=', 'is_design')]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_design_process_sample">
+      <field name="name">Sample Request</field>
+      <field name="res_model">design.process</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('type_rnd', '=', 'is_sample')]</field>
+    </record>
+	
+menu A action A <menuitem id="" parent = 'design_process_sub_menu' name="Spec. Design" action="design_process.action_design_process_design"/>
+menu B action B <menuitem id="" parent = 'design_process_sub_menu' name="Sample Request" action="design_process.action_design_process_sample"/>
+
+tree-form AB: invisible: type_a = false
+risky: inherit, deleting code
+mandatory <xpath expr="//field[@name='']" position="attributes"><attribute name="required">1</attribute></xpath>
+		<field name="" required="1"/>
+.py oe_chatter = recreate can't refresh tabs
+override=draft already but need included
+<xpath expr="//field[@name='location_dest_id']" position="attributes">
+    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'waiting', 'confirmed', 'grading', 'assigned', 'done', 'cancel'])]}</attribute></xpath>
+avoid singleton: if else: self.order_line[0].no_mo
+qa_qc/wizard = report 
+auto string if no set: no_pi = No Pi
+Saepul push: SIT & ckwi-dev, sale.order.line/name
+
+seq: crm.sample

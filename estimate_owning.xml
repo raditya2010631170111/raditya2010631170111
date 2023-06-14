@@ -1,0 +1,266 @@
+<odoo>
+    <data>
+        <template id="report_estimate_owning">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+					<style>
+						.dot-fill,
+						.line-fill {
+							position: relative;
+						}
+						.dot-fill::after {
+							content: "";
+							position: absolute;
+							top: 50%;
+							left: 0;
+							right: 0;
+							border-bottom: 1px dotted;
+							transform: translateY(-50%);
+						}
+						.line-fill::after {
+							content: "";
+							position: absolute;
+							top: 50%;
+							left: 0;
+							right: 0;
+							border-bottom: 1px dashed;
+							transform: translateY(-50%);
+						}
+						.straight-line {
+							display: block;
+							border-bottom: 1px solid black;
+							margin: 10px 0;
+						}
+					</style>
+                    <div class="page">
+						<div class="row"><div class="col-xs-12"><link rel="stylesheet" type="text/css" href="/jidoka_crm_sample_request/static/report_styles.css"/></div></div>
+                        <table width="100%" style="font-family:Arial;">
+							<tr>
+								<td colspan="8" style="font-weight:bold;text-align:center;font-size:16px;">ESTIMATE OWNING AND OPERATING COSTS</td>
+							</tr>
+							<tr>
+								<td colspan="3" style="padding-top:30px;">MACHINE MODEL</td>
+								<td>:</td>
+								<td colspan="4"><t t-esc="o.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="3">OPERATING CONDITION</td>
+								<td>:</td>
+								<td colspan="4"><t t-esc="o.department_rnd_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="8">(L=Light, M=Medium, H=Hard)</td>
+							</tr>
+							<tr>
+								<td colspan="3">PRICE (EXCLUDED PPN)</td>
+								<td>:</td>
+								<td colspan="4"><t t-esc="o.pricelist_id.name"/> &#160;&#160;(<t t-esc="o.pricelist_id.currency_id.name"/>)</td>
+							</tr>
+							<tr>
+								<td colspan="2">TRADE IN VALUE</td>
+								<td>20%</td>
+								<td>:</td>
+								<td colspan="4"><t t-esc="o.pricelist_id.name"/> &#160;&#160;(<t t-esc="o.pricelist_id.currency_id.name"/>)</td>
+							</tr>
+							<tr>
+								<td colspan="3">NET DEPRECIATION VALUE</td>
+								<td>:</td>
+								<td colspan="4"><t t-esc="o.pricelist_id.name"/> &#160;&#160;(<t t-esc="o.pricelist_id.currency_id.name"/>)</td>
+							</tr>
+							<tr>
+								<td colspan="3">DATE</td>
+								<td>:</td>
+								<td colspan="4"><t t-if="o.date_deadline">
+										<t t-esc="o.date_deadline.strftime('%d-%B-%Y')"/>
+									</t>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="8" style="padding-top:40px;font-weight:bold;">1. OWNING COSTS</td>
+							</tr>
+							<tr>
+								<td width="16%" style="padding-left:10px;">a. Depreciation :</td>
+								<td class="straight-line" width="16%" style="text-align:center;"><t t-esc="o.date_deadline"/></td>
+								<td width="8%"></td>
+								<td width="10%">:</td>
+								<td class="straight-line" width="26" style="text-align:center;"><t t-esc="o.date_deadline"/> (<t t-esc="o.pricelist_id.currency_id.name"/>)</td>
+								<td width="4"></td>
+								<td width="5%">:</td>
+								<td width="15%">12,33 &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td style="text-align:center;"><t t-esc="o.date_deadline"/></td>
+								<td></td>
+								<td></td>
+								<td style="text-align:center;"><t t-esc="o.date_deadline"/></td>
+								<td colspan="3"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td style="text-align:center;">( n-1 )( 1-r )</td>
+								<td colspan="6"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>1---------------------x</td>
+								<td colspan="6">Price before VAT x (l + l) diganti jadi IDR atau multi currency</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td style="text-align:center;">2n</td>
+								<td colspan="6"></td>
+							</tr>
+							<tr>
+								<td style="padding-left:10px;vertical-align:top;">b. Int. &amp; Ins :</td>
+								<td colspan="3" class="dot-fill"></td>
+								<td colspan="4"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="3" style="text-align:right;">Annual use in hours</td>
+								<td colspan="4"></td>
+							</tr>
+							<tr>
+								<td colspan="3"></td>
+								<td colspan="3" style="text-align:center;">0,72 &#160;&#160;&#160;x &#160;&#160;&#160;<t t-esc="o.pricelist_id.name"/> &#160;&#160;(<t t-esc="o.pricelist_id.currency_id.name"/>) &#160;&#160;&#160;x &#160;&#160;&#160;0,110</td>
+								<td colspan="2"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>:</td>
+								<td></td>
+								<td colspan="3" class="dot-fill"></td>
+								<td>:</td>
+								<td>4,07 &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="3"></td>
+								<td colspan="3" style="text-align:center;">6.000 &#160;&#160;hrs.</td>
+								<td colspan="2"></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;font-weight:bold;">Total Owning Costs</td>
+								<td>:</td>
+								<td style="font-weight:bold;"><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="8" style="padding-top:20px;font-weight:bold;">2. OPERATING COSTS</td>
+							</tr>
+							<tr>
+								<td colspan="3" style="padding-left:10px;">a. &#160;Fuel</td>
+								<td colspan="3"><t t-esc="o.pricelist_id.name"/> &#160;&#160;ltr/hr <span class="arrow-symbol">&#8594;</span></td>
+								<td>:</td>
+								<td><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;">b. &#160;Periodic Service <span class="arrow-symbol">&#8594;</span></td>
+								<td>:</td>
+								<td><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;">c. &#160;Overhaul Component <span class="arrow-symbol">&#8594;</span></td>
+								<td>:</td>
+								<td><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;">d. &#160;Repair Maintenance <span class="arrow-symbol">&#8594;</span></td>
+								<td>:</td>
+								<td><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;">- &#160;Scheduled Maintenance <span class="arrow-symbol">&#8594;</span></td>
+								<td>:</td>
+								<td><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;">- &#160;Unscheduled Maintenance <span class="arrow-symbol">&#8594;</span></td>
+								<td>:</td>
+								<td><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;">e. &#160;Tyre/ Undercarriage <span class="arrow-symbol">&#8594;</span></td>
+								<td>:</td>
+								<td><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;">f. &#160;Operator Wage <span class="arrow-symbol">&#8594;</span></td>
+								<td>:</td>
+								<td><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;font-weight:bold;">Total Owning Costs</td>
+								<td>:</td>
+								<td style="font-weight:bold;"><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-top:20px;font-weight:bold;">3. TOTAL OWNING AND OPERATING COSTS ( O &amp; O COSTS )</td>
+								<td>:</td>
+								<td style="font-weight:bold;"><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/></td>
+							</tr>
+							<tr>
+								<td colspan="8" style="padding-top:20px;padding-left:10px;">Notes : <t t-esc="o.note"/></td>
+							</tr>
+							<tr>
+								<td colspan="6" style="padding-left:10px;">n = economic lift time (years) = life time in hours/annual use in hours</td>
+								<td>:</td>
+								<td>3,33 Years</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="padding-left:10px;">r = trade in value</td>
+								<td>=</td>
+								<td>20% &#160;interest</td>
+								<td>=</td>
+								<td colspan="4" style="text-align:left;">10%</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="padding-left:10px;">Insurance</td>
+								<td>=</td>
+								<td>1% &#160;&#160;1 <t t-esc="o.pricelist_id.currency_id.name"/></td>
+								<td>=</td>
+								<td colspan="4" style="text-align:left;"><t t-esc="o.pricelist_id.name"/> &#160;&#160;(<t t-esc="o.pricelist_id.currency_id.name"/>)</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="padding-left:10px;">Local Fuel Cost</td>
+								<td>=</td>
+								<td colspan="5"><t t-esc="o.pricelist_id.name"/> &#160;&#160;<t t-esc="o.pricelist_id.currency_id.name"/>/ltr</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="padding-left:10px;">Availability</td>
+								<td>=</td>
+								<td>90 &#160;%</td>
+							</tr>
+							<t t-if="o and 'company_id' in o"><t t-set="company" t-value="o.company_id"></t></t>
+							<t t-if="not o or not 'company_id' in o"><t t-set="company" t-value="res_company"></t></t>
+							<tr>
+								<td colspan="8" style="padding-top:160px;text-align:right;font-style:italic;"><t t-esc="o.rnd_team_id.name"/><br/><t t-esc="company.name"/></td>
+							</tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+		<!--unit_mm-->
+        <record id="paperformat_report_estimate_a4" model="report.paperformat">
+			<field name="default" eval="True"/>
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">25.4</field>     <!--1 inch-->
+			<field name="margin_bottom">5.08</field>   <!--0.2 inch-->
+			<field name="margin_left">7.62</field>     <!--0.3 inch-->
+			<field name="margin_right">17.78</field>   <!--0.7inch -->
+			<field name="header_line" eval="False"/>
+			<field name="header_spacing">0</field>
+			<field name="dpi">90</field>
+		</record>
+        <record id="report_estimate_owning_action" model="ir.actions.report">
+            <field name="name">Estimate Owning and Operating Costs</field>
+            <field name="model">crm.sample.request</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">jidoka_crm_sample_request.report_estimate_owning</field>
+            <field name="binding_model_id" ref="model_crm_sample_request"/>
+            <field name="paperformat_id" ref="paperformat_report_estimate_a4"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

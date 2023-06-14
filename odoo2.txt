@@ -1,0 +1,185 @@
+source.py .xml
+def action_view_update_wage(self):
+        action = self.env["ir.actions.actions"]._for_xml_id("om_hr_payroll.action_salary_rule_form")
+        return action
+
+    def prepare_update_wage(self):
+        self.ensure_one()  #only one record
+        vals = {
+            'wage': self.wage,  
+        }
+        return vals
+
+    def update_wage_action(self):
+        action = self.action_view_update_wage()
+        vals = self.prepare_update_wage()
+        rules_obj = self.env['hr.salary.rule']
+        rules_id = rules_obj.create(vals)
+        action['res_id'] = rules_id.id
+        action['views'] = [(self.env.ref('om_hr_payroll.hr_salary_rule_form').id, 'form')]
+        return action
+
+                <button string="Update Wage" name="update_wage_action" class="oe_highlight" type="object"/>
+
+odoo/addons/hr_recruitment.xml 
+	<menuitem name="" id="report_hr_recruitment" parent="menu_hr_recruitment_root" sequence="99"/>
+.xml
+	<menuitem name="" id="" parent="hr_recruitment.report_hr_recruitment" sequence="60" action="report_reporting_action" groups="om_hr_payroll.group_hr_payroll_approval"/>
+view form > parent menuitem > child
+
+menuitem & btn Print = technical/reporting/report to not display
+folder training_odoo/static/description/icon.png
+<menuitem id="" name="" web_icon="training_odoo,static/description/icon.png"/>
+id=Unique,name,model_id:id,group_id:id,perm_read,perm_write,perm_create, perm_unlink=Action Delete
+Error basename=existing group _manufacturing/samwill.xml
+        
+		<record id="hr_contract_wage_action" model="ir.actions.act_window">
+			<field name="name">Wage</field>
+			<field name="res_model">hr.contract.wage</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+				</p>
+			</field>
+		</record>
+		
+hr.contract.new_view
+.py = field computed doesn't have to inherit
+.xml = no field ref & fields can redeclared
+.csv 
+
+		<record id="hr_contract_wage_form" model="ir.ui.view">
+			<field name="name">hr.contract.wage.form</field>
+			<field name="model">hr.contract.wage</field>
+			<field name="inherit_id" ref="hr_contract_wage_form"/> 
+			<field name="arch" type="xml">
+			</field>
+		</record>
+
+		<record id="hr_contract_wage_form_manager" model="ir.ui.view">
+			<field name="name">hr.contract.wage.form.manager</field>
+			<field name="model">hr.contract.wage</field>
+			<field name="inherit_id" ref="hr_contract_wage_form"/>  
+			<field name="groups_id" eval="[(4, ref('om_hr_payroll.group_hr_payroll_approval'))]"/>  
+			<field name="arch" type="xml">
+			</field>
+				<form>
+                    <header>
+                        <button/> #white color
+                        <button class="btn-primary" states="draft_to_approval"/>
+                        <button class="oe_highlight"/> #blue color
+                        <button class="btn-danger" confirm="Are you sure?"/> #red color
+                        <field name="state" widget="statusbar" statusbar_visible="draft,draft_to_approval,approved"/>
+						attrs="{'invisible': [('state_design_detail', '!=', 'confirm')]}"
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="wage"/>
+                            <field name="employee_id"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="contract_name"/>
+                            <field name="date_to"/>
+                            <field name="approver_name"/>
+                        </group>
+                    </sheet>
+					
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" class="oe_inline"
+                                    placeholder="Input Tag Card" string="No. Tag Card"  attrs="{'readonly': [('state','in',('done'))]}"/>
+                            </h1>
+                            <field name="package_id" invisible="1"/>
+                        </div>
+                        <group>
+                            <field name="wage"/><field name="employee_id"/><field name="company_id" invisible="1"/><field name="contract_name"/><field name="date_to"/><field name="approver_name"/>
+							
+							<calendar></calendar>
+							<graph></graph>
+							<kanban><templates></templates></kanban>
+							
+							<notebook><page></page></notebook></sheet>
+                        </group>				
+                    </sheet>			
+					
+					<footer> #wizard
+						<button string="Ok" name="func_ok" type="object" class="oe_highlight"/>
+						<button string="Cancel" special="cancel" class="oe_link"/></footer>
+					<search string=""><field>
+						<filter name="" string="" domain="[('name','ilike','php'), ('user_id', '=', uid)]"/>
+						<group string="">
+							<filter name="group_by_category" string=""
+								context="{'group_by': 'category_id', 'user_id'}"/></group> </search>
+								
+                </form>
+			</field>
+		</record>
+
+		<record id="hr_contract_wage_tree" model="ir.ui.view">
+			<field name="name">hr.contract.wage.tree</field>
+			<field name="model">hr.contract.wage</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="state" decoration-success="state == 'done' or state == 'done'" decoration-info="state == 'draft' or state == 'draft'" widget="badge" optional="show"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="hr_contract_wage_tree_group2" model="ir.ui.view">
+			<field name="name">hr.contract.wage.tree.group2</field>
+			<field name="model">hr.contract.wage</field>
+			<field name="inherit_id" ref="hr_contract_wage_tree"/>  <!-- Inherit from the default tree view -->
+			<field name="groups_id" eval="[(4, ref('om_hr_payroll.group_hr_payroll_approval'))]"/>  <!-- Specify the group for which this tree view is visible -->
+			<field name="arch" type="xml">
+============================================================================================================================================================================
+Footer Subtotal
+    _name = 'account.voucher'	
+    payment_amount = fields.Monetary(string='Payment Amount', store=True, readonly=True, compute='_amount_all', tracking=True)
+    amount_ppn = fields.Monetary(string='PPN', store=True, readonly=True, compute='_amount_all')
+    amount_total = fields.Monetary(string='Total', store=True, readonly=True, compute='_amount_all')
+    currency_id = fields.Many2one(
+        comodel_name='res.currency', string='Currency', compute="_compute_currency", store=True)
+		
+	@api.depends('line_ids.amount','line_ids.tax_amount')
+    def _amount_all(self):
+        for order in self:
+            payment_amount = amount_ppn = 0.0
+            for line in order.line_ids:
+                line._compute_amount()
+                payment_amount += line.amount
+                amount_ppn += line.tax_amount
+            currency = order.currency_id or order.partner_id.property_purchase_currency_id or self.env.company.currency_id
+            order.update({
+                'payment_amount': payment_amount,
+                'amount_ppn': amount_ppn,
+                'amount_total': payment_amount + amount_ppn
+            })	
+			
+    _name = 'account.voucher.line'		
+	amount = fields.Monetary(string='Payment Amount', currency_field="currency_id", store=True, required=True)
+	OR price_unit = fields.Float('Unit Price', digits='Product Price', default=0.0)
+    taxes_ids = fields.Many2many('account.tax', string='PPN')
+    tax_amount = fields.Monetary(compute='_compute_amount', string='Tax Amount', store=True)
+    
+    @api.depends('amount', 'taxes_ids') #convert taxes_ids to float
+    def _compute_amount(self):
+        for line in self:
+            tax_percentage = 0
+            if line.taxes_ids:
+                tax = line.taxes_ids[0]
+                tax_percentage = tax.amount or 0
+
+            line.tax_amount = (line.amount * tax_percentage) / 100
+			
+								</field>
+								<group class="oe_subtotal_footer oe_right">
+                                    <field name="payment_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="amount_ppn" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="amount_total"/>
+                                    </div>
+                                    <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                            </page>
+                        </notebook>
+============================================================================================================================================================================
