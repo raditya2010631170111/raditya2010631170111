@@ -46,3 +46,9 @@ apabila error API
 php artisan optimize
 php artisan view:clear
 pakai public API = nambah poin
+
+HTML/XML
+Python/.ipynb
+framework/front end: PHP: 43% Laravel, 15% Code Igniter/Python odoo
+composer/docker, Laragon/service PostgreSQL, extension: odoo snippet
+muk_web_theme, ibo icon builder for odoo

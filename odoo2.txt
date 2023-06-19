@@ -21,40 +21,17 @@ def action_view_update_wage(self):
 
                 <button string="Update Wage" name="update_wage_action" class="oe_highlight" type="object"/>
 
-odoo/addons/hr_recruitment.xml 
-	<menuitem name="" id="report_hr_recruitment" parent="menu_hr_recruitment_root" sequence="99"/>
-.xml
-	<menuitem name="" id="" parent="hr_recruitment.report_hr_recruitment" sequence="60" action="report_reporting_action" groups="om_hr_payroll.group_hr_payroll_approval"/>
 view form > parent menuitem > child
-
-menuitem & btn Print = technical/reporting/report to not display
+menuitem & btn Print
 folder training_odoo/static/description/icon.png
 <menuitem id="" name="" web_icon="training_odoo,static/description/icon.png"/>
 id=Unique,name,model_id:id,group_id:id,perm_read,perm_write,perm_create, perm_unlink=Action Delete
 Error basename=existing group _manufacturing/samwill.xml
-        
-		<record id="hr_contract_wage_action" model="ir.actions.act_window">
-			<field name="name">Wage</field>
-			<field name="res_model">hr.contract.wage</field>
-			<field name="view_mode">tree,form</field>
-			<field name="help" type="html">
-				<p class="oe_view_nocontent_create">
-				</p>
-			</field>
-		</record>
 		
-hr.contract.new_view
+model.name.new_view
 .py = field computed doesn't have to inherit
 .xml = no field ref & fields can redeclared
 .csv 
-
-		<record id="hr_contract_wage_form" model="ir.ui.view">
-			<field name="name">hr.contract.wage.form</field>
-			<field name="model">hr.contract.wage</field>
-			<field name="inherit_id" ref="hr_contract_wage_form"/> 
-			<field name="arch" type="xml">
-			</field>
-		</record>
 
 		<record id="hr_contract_wage_form_manager" model="ir.ui.view">
 			<field name="name">hr.contract.wage.form.manager</field>
@@ -114,23 +91,6 @@ hr.contract.new_view
                 </form>
 			</field>
 		</record>
-
-		<record id="hr_contract_wage_tree" model="ir.ui.view">
-			<field name="name">hr.contract.wage.tree</field>
-			<field name="model">hr.contract.wage</field>
-			<field name="arch" type="xml">
-				<tree>
-					<field name="state" decoration-success="state == 'done' or state == 'done'" decoration-info="state == 'draft' or state == 'draft'" widget="badge" optional="show"/>
-				</tree>
-			</field>
-		</record>
-
-		<record id="hr_contract_wage_tree_group2" model="ir.ui.view">
-			<field name="name">hr.contract.wage.tree.group2</field>
-			<field name="model">hr.contract.wage</field>
-			<field name="inherit_id" ref="hr_contract_wage_tree"/>  <!-- Inherit from the default tree view -->
-			<field name="groups_id" eval="[(4, ref('om_hr_payroll.group_hr_payroll_approval'))]"/>  <!-- Specify the group for which this tree view is visible -->
-			<field name="arch" type="xml">
 ============================================================================================================================================================================
 Footer Subtotal
     _name = 'account.voucher'	

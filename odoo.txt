@@ -1,4 +1,21 @@
-﻿./ckwi-addons
+﻿Inuit myth/American myth: Moshiri/Inugpasug/Khong Lo Vietnam pantheon
+Zuni myth
+Canaanite myth
+Hittite mythology
+Etruscan mythology
+Ohlone
+
+Ainu people default=Moses/Moshiri amorphous mass of the Earth into separate continents, then form mountains, rivers, lakes and islands
+Soul=Fire "do you know what soul made of, it's fire and i am it's ruler"
+Baldr/Chup
+Thor/Kanna
+Odin/Kando-Koro Rhea/Nishkanru
+Artemis/Hashinau-Uk
+Hercules/Okikurmi 
+Asgard/Kamuikando
+Female Loki/Fuchi Fire God
+
+./ckwi-addons
 ./odoo14/server/odoo/addons
 
 Task 1 Report pdf sample request: padding, width
@@ -8,12 +25,13 @@ Task 4 Report Voucher In & Voucher Out [account.voucher]
 Task 5 Error btn Confirm [RND] kecuali user Administrator
 Task 6 menu Defect & computed [jidoka_inventory]
 Task 7 kanban [crm.lead]
-Task 8 Report xls 
-Task 9 Report xls convert to pdf size
+Task 8 Report xls [crm.sample.request]
+Task 9 Report xls convert to pdf size [crm.sample.request]
+Task 10 Wizard report xls [inspection.tag.card]
+Task 11 report xls semua Type_QC
+Task 12 report xls Cushion
+Task 13 report xls Reguler
 
-framework/front end: PHP: 43% Laravel, 15% Code Igniter/Python odoo
-composer/docker, Laragon/service PostgreSQL, extension: odoo snippet
-muk_web_theme, ibo icon builder for odoo
 init=py,conf=restart & manifest=csv,xml=upgrade - .xml can change .py=restart
 update apps/favorite dashboard/install
 addons: 1 directory before modul, 1 coma
@@ -24,7 +42,7 @@ git > odoo16 > postgresql 15 > pgadmin port random 5432 8069 8072>properties cre
 environment>edit>path C:\jidoka\odoo16\phyton & \Scripts 
 .\server python .\odoo-bin 
 .\odoo_training_jidoka python .\odoo-bin scaffold jidokaacademy
-python .\odoo-bin -u modulename (data files after table) -c .\odoo.conf -d databasename --stop-after-init
+python .\odoo-bin -u modulename (/data) -c .\odoo.conf -d databasename --stop-after-init
 main>dev>clone>HTTP>main>dev/dev-raditya
 merge/pull>dev-r/dev>compare>uncheck delete>create>ask/merge
 git pull>upgrade - depends ['stock', 'base']
@@ -33,12 +51,9 @@ Reyhan: qa_qc/level.aql/categ_id = Many2one product = depends ['product']
 design_process - crm_sample_request - jidoka_marketing
 debug=odoo running on >edit>model, external - object=foreach/inheret, method=button
 msu_rooster = search menu: technical/views model, click views, find "ir_holiday" = msu_holiday
-restart .py = init - upgrade .xml .csv = manifest
 clone staging2 > python -m pip install "PyJWT===1.7.1" simplejson pyfcm xlsxwriter --user/copy lib/site-packages> restore database
 upgrade: 1st view > 2nd menuitem
-ask chatgpt always state "odoo 14" > google
-all my task backup somewhere > push
-stop mid-action: git commit > alt+f4/upgrade
+ask chatgpt state "odoo 14" > google - task backup > push - stop mid-action: git commit/upgrade
 
 E:\jidoka\odoo14\ckwi-addons git clone https://github.com/arisnew/ckwi.git E:/jidoka/ckwi-addons
 <link> <directory> 
@@ -236,20 +251,6 @@ report/report.xml
 			default=vertical <tr>=horizontal
         </t></template>
 		
-		<report id="sample_request_xlsx"
-            model="crm.sample.request"
-            string="Sample Request (XLS)"
-            report_type="xlsx"
-            name="jidoka_crm_sample_request.report_sample_request_xlsx"
-            file="jidoka_crm_sample_request"
-            print_report_name="('%s' % (object.name))"
-            attachment_use="False"/>
-		
-    _name = 'report.jidoka_crm_sample_request.report_sample_request_xlsx'
-	def generate_xlsx_report(self, workbook, data, objects):
-		format
-		sheet = workbook.add_worksheet('Spec Design Excel')
-		for obj/quant in objects:
 			formatted_quantity = format(quant.quantity, ',')
 			formatted_total = format(round(quant.total, 2), ',')
 			worksheet.write(row, 2, formatted_quantity)
@@ -257,9 +258,7 @@ report/report.xml
 			number_format = workbook.add_format({'num_format':'[$Rp-421]#,##0.00','font_size':10,'align':'center','valign':'vcenter'})
 			number_format.set_right(1)  = border-right
 			
-			sheet.set_column(0, 0, 30) 0-0
             sheet.set_column(1, 6, 14) 1-6 width
-			row = row + 4 (jarak empat dari data's first data)
 			sheet.write('D9',obj.name) / (row, column, value, format)
 			sheet.write_string
 			sheet.merge_range('A9:A11', 'UKURAN INVOICE \n (LUAS PENAMPANG)',table_header)
@@ -268,15 +267,8 @@ report/report.xml
 			write=2, merge_range=4, false=Xdata - TypeError: merge_range() missing 2 required positional arguments: 'last_col' and 'data'
 			
 			row,number=column 0-10
-			sheet.merge_range(row,0,row,1,'R&D MANAGER',ttd_format)
-            sheet.merge_range(row,2,row,4,'R&D DEPT.',ttd_format)
-            sheet.merge_range(row,5,row,7,'MARKETING MANAGER',ttd_format_center)
-            sheet.merge_range(row,8,row,10,'MARKETING DEPT.',ttd_format_center)
-			
-			erase row + 1
 			sheet.merge_range(row,0,row,0,'',table_header) #1st column 
-            notes_name = obj.internal_notes
-            sheet.merge_range(row,1,row,5,'NOTES : %s' % notes_name, table_content_center2)
+            sheet.merge_range(row,1,row,5,'NOTES : %s' % obj.internal_notes, table_content_center2)
             sheet.merge_range(row,6,'',table_header) #3rd column 
             sheet.merge_range(row,7,row,8,'',table_header) #4th column 
 
@@ -284,12 +276,17 @@ server 36px local 30px
 			+3 = merged with 3 attachment below it
 			sheet.merge_range('B%s:F%s' % (row, row + 3), line.description or '', table_content)
 			A:I A4 pdf 8.43=75.87 - page 2: J-R
+			
+			multi form
+			_inventory/report/quant.py
+			qa_qc/report/.py
+			local variable 'inv' referenced before assignment
+			row_names, row +- 1
+			("%Y") 2023 - ("%m") 06 - ("%d") 25 - 'dd-MMM-yyyy' 25-Apr-2023
 
 header: 
 page: <table> 
-<table>: form
-<thead><tbody>: .line
-<tfoot>grand total, signature
+<table> <thead><tbody> <tfoot>
 field unappear=false o.
 _purch.o/receipt = _inventory
 _inv/batch = _awb
@@ -344,6 +341,12 @@ style="line-height:20%;"
                     row += 1
                 else:
                     row += 1
+					
+			<t t-foreach="o.grading_summary_line_ids[0]" t-as="line"> #display first element of list
+			for ins in inspection:
+				if ins:  # Check if ins is not empty
+					first_ins = ins[0]  # Access the first element of ins
+					sheet.write(row, 0, first_ins.product_pembahanan_id.name, data_format)
 
 &gt; > &lt; < &amp; & &rarr; &#8594; -> &larr; <- &#42; * asterisk
 <![CDATA[&nbsp;]] OR &#160; space
@@ -366,41 +369,6 @@ style="line-height:20%;"
 								<td style="border-left:2px solid black;border-top:1px solid black;"></td>
 								<td style="border-top:1px solid black;"></td>
 								<td style="border-top: 1px solid black;border-bottom:1px solid black;" t-if="vendor_name"><t t-esc="second_part"/></td>
-								
-								
-							.image {max-height:8cm;max-width:8cm;}
-							
-							<thead style="color:black;text-align:center;border:1px solid black;">
-                                <tr>
-                                    <td width="15%" style="border:1px solid black;">Item No.</td>
-                                    <td wdith="50%" style="border:1px solid black;">Description</td>
-                                    <td width="10%" style="border:1px solid black;">Qty</td>
-                                    <td width="25%" style="border:1px solid black;">Remark</td>
-                                </tr>
-								
-									<td style="padding-left:5px;vertical-align:top;border:1px solid black;">
-                                        <t t-esc="move.description"/><br/>
-										<table>
-											<t t-if="move.attachment and move.attachment2">
-												<tr>
-													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment)" class="image"/></td>
-													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment2)" class="image"/></td>
-												</tr>
-											</t>
-											<t t-elseif="move.attachment and move.attachment3">
-												<tr>
-													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment)" class="image"/></td>
-													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment3)" class="image"/></td>
-												</tr>
-											</t>
-											<t t-elseif="move.attachment2 and move.attachment3">
-												<tr>
-													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment2)" class="image"/></td>
-													<td class="border"><img t-att-src="'data:image/png;base64,%s' % to_text(move.attachment3)" class="image"/></td>
-												</tr>
-											</t>
-										</table>
-									</td>
 									
 Total: packing_list
 record: pack/means/gross_weight/net_weight
@@ -601,7 +569,7 @@ crm.sample > design.process: new/rename field, .line delete, add
 	def action_done(self):
        if self.state == 'ready':
             self.write({'state': 'done'})
-            invoice_list = self.env['invoice'].create({vals
+            invoice_list = self.env['invoice'].create({vals                 #Query SQL
                 
             })
             for line in self.product_line_ids:
@@ -624,7 +592,7 @@ crm.sample > design.process: new/rename field, .line delete, add
 	
     @api.depends('packing_id.no_sc_id.order_line')
     def _compute_mo_no(self):
-        for record in self:
+        for record in self:                                                 #Access
             record.mo_no = record.packing_id.no_sc_id.order_line.no_mo
 			
                             <field name="many_source_document_ids" domain > widget="many2many_tags"/>
@@ -761,8 +729,9 @@ override=draft already but need included
 <xpath expr="//field[@name='location_dest_id']" position="attributes">
     <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'waiting', 'confirmed', 'grading', 'assigned', 'done', 'cancel'])]}</attribute></xpath>
 avoid singleton: if else: self.order_line[0].no_mo
-qa_qc/wizard = report 
 auto string if no set: no_pi = No Pi
-Saepul push: SIT & ckwi-dev, sale.order.line/name
+push: change of jidoka_sale/sale.order.line/name
 
 seq: crm.sample
+
+<field name="ket_masalah_id"  attrs="{'column_invisible': [('parent.type_qc', 'in', ['proses_pengiriman','pre_finishing','top_coat','packing','bras_component','cushion','kawai_top_coat'])]}"/>
