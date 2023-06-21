@@ -1,36 +1,111 @@
-﻿Inuit myth/American myth: Moshiri/Inugpasug/Khong Lo Vietnam pantheon
-Zuni myth
+﻿Zuni myth
 Canaanite myth
 Hittite mythology
 Etruscan mythology
 Ohlone
 
-Ainu people default=Moses/Moshiri amorphous mass of the Earth into separate continents, then form mountains, rivers, lakes and islands
-Soul=Fire "do you know what soul made of, it's fire and i am it's ruler"
-Baldr/Chup
-Thor/Kanna
-Odin/Kando-Koro Rhea/Nishkanru
-Artemis/Hashinau-Uk
-Hercules/Okikurmi 
-Asgard/Kamuikando
-Female Loki/Fuchi Fire God
+Linked Pantheon: Greek/Roman
+Aztec/Maya
+Abrahamic: Jewish/Christian/Islamic
+Arthurian/Welsh 
+mass destruction of Maya by Catholic
+
+House Sigil
+Britain: Ddraig Red Dragon (Dragon Wings FT, DXD, GOT)
+Yu-long King of Dragons
+Greek Wyvern
+Khaos: Gaia, Tiamat: Nidhoggr, Ddraig
+Aztec Quetzalcoatl/Babylon Kukulkan/Maya Kukulcán
+Tlaloc/Chaac
+Ehecatl/Kinich Ahau
+Coatlicue/Ixchel
+Zeus/Itzamná 
+Hades/Ah Puch
+Ares/Buluc Chabtan
+
+Inuit myth/American myth: Moshiri/Inugpasug/Khong Lo Vietnam pantheon
+Amaterasu/Malina 
+Hodr/Aningan Moon
+Moses/Alignak Moon Weather - Poseidon/Agloolik
+Odin/Torngarsuk Sky
+Zeus/Sila Air
+Hades/Anguta Death - default
+Baldr/Ignirtoq 
+Artemis/Pinga
+Underworld/Adlivun
+Jormugandr/Tizheruk
+
+Blade of Olympus/Izanagi' Ame-no-o-habari
+Hades/Susanoo' > Amaterasu' Kusanagi from Yamato-no-Orochi
+Amaterasu vs Susanoo, Amaterasu' grandchild: Karna/Ninigi ruler of Japan
+Amaterasu ruler of Heaven: Take-mika-zuchi thunder and Futsu-nushi fire vs Oho-kuni-nushi/Okuninushi ruler of Earth married Susanoo' daughter
+Odin's Raven/yata garasu messenger of god
+Bifrost/Ama-no-hashidate [Heaven/Takama no Hara - Sea/Ama - Earth] - Underworld/Yomi
+Izanagi impantience failed to bring back Izanami stay on Hell
+
+Celtic
+Odin/Daghda x Boann, Morrigan War Goddess: Athena/Brigit,  Aengus 
+Zeus/Taranis
+Poseidon/Esus 
+Manannan God of Sea
+Balor leader of demons
+Baldr/Lugh Sun God x Forseti/Birth: Percival/Cú Chulainn - default
+"No armor can stop my spear from killing you, not even my father."
+Fionn mac Cumhaill or Cú Chulainn and the Tuatha Dé Danann of the Ulster Cycle
+Dullahan
+
+_name = 'inspection.tag.card'
+type_qc = fields.Selection([
+    ('reguler', 'Reguler')])
+
+<field name="" attrs="{'invisible': [('type_qc', '!=', 'pembahanan')]}"/>
+<field name="" attrs="{'column_invisible': [('parent.type_qc', 'not in', ['proses_pengiriman'])]}"/>
+<field name=""  attrs="{'column_invisible': [('parent.type_qc', 'in', ['proses_pengiriman','pre_finishing','top_coat','packing','bras_component','cushion','kawai_top_coat'])]}"/>
 
 ./ckwi-addons
 ./odoo14/server/odoo/addons
 
-Task 1 Report pdf sample request: padding, width
-Task 2 Fields attachment modul crm
-Task 3 button state [crm.sample.request]
-Task 4 Report Voucher In & Voucher Out [account.voucher]
-Task 5 Error btn Confirm [RND] kecuali user Administrator
-Task 6 menu Defect & computed [jidoka_inventory]
-Task 7 kanban [crm.lead]
-Task 8 Report xls [crm.sample.request]
-Task 9 Report xls convert to pdf size [crm.sample.request]
-Task 10 Wizard report xls [inspection.tag.card]
-Task 11 report xls semua Type_QC
-Task 12 report xls Cushion
-Task 13 report xls Reguler
+SQL/Database.zip: MySQL [6months University]
+Python/.ipynb: Odoo [SCSS, HTML/XML, JS] - [6months University, 6months Work]
+PHP: 43% Laravel [Blade] 15% Code Igniter - [6months University]
+Dart: Xamarin / Flutter [C++ 38% CMake 33%] - [1years University]
+Java: Kotlin
+composer/docker, Laragon/service PostgreSQL, extension: odoo snippet, muk_web_theme, ibo icon builder for odoo
+
+E:\jidoka\odoo14\ckwi-addons git clone <link> <directory> 
+git/python --version
+git branch <create_branch> (git branch), git checkout <enter_branch> 
+git config --global user.name raditya2010631170111 | as205303
+git config --global user.email 2010631170111@student.unsika.ac.id | key-ckwi
+git branch -m = rename -d/-D = delete 
+git push origin --delete <branch>
+git diff .\jidoka_purchase\models\purchase_order.py = worktree
+git blame .\jidoka_purchase\models\purchase_order.py (git blame)
+git rm --cached ./ckwi-addons/design_process/manifest.py = unstage a file
+git reset = unstage all
+git checkout .\jidoka_purchase\report\m.xml = undo commit
+git rm ./ = remove a file
+git reset --hard = discard all
+git status
+git add . git commit -m "" git push origin dev-raditya
+git --no-pager log -n <limit> (git lens's tabs commit)
+q ctrl+c = exit
+git reset --soft HEAD~ / ~2 = 2 push before
+cd E:/jidoka/odoo14/server python .\odoo-bin
+
+open folder & add . to workspace, File>Auto Save
+$=python
+ctrl+d=block
+ctrl+c>v/ctrl+d=copy 1line
+terminal=ctrl+`
+ctrl+f > esc
+ctrl+page=tabs
+alt+tab=windows
+win+v=clipboard
+shift+home
+shift+tab=reverse
+cmd = instance
+ask chatgpt state "odoo 14" > google - task backup > push - stop mid-action: git commit/upgrade
 
 init=py,conf=restart & manifest=csv,xml=upgrade - .xml can change .py=restart
 update apps/favorite dashboard/install
@@ -53,39 +128,6 @@ debug=odoo running on >edit>model, external - object=foreach/inheret, method=but
 msu_rooster = search menu: technical/views model, click views, find "ir_holiday" = msu_holiday
 clone staging2 > python -m pip install "PyJWT===1.7.1" simplejson pyfcm xlsxwriter --user/copy lib/site-packages> restore database
 upgrade: 1st view > 2nd menuitem
-ask chatgpt state "odoo 14" > google - task backup > push - stop mid-action: git commit/upgrade
-
-E:\jidoka\odoo14\ckwi-addons git clone https://github.com/arisnew/ckwi.git E:/jidoka/ckwi-addons
-<link> <directory> 
-git/python --version
-git branch <create_branch> (git branch), git checkout <enter_branch> 
-git config --global user.name raditya2010631170111 | as205303
-git config --global user.email 2010631170111@student.unsika.ac.id | key-ckwi
-git branch -m = rename -d/-D = delete 
-git push origin --delete <branch>
-git diff .\jidoka_purchase\models\purchase_order.py = worktree
-git blame .\jidoka_purchase\models\purchase_order.py (git blame)
-git reset --hard = discard all
-git status
-git add . git commit -m "" git push origin dev-raditya
-git restore .\jidoka_purchase\report\m.xml --staged = unstage
-git checkout .\jidoka_purchase\report\m.xml = undo commit
-git --no-pager log -n <limit> (git lens's tabs commit)
-q ctrl+c = exit
-git reset --soft HEAD~ / ~2 = 2 push before
-
-open folder & add f to workspace, File>Auto Save
-$=python
-ctrl+d=block
-ctrl+c>v/ctrl+d=copy 1line
-terminal=ctrl+`
-ctrl+f > esc
-ctrl+page=tabs
-alt+tab=windows
-win+v=clipboard
-shift+home
-shift+tab=reverse
-cmd = instance
 
 reset: contact issue = delete database=activate/line codes error=false making modul
 ✓ Demo=auto dummy=long load
@@ -228,15 +270,17 @@ size = fields.Selection([('size_cm', 'cm'),('size_mm', 'mm'),], 'Dimensi Uom')
 unit internal: botol & unit subcount: liter, ml they both connect
 fleet.vehicle: X model V views of module
 ============================================================================================================================================================================
-localhost:8069/report/html/jidokaacademy.report_session/1
+localhost:8069/report/html/module.template_id/1
 print Action dialog & btn Print dialog rearrage: change previous's id
 
-	<record id="report_reporting_action" model="ir.actions.report">
+	<record id="" model="ir.actions.report">
 		<field name="name"></field>
 		<field name="model"></field>
-		<field name="report_type">qweb-pdf</field>
-		<field name="report_file">jidoka_awb.report_training_session</field>
-		<field name="print_report_name">'Surat Jalan Pabrik - %s' % (object.name)</field>
+		<field name="report_type">qweb-pdf/xlsx</field>
+        <field name="report_name">qa_qc.report_inspection_tag_card_xls</field>
+		<field name="report_file">module.template_id</field>
+        <field name="print_report_name">'Inspection Tag Card (%s - %s %s)' % (object.start_date,object.end_date,object.type_qc)</field>
+		<!--pdf-->
 		<field name="binding_model_id" ref="jidoka_awb.model_stock_picking_batch"/> = model_id:id = error model
 		<field name="binding_view_types">report</field></record>
 report/report.xml
@@ -251,20 +295,21 @@ report/report.xml
 			default=vertical <tr>=horizontal
         </t></template>
 		
-			formatted_quantity = format(quant.quantity, ',')
-			formatted_total = format(round(quant.total, 2), ',')
-			worksheet.write(row, 2, formatted_quantity)
-			<span t-esc="'{0:,.2f}'.format(int(o.amount_total))"/>
-			number_format = workbook.add_format({'num_format':'[$Rp-421]#,##0.00','font_size':10,'align':'center','valign':'vcenter'})
-			number_format.set_right(1)  = border-right
-			
+			sheet.set_row(0, 30)
             sheet.set_column(1, 6, 14) 1-6 width
 			sheet.write('D9',obj.name) / (row, column, value, format)
 			sheet.write_string
 			sheet.merge_range('A9:A11', 'UKURAN INVOICE \n (LUAS PENAMPANG)',table_header)
 			for line in obj.line_ids:
-			sheet.merge_range('I%s:J%s' % (row, row + 5), obj.equal_symbol, header)
-			write=2, merge_range=4, false=Xdata - TypeError: merge_range() missing 2 required positional arguments: 'last_col' and 'data'
+				sheet.merge_range('I%s:J%s' % (row, row + 5), obj.equal_symbol, header)
+				write=2, merge_range=4, false=Xdata - TypeError: merge_range() missing 2 required positional arguments: 'last_col' and 'data'
+			
+			local variable 'inv' referenced before assignment
+			row_names/row +- 1/row = 8 #will start written on row 8
+			+3 = merged with 3 attachment below it
+			sheet.merge_range('B%s:F%s' % (row, row + 3), line.description or '', table_content)
+			A:I A4 pdf 8.43=75.87 - page 2: J-R
+			("%Y") 2023 - ("%m") 06 - ("%d") 25 - 'dd-MMM-yyyy' 25-Apr-2023
 			
 			row,number=column 0-10
 			sheet.merge_range(row,0,row,0,'',table_header) #1st column 
@@ -273,26 +318,21 @@ report/report.xml
             sheet.merge_range(row,7,row,8,'',table_header) #4th column 
 
 server 36px local 30px			
-			+3 = merged with 3 attachment below it
-			sheet.merge_range('B%s:F%s' % (row, row + 3), line.description or '', table_content)
-			A:I A4 pdf 8.43=75.87 - page 2: J-R
 			
-			multi form
-			_inventory/report/quant.py
-			qa_qc/report/.py
-			local variable 'inv' referenced before assignment
-			row_names, row +- 1
-			("%Y") 2023 - ("%m") 06 - ("%d") 25 - 'dd-MMM-yyyy' 25-Apr-2023
+			multi: _inventory/report/quant.py
+			_indonesia_tax/report/.py=if elif else: both
+			qa_qc/report/.py=if elif
+			
+			sum_persentase_harian = format(round(sum(ins.persentase_harian for ins in inspection), 2), ',')
+			<span t-esc="'{0:,.2f}'.format(int(o.amount_total))"/>
+			number_format = workbook.add_format({'num_format':'[$Rp-421]#,##0.00','font_size':10,'align':'center','valign':'vcenter'})
+			number_format.set_right(1)  = border-right
 
 header: 
 page: <table> 
 <table> <thead><tbody> <tfoot>
 field unappear=false o.
-_purch.o/receipt = _inventory
-_inv/batch = _awb
-_purch/req = _purch_req
-no closing tag can't used inside closed tag <span></span> <hr>
-report: stacked </>=no spacing		
+report: stacked </>=no spacing
 table, th, td style:"font-family:'Times New Roman', serif;border-collapse = X border has range
 <div class=table_responsive>
 header isn't displaying <div style="position:relative;">
@@ -342,20 +382,22 @@ style="line-height:20%;"
                 else:
                     row += 1
 					
+			use first value
 			<t t-foreach="o.grading_summary_line_ids[0]" t-as="line"> #display first element of list
-			for ins in inspection:
-				if ins:  # Check if ins is not empty
-					first_ins = ins[0]  # Access the first element of ins
-					sheet.write(row, 0, first_ins.product_pembahanan_id.name, data_format)
+				for ins in inspection:
+                    sheet.write(row, 0, ins.product_pembahanan_id.name if ins.product_pembahanan_id else "", data_format)
+                    sheet.write(row, 9, round(ins.persentase_harian, 2), data_format) 
+                    for line in ins.operation_line_ids:
+                        sheet.write(row, 4, line.ket_masalah_id.name if line.ket_masalah_id else "", data_format)
+                    for move in ins.product_line_ids: 
+                        sheet.write(row, 8, move.tk_pembahanan, data_format)
 
 &gt; > &lt; < &amp; & &rarr; &#8594; -> &larr; <- &#42; * asterisk
 <![CDATA[&nbsp;]] OR &#160; space
 <t t-esc="o.name and ' (' + o.name + ')' or ''"/> = if no value = parentheses wouldn't appear
-
-	def action_print(self):
-        return self.env.ref('stock.action_report_inventory').report_action(self)
-                <button name="action_print" string="Print Count Sheet" type="object" attrs="{'invisible': [('state', '=', 'draft')]}" groups="stock.group_stock_user"/>
-        <record id="action_report_inventory" model="ir.actions.report">	
+\n OR <br/>
+unclosed tag can't inside closed tag <span></span> <hr>
+.straight-line {display: block;border-bottom: 0.5px solid black;margin: 10px 0;}
 		
 						col/rowspan=destroy border
 							<t t-set="first_part" t-value="' '.join(o.vendor_id.name.split(' ')[0:-2]) if vendor_name.split(' ')[0:-2] else ''"/>
@@ -402,25 +444,23 @@ class Picking(models.Model):
     _name = "stock.picking"
     show_check_availability = fields.Boolean
     show_validate = fields.Boolean
+	show_c = fields.Boolean
+	
+	def generate_operation(self):
+        self.show_check_availability= False
+        self.show_c = False
+        self.show_validate = False
         
 			<field name="model">stock.picking</field>
 				<field name="show_check_availability" invisible="1"/>
                 <field name="show_validate" invisible="1"/>
                     <button name="action_assign" attrs="{'invisible': [('show_check_availability', '=', False)]}" string="Check Availability" type="object" class="oe_highlight" groups="base.group_user"/><button name="button_validate" attrs="{'invisible': ['|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False)]}" string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"/>
-
-	'stock.picking'
-	show_c = fields.Boolean
-	def generate_operation(self):
-        self.show_check_availability= False
-        self.show_c = False
-        self.show_validate = False
-	
-	<field name="show_c" invisible="1"/>
-	<xpath expr="//header/button[@name='button_validate'][1]" position="attributes">
-		<attribute name="attrs">{'invisible': ['|','|',('is_kayu','=', True),('show_validate','=', False), ('show_c','=', False)]}</attribute>
-	<xpath expr="//button[@name='action_assign']" position="attributes">
-		<attribute name="attrs">{'invisible': [('show_c', '=', False)]}</attribute>
-	</xpath>
+			<field name="show_c" invisible="1"/>
+			<xpath expr="//header/button[@name='button_validate'][1]" position="attributes">
+				<attribute name="attrs">{'invisible': ['|','|',('is_kayu','=', True),('show_validate','=', False), ('show_c','=', False)]}</attribute>
+			<xpath expr="//button[@name='action_assign']" position="attributes">
+				<attribute name="attrs">{'invisible': [('show_c', '=', False)]}</attribute>
+			</xpath>
  
 <notebook><page string=>
 Line 1st=<field><tree><field>
@@ -733,5 +773,3 @@ auto string if no set: no_pi = No Pi
 push: change of jidoka_sale/sale.order.line/name
 
 seq: crm.sample
-
-<field name="ket_masalah_id"  attrs="{'column_invisible': [('parent.type_qc', 'in', ['proses_pengiriman','pre_finishing','top_coat','packing','bras_component','cushion','kawai_top_coat'])]}"/>
