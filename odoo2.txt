@@ -1,5 +1,12 @@
+model A' right corner button = model B
+
+	def packing_list_btn(self):
+        action = self._packing_list_action_view()
+        action['domain'] = [('id','in',self.packing_list_ids.ids)]
+        return action
+
 source.py .xml
-def action_view_update_wage(self):
+	def action_view_update_wage(self):
         action = self.env["ir.actions.actions"]._for_xml_id("om_hr_payroll.action_salary_rule_form")
         return action
 
@@ -49,13 +56,16 @@ model.name.new_view
                         <field name="state" widget="statusbar" statusbar_visible="draft,draft_to_approval,approved"/>
 						attrs="{'invisible': [('state_design_detail', '!=', 'confirm')]}"
                     </header>
-                    <sheet>
+					<sheet>
+						#right corner button
+					    <div class="oe_button_box" name="button_box">
+							<button name="packing_list_btn" type="object" class="oe_stat_button" icon="fa-list">
+								<field name="packing_list_count" widget="statinfo" string="Packing List"/>
+								<field name='packing_list_ids' invisible="1"/>
+							</button>
+						</div>
                         <group>
                             <field name="wage"/>
-                            <field name="employee_id"/>
-                            <field name="company_id" invisible="1"/>
-                            <field name="contract_name"/>
-                            <field name="date_to"/>
                             <field name="approver_name"/>
                         </group>
                     </sheet>

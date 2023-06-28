@@ -1,111 +1,22 @@
-﻿Zuni myth
-Canaanite myth
-Hittite mythology
-Etruscan mythology
-Ohlone
-
-Linked Pantheon: Greek/Roman
-Aztec/Maya
-Abrahamic: Jewish/Christian/Islamic
-Arthurian/Welsh 
-mass destruction of Maya by Catholic
-
-House Sigil
-Britain: Ddraig Red Dragon (Dragon Wings FT, DXD, GOT)
-Yu-long King of Dragons
-Greek Wyvern
-Khaos: Gaia, Tiamat: Nidhoggr, Ddraig
-Aztec Quetzalcoatl/Babylon Kukulkan/Maya Kukulcán
-Tlaloc/Chaac
-Ehecatl/Kinich Ahau
-Coatlicue/Ixchel
-Zeus/Itzamná 
-Hades/Ah Puch
-Ares/Buluc Chabtan
-
-Inuit myth/American myth: Moshiri/Inugpasug/Khong Lo Vietnam pantheon
-Amaterasu/Malina 
-Hodr/Aningan Moon
-Moses/Alignak Moon Weather - Poseidon/Agloolik
-Odin/Torngarsuk Sky
-Zeus/Sila Air
-Hades/Anguta Death - default
-Baldr/Ignirtoq 
-Artemis/Pinga
-Underworld/Adlivun
-Jormugandr/Tizheruk
-
-Blade of Olympus/Izanagi' Ame-no-o-habari
-Hades/Susanoo' > Amaterasu' Kusanagi from Yamato-no-Orochi
-Amaterasu vs Susanoo, Amaterasu' grandchild: Karna/Ninigi ruler of Japan
-Amaterasu ruler of Heaven: Take-mika-zuchi thunder and Futsu-nushi fire vs Oho-kuni-nushi/Okuninushi ruler of Earth married Susanoo' daughter
-Odin's Raven/yata garasu messenger of god
-Bifrost/Ama-no-hashidate [Heaven/Takama no Hara - Sea/Ama - Earth] - Underworld/Yomi
-Izanagi impantience failed to bring back Izanami stay on Hell
-
-Celtic
-Odin/Daghda x Boann, Morrigan War Goddess: Athena/Brigit,  Aengus 
-Zeus/Taranis
-Poseidon/Esus 
-Manannan God of Sea
-Balor leader of demons
-Baldr/Lugh Sun God x Forseti/Birth: Percival/Cú Chulainn - default
-"No armor can stop my spear from killing you, not even my father."
-Fionn mac Cumhaill or Cú Chulainn and the Tuatha Dé Danann of the Ulster Cycle
-Dullahan
-
-_name = 'inspection.tag.card'
-type_qc = fields.Selection([
-    ('reguler', 'Reguler')])
-
-<field name="" attrs="{'invisible': [('type_qc', '!=', 'pembahanan')]}"/>
-<field name="" attrs="{'column_invisible': [('parent.type_qc', 'not in', ['proses_pengiriman'])]}"/>
-<field name=""  attrs="{'column_invisible': [('parent.type_qc', 'in', ['proses_pengiriman','pre_finishing','top_coat','packing','bras_component','cushion','kawai_top_coat'])]}"/>
-
-./ckwi-addons
+﻿./ckwi-addons
 ./odoo14/server/odoo/addons
 
-SQL/Database.zip: MySQL [6months University]
-Python/.ipynb: Odoo [SCSS, HTML/XML, JS] - [6months University, 6months Work]
-PHP: 43% Laravel [Blade] 15% Code Igniter - [6months University]
-Dart: Xamarin / Flutter [C++ 38% CMake 33%] - [1years University]
-Java: Kotlin
-composer/docker, Laragon/service PostgreSQL, extension: odoo snippet, muk_web_theme, ibo icon builder for odoo
-
-E:\jidoka\odoo14\ckwi-addons git clone <link> <directory> 
-git/python --version
-git branch <create_branch> (git branch), git checkout <enter_branch> 
-git config --global user.name raditya2010631170111 | as205303
-git config --global user.email 2010631170111@student.unsika.ac.id | key-ckwi
-git branch -m = rename -d/-D = delete 
-git push origin --delete <branch>
-git diff .\jidoka_purchase\models\purchase_order.py = worktree
-git blame .\jidoka_purchase\models\purchase_order.py (git blame)
-git rm --cached ./ckwi-addons/design_process/manifest.py = unstage a file
-git reset = unstage all
-git checkout .\jidoka_purchase\report\m.xml = undo commit
-git rm ./ = remove a file
-git reset --hard = discard all
-git status
-git add . git commit -m "" git push origin dev-raditya
-git --no-pager log -n <limit> (git lens's tabs commit)
-q ctrl+c = exit
-git reset --soft HEAD~ / ~2 = 2 push before
-cd E:/jidoka/odoo14/server python .\odoo-bin
-
-open folder & add . to workspace, File>Auto Save
-$=python
-ctrl+d=block
-ctrl+c>v/ctrl+d=copy 1line
-terminal=ctrl+`
-ctrl+f > esc
-ctrl+page=tabs
-alt+tab=windows
-win+v=clipboard
-shift+home
-shift+tab=reverse
-cmd = instance
-ask chatgpt state "odoo 14" > google - task backup > push - stop mid-action: git commit/upgrade
+ aa_payment_request/models/res_config.py            |   2 +
+ aa_payment_request/views/company.xml               |   3 +
+ design_process/__manifest__.py                     |   3 +-
+ design_process/models/sample_request.py            |   2 +-
+ design_process/report/report_design_process.py     |   1 +
+ .../report/sample_request_report_pdf.xml           | 239 +++++++++++++++++++++
+ design_process/views/sample_request.xml            |   3 +
+ fik_sale_mo_report/report/sale_mo_report.xml       |   1 +
+ .../report/sample_request_report.py                |   1 +
+ .../report/sample_request_report_pdf.xml           |   1 +
+ jidoka_marketing/report/sale_confirm.xml           |   1 +
+ .../report/sample_request_report_pdf.xml           |   1 +
+ jidoka_sale/report/sale_confirm.xml                |   3 +-
+ jidoka_sale/report/sale_mo_report.xml              |   1 +
+ qa_qc/models/inspection_tag_card.py                | 119 +++++++++-
+ qa_qc/views/inspection_tag_card_views.xml          |  16 ++
 
 init=py,conf=restart & manifest=csv,xml=upgrade - .xml can change .py=restart
 update apps/favorite dashboard/install
@@ -129,7 +40,6 @@ msu_rooster = search menu: technical/views model, click views, find "ir_holiday"
 clone staging2 > python -m pip install "PyJWT===1.7.1" simplejson pyfcm xlsxwriter --user/copy lib/site-packages> restore database
 upgrade: 1st view > 2nd menuitem
 
-reset: contact issue = delete database=activate/line codes error=false making modul
 ✓ Demo=auto dummy=long load
 -modular: fields & override, cons, method & override
 -delegation: link record of models to parent
@@ -138,11 +48,6 @@ onchange=warning invalid value
 make value without adding to database:
 constraints verified invariant by python/SQL
 emp_id = error Python
-
-case-sensitif - model_stock_picking = snake_case
-fields.Float = camelCase
-CONTRAINT_ = ALL_CAPS
-#/""" """"
 	
 constraint
 @api.constrains('rounding') : Method yang memiliki decorator ini berfungsi untuk membuat constraints (pengecekan batasan/aturan) value sebuah field
@@ -172,10 +77,11 @@ widget="priority"/"radio"/"selection"=X create edit/readonly='1'
 <width="33"> default
 after, before, replace, inside menyisipkan, attribute: readonly/domain
 invisible, required, column_invisible
+
 	self.write({'state': 'draft_to_approval'})
 	OR
 	if self.state == 'to_approve':
-				self.state = 'approved'
+		self.state = 'approved'
 
 status noupdate=True > False
 
@@ -269,164 +175,7 @@ size = fields.Selection([('size_cm', 'cm'),('size_mm', 'mm'),], 'Dimensi Uom')
 		
 unit internal: botol & unit subcount: liter, ml they both connect
 fleet.vehicle: X model V views of module
-============================================================================================================================================================================
-localhost:8069/report/html/module.template_id/1
-print Action dialog & btn Print dialog rearrage: change previous's id
 
-	<record id="" model="ir.actions.report">
-		<field name="name"></field>
-		<field name="model"></field>
-		<field name="report_type">qweb-pdf/xlsx</field>
-        <field name="report_name">qa_qc.report_inspection_tag_card_xls</field>
-		<field name="report_file">module.template_id</field>
-        <field name="print_report_name">'Inspection Tag Card (%s - %s %s)' % (object.start_date,object.end_date,object.type_qc)</field>
-		<!--pdf-->
-		<field name="binding_model_id" ref="jidoka_awb.model_stock_picking_batch"/> = model_id:id = error model
-		<field name="binding_view_types">report</field></record>
-report/report.xml
-	<template id="report_picking">
-        <t t-call="web.html_container">
-			field.One2many
-			picking_ids = stock.picking
-			move_ids_without_package = line/stock.move
-			o.picking_ids.move_ids_without_package
-			<t t-foreach="docs"/"o.object in model" t-as="o"/"move" 
-				t=o.field.field</t>
-			default=vertical <tr>=horizontal
-        </t></template>
-		
-			sheet.set_row(0, 30)
-            sheet.set_column(1, 6, 14) 1-6 width
-			sheet.write('D9',obj.name) / (row, column, value, format)
-			sheet.write_string
-			sheet.merge_range('A9:A11', 'UKURAN INVOICE \n (LUAS PENAMPANG)',table_header)
-			for line in obj.line_ids:
-				sheet.merge_range('I%s:J%s' % (row, row + 5), obj.equal_symbol, header)
-				write=2, merge_range=4, false=Xdata - TypeError: merge_range() missing 2 required positional arguments: 'last_col' and 'data'
-			
-			local variable 'inv' referenced before assignment
-			row_names/row +- 1/row = 8 #will start written on row 8
-			+3 = merged with 3 attachment below it
-			sheet.merge_range('B%s:F%s' % (row, row + 3), line.description or '', table_content)
-			A:I A4 pdf 8.43=75.87 - page 2: J-R
-			("%Y") 2023 - ("%m") 06 - ("%d") 25 - 'dd-MMM-yyyy' 25-Apr-2023
-			
-			row,number=column 0-10
-			sheet.merge_range(row,0,row,0,'',table_header) #1st column 
-            sheet.merge_range(row,1,row,5,'NOTES : %s' % obj.internal_notes, table_content_center2)
-            sheet.merge_range(row,6,'',table_header) #3rd column 
-            sheet.merge_range(row,7,row,8,'',table_header) #4th column 
-
-server 36px local 30px			
-			
-			multi: _inventory/report/quant.py
-			_indonesia_tax/report/.py=if elif else: both
-			qa_qc/report/.py=if elif
-			
-			sum_persentase_harian = format(round(sum(ins.persentase_harian for ins in inspection), 2), ',')
-			<span t-esc="'{0:,.2f}'.format(int(o.amount_total))"/>
-			number_format = workbook.add_format({'num_format':'[$Rp-421]#,##0.00','font_size':10,'align':'center','valign':'vcenter'})
-			number_format.set_right(1)  = border-right
-
-header: 
-page: <table> 
-<table> <thead><tbody> <tfoot>
-field unappear=false o.
-report: stacked </>=no spacing
-table, th, td style:"font-family:'Times New Roman', serif;border-collapse = X border has range
-<div class=table_responsive>
-header isn't displaying <div style="position:relative;">
-t-esc="l.get('field', 0)"
-<td><t t-esc="o.phone or 0"/></td>
-style="line-height:20%;"
-<t t-esc="o.env.user.name" />
-										Nested if else
-										<t t-if="o.invoice_address_id.zip">
-											<span t-esc="o.invoice_address_id.zip"/><br/>
-											<t t-if="o.invoice_address_id.state_id.name">
-												<span t-esc="o.invoice_address_id.state_id.name"/>,
-											</t>
-											<t t-else="">
-												<span t-esc="o.invoice_address_id.zip"/>,<br/>
-											</t>
-											
-											<t-esc/> datetime, binary/image</t>
-											information = fields.Text('Information', strip_style=True)
-											<t t-foreach="move.remark.split('\n')" t-as="remark_line">
-												<span t-esc="remark_line"/><br/>
-											</t>
-										</t>
-										<t t-elif="docs.country_of_deliver_id.name">
-											<span t-esc="docs.country_of_deliver_id.name"/>
-										</t>
-										<t t-esc="sum(line.product_qty for line in o.order_line)"/>
-										<t t-field="line.product_uom.name" groups="uom.group_uom" />
-			if obj.partner_shipping_id.display_name:
-                sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.display_name, field_text)
-				sheet.merge_range('D11:D12', obj.partner_id.name,table_remark)
-            else:
-                if obj.partner_shipping_id.name:
-                    sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.name, field_text)
-                else:
-                    sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.parent_id.name, field_text)
-					
-			if obj.partner_id.name:
-                sheet.merge_range('B10:E11', obj.partner_id.name, buyer_style)
-            elif obj.partner_id.parent_id.name and obj.partner_id.name:
-                sheet.merge_range('B10:E11', f"{obj.partner_id.parent_id.name}, {obj.partner_id.name}", buyer_style)
-            elif obj.partner_id.parent_id.name and obj.partner_id.type:
-                sheet.merge_range('B10:E11', f"{obj.partner_id.parent_id.name}, {obj.partner_id.type}", buyer_style)
-				
-				if line.attachment3:
-                    row += 1
-                else:
-                    row += 1
-					
-			use first value
-			<t t-foreach="o.grading_summary_line_ids[0]" t-as="line"> #display first element of list
-				for ins in inspection:
-                    sheet.write(row, 0, ins.product_pembahanan_id.name if ins.product_pembahanan_id else "", data_format)
-                    sheet.write(row, 9, round(ins.persentase_harian, 2), data_format) 
-                    for line in ins.operation_line_ids:
-                        sheet.write(row, 4, line.ket_masalah_id.name if line.ket_masalah_id else "", data_format)
-                    for move in ins.product_line_ids: 
-                        sheet.write(row, 8, move.tk_pembahanan, data_format)
-
-&gt; > &lt; < &amp; & &rarr; &#8594; -> &larr; <- &#42; * asterisk
-<![CDATA[&nbsp;]] OR &#160; space
-<t t-esc="o.name and ' (' + o.name + ')' or ''"/> = if no value = parentheses wouldn't appear
-\n OR <br/>
-unclosed tag can't inside closed tag <span></span> <hr>
-.straight-line {display: block;border-bottom: 0.5px solid black;margin: 10px 0;}
-		
-						col/rowspan=destroy border
-							<t t-set="first_part" t-value="' '.join(o.vendor_id.name.split(' ')[0:-2]) if vendor_name.split(' ')[0:-2] else ''"/>
-							<tr>
-								<td style="border-left:2px solid black;border-top:1px solid black;"></td>
-								<td style="border-top:1px solid black;"></td>
-								<td style="border-top: 1px solid black;border-bottom:1px solid black;" t-if="first_part"><t t-esc="first_part"/></td>
-							</tr>
-							<t t-set="second_part" t-value="o.vendor_id.name.split(' ')[-2:][0] + ' ' + vendor_name.split(' ')[-2:][1] if vendor_name.split(' ')[-2:] else ''"/>
-							<tr>
-								<td style="border-left:2px solid black;border-top:1px solid black;"></td>
-								<td style="border-top:1px solid black;"></td>
-								<td style="border-top: 1px solid black;border-bottom:1px solid black;" t-if="vendor_name"><t t-esc="second_part"/></td>
-									
-Total: packing_list
-record: pack/means/gross_weight/net_weight
-
-	@api.depends('product_line_ids.record')
-    def _compute_total_record(self):
-		subtotal_record = sum(float(record) for record in self.product_line_ids.mapped('record'))* self.product_line_ids.product_uom_qty
-        self.record = subtotal_record
-shipping.list
-record: pack/means/gross_weight/net_weight
-
-	@api.depends('product_line_ids.pack') #,'product_line_ids.product_uom_qty'
-    def _compute_total_pack(self):
-		subtotal_pack = sum(self.product_line_ids.mapped('pack')) * self.product_line_ids.product_uom_qty
-        self.total_pack = subtotal_pack
-============================================================================================================================================================================
 design_process/manufacture_order.py mrp.bom = total_meter_ mrp.bom.line = total_meter_1
 /static/src/xml
 							
@@ -472,160 +221,7 @@ OR
 Under it = ...
 <div class="oe_chatter"> 
 ============================================================================================================================================================================
-Master data =  Selection.Many2one ('jidoka.worklocation''account.account'/'hr.contract'/'mrp.production'/'product.product') = /name = _order = ''
-(<comodel_name=>,<id=>,<string=>) 
 
-make views: ir.action.windows & ir.view.ui: tree & form - UndefinedColumn vs Invalid field
-
-target.py .xml
-    _name = 'hr.salary.rule'						
-	contract = fields.Many2one('hr.contract', string='Contract')
-    currency_id = fields.Many2one(related='contract.currency_id', string='Currency')
-    wage = fields.Monetary(related='contract.wage', store=True, currency_field='currency_id')
-    amount_python_compute = fields.Text(string='Python Code',
-        default=''' ''')
-	@api.depends('amount_python_compute', 'contract.wage') def get_jp(self):
-        if self.contract.wage >= 9500000: self.amount_python_compute = 0.03 * self.contract.wage
-       else: self.amount_python_compute = 0.03 * 9500000
-		   
-                            <separator colspan="4" string="Computation"/>
-                            <field name="wage" invisible="1"/>
-                            <field colspan="4" name="amount_python_compute"
-							<field name="contract" invisible="1"/>
-	
-purchase_req/wizard/.py
-    _name = "purchase.request.line.make.purchase.order"
-btn create RFQ>method = def make_purchase_order(self): 
-	for if not purchase:
-                po_data = self._prepare_purchase_order >
-@api.model
-def _prepare_purchase_order_line(self, po, item):
-	product = item.product_id
-	qty = item.product_uom_id._compute_quantity(
-		item.product_qty, product.uom_po_id or product.uom_id
-	)
-	min_qty = item.line_id._get_supplier_min_qty(product, po.partner_id)
-	qty = max(qty, min_qty)
-	date_required = item.line_id.date_required
-	vals = {
-		"no_purchase_request": item.name,
-	}
-	if item.line_id.analytic_tag_ids:
-		vals["analytic_tag_ids"] = [
-			(4, ati) for ati in item.line_id.analytic_tag_ids.ids
-		]
-	self._execute_purchase_line_onchange(vals)
-	return vals
-
-	_inherit = "account.move"
-	field = fields.Same('', related='.')
-	origin = fields.Char('Source Document', compute='_compute_origin')
-	def _compute_origin(self):
-        sale_orders = self.env['sale.order'].search([('name', '=', self.invoice_origin)])
-        self.origin = sale_orders[0].no_ckwi if sale_orders else ''
-			
-	partner_id = fields.Many2one('res.partner')
-	bank_name = fields.Char('Bank Name', compute='_compute_bank_name', store=True)
-    @api.depends('partner_id')
-    def _compute_bank_name(self):
-        for r in self[0]:
-            r.bank_name = self.partner_id.bank_ids.bank_id.name
-			
-	def _create_design_process #crm.sample.request > design.process
-	search: other module same model > Many2one > method vals > related= > compute= > self.env.user
-
-	categ_id = fields.Many2one('product.category', string='Category Product' , compute='_compute_categ', store=True,)
-	@api.depends('product_id')
-    def _compute_categ(self):
-        for record in self:
-            if record.product_id:
-                record.categ_id = record.product_id.categ_id.id
-
-rnd/spec d/design/sket warna/oe_chatter	
-from datetime import date or datetime, timedelta
-    _name = 'sket.warna'
-    fields.Date("date",default=date.today()) or .Datetime(default=lambda self: fields.Datetime.now())
-    username = fields.Char()
-	password = fields.Char()
-	
-    @api.model
-    def create(self, vals):
-        if 'user_name' not in vals and 'user_id' in vals:
-            user = self.env['res.users'].browse(vals['user_id'])
-            vals['user_name'] = user.name
-            vals['password'] = user.password
-        return super(sket_warna/LoginLogout, self).create(vals)	
-	def write(self, vals):
-        if 'user_id' in vals:
-            user = self.env['res.users'].browse(vals['user_id'])
-            vals['user_name'] = user.name
-            vals['password'] = user.password
-        if attachment_ids:
-            user_name = self.user_name or self.env.user.name
-            self.message_post(body='Attachments added %s<br/> by %s' % (self.date, user_name), attachment_ids=attachment_ids)
-        return super(sket_warna/LoginLogout, self).write(vals)
-		
-class SaleOrderLine(models.Model):
-    _inherit = 'sale.order.line'
-    
-    spec_design_id = fields.Many2one('spec.design', string='Spec Design')
-    attachment = fields.Binary('Design Image',related='spec_design_id.attachment')
-	
-		<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='name']" position="after">
-          <field name="spec_design_id" invisible="1"/>
-		
-Reyhan
-crm.sample > design.process: new/rename field, .line delete, add
-	def coba(self):
-        to_rnd = self.env['design.process'].create({vals
-		})
-        rnd_s_lines = []
-        for line in self.line_ids:
-            rnd_s_lines.append((0, 0, {vals
-			}))
-        to_rnd.write({'spec_design_ids': rnd_s_lines})
-        return to_rnd
-		
-	def action_approve(self):
-        self.is_show= True
-        to_rnd = self.env['design.process'].create({vals
-		})
-
-        rnd_s_lines = []
-        for line in self.line_ids:
-            rnd_s_lines.append((0, 0, {
-			}))
-        to_rnd.write({'spec_design_ids': rnd_s_lines})
-		return {
-		
-				<header>
-                    <button name="coba" type="object" string="tes aza"/>
-	
-	_name = 'invoice'
-	operation_container_line_ids = fields.One2many(comodel_name='invoice.container.line', string='Product Detail', inverse_name='invoice_id')
-	_name = 'invoice.container.line' =  security
-	
-	_name = 'packing.list'	
-	def action_done(self):
-       if self.state == 'ready':
-            self.write({'state': 'done'})
-            invoice_list = self.env['invoice'].create({vals                 #Query SQL
-                
-            })
-            for line in self.product_line_ids:
-                invoice_line = self.env['invoice.line'].create({vals
-                })
-                invoice_list.write({'product_line_ids': invoice_line})
-            
-            for line in self.operation_container_line_ids:
-                    invoice_c_line = self.env['invoice.container.line'].create({vals
-                    })
-                    invoice_list.write({'operation_container_line_ids': invoice_c_line})
-            return {
-        }
-		
-	mo_no = fields.Char('Mo No.', compute='_compute_mo_no')
-=============================================================
 	many_source_document_ids Many2one >
 	= fields.Many2many(comodel_name='stock.picking', relation='packing_picking_rel', compute='_compute_many_source_document_ids')
 	= delete all method containing it
@@ -661,50 +257,6 @@ crm.sample > design.process: new/rename field, .line delete, add
 				
 	inspection:/data
 ===========================================================================================================================================================================	
-#manufacturing/_samwill/tag_card.xml - model: jenis_kayu: black-border, text-align, auto line-fill
-XPO/rekapitulasi_grading.py
-#inventory /transfers /delivery order /batch transfer/_awb/surat_jalan.xml
-/receipts & PO/receipt
-#rnd/_marketing/spec design.py .xml
-#purchase/purchase_order, quotation, PO reguler
-#Sales/_sale/Sale Confirmation: Total false#CRM/_marketing/sale_confirm.xml 
-
-inventory/inventory adjusment/count .py
-design_process/static/rnd_bom.xml
-_sale/rincian_hardware.py
-/report_hasil_tes_internal_external.py
-qa_qc/qa_qc.xml: Ukuran: pcs
-A. Ukuran & B. Plywood: colspans all
-Sale/ & Purchase/ & Inventory/Product
-Product Label (PDF), (ZPL)
-Product Barcode (PDF), (ZPL)
-Inventory/Lot/Serial Number (PDF), (ZPL)
-CRM & RND
-_crm/sample_req.xml | .py
-_rnd_flow/sample_req.xml
-accounting/customer/invoice, credit notes									
-account.move: INVOICE LOCAL(PDF)
-Shipping Ins: ATTENTION: capital
-
-CRM /Quotation
-/quotation - Sales/Market Quotation or error: footer
-/quotation XLS - Sales/Order to Invoice: collapse, thead column width
-/_sale/sale_mo.xml Sale MO  - Sales/MO
-/_design_process/contract_review [sale.order] - Sales/Contract Review
-/_sale/sale_confirm.xml
-contract_review.xml cr.rv.wizard
-page 1 of 1
-collapse
-ValidationError to print on correct menuitem
-qa_qc/ketidaksesuaian.xml: naming similar to qa_qc report
-Material/_material/tag card
-rename title: B. 1/2 Jadi, Component, Sawn Timber only seq		
-
-report PO: company_id unshown
-Alamat & Item vertical-align:top;
-Tanggal: bulan as word not number
-table: right left border & border-collapse
-kwalitas text: no top border
 
 attachment document qa_qc/.xml
 									<group name="ditolak"  attrs="{'invisible' : [('keputusan', '!=', 'tolak')]}" class="oe_row">
@@ -773,3 +325,58 @@ auto string if no set: no_pi = No Pi
 push: change of jidoka_sale/sale.order.line/name
 
 seq: crm.sample
+
+qa_qc/inspection. SC: have ~total of item UNFINISHED
+    no_mo_id = fields.Many2one('sale.order', string='No. SC')
+	product_tmpl_ids = fields.Many2many('product.product', 'tag_card_product_tmpl_rel', 'tag_id', 'product_id', string='Item Product', compute='_compute_product_tmpl_ids')
+    product_id_domain_ids = fields.Many2many('product.product', 'tag_card_product_domain_rel_1', 'tag_id', 'product_id', readonly=False, string='Item Product')
+    available_products = fields.Many2many('product.product', 'tag_card_product_domain_rel_2', 'tag_id', 'product_id', compute='_compute_available_products', store=True,readonly=False)
+	
+	@api.depends('product_id_domain_ids')
+    def _compute_available_products(self):
+        for record in self:
+            record.available_products = self._get_default_available_products()
+
+    @api.model
+    def default_get(self, fields_list):
+        defaults = super().default_get(fields_list)
+        if 'available_products' in fields_list:
+            defaults['available_products'] = self._get_default_available_products()
+        return defaults
+
+    def _get_default_available_products(self):
+        previous_record = self.search([], order='id desc', limit=1)
+        if previous_record:
+            return previous_record.available_products + self.product_id_domain_ids
+        return self.product_id_domain_ids
+		
+	def _compute_product_tmpl_ids(self):
+        for record in self:
+            if record.no_mo_id:
+                product_ids = record.no_mo_id.order_line.mapped('product_id')
+                domain = [('id', 'in', product_ids.ids), ('id', 'not in', record.available_products.ids)]
+                record.product_tmpl_ids = self.env['product.product'].search(domain)
+                if not record.product_tmpl_ids:
+                    record.no_mo_id = False
+            else:
+                record.product_tmpl_ids = False
+
+    @api.onchange('no_mo_id')
+    def _onchange_no_mo_id(self):
+        selected_ids = self.search([('no_mo_id', '!=', False)]).filtered(lambda r: r.state == 'sale').mapped('no_mo_id').ids
+        domain = [('id', 'not in', selected_ids), ('state', '=', 'sale')]
+        return {'domain': {'no_mo_id': domain}}
+		
+							<field name="no_mo_id"  domain="[('state', '=', 'sale')]"  attrs="{'readonly': [('state','in',('confirm'))]}"/>
+                            <field name="product_id_domain_ids" options="{'no_create': True, 'no_create_edit': True}" widget="many2many_tags" domain="[('id', 'in', product_tmpl_ids)]" attrs="{'readonly': [('state', 'in', ['confirm'])], 'invisible': [('no_mo_id', '=', False)]}"/>
+                            <field name="available_products" invisible="1"/>
+                            <field name="product_tmpl_ids" domain="[('id', 'not in', available_products)]" widget="many2many_tags" invisible="1"/>
+	
+tambahan di export
+- SC sudah dipilih pada dokumen 1 maka ketika membuat SI baru dengan SC yg sama akn langsung tampil sisa produk yg sudah dipilih sebelumnya
+ex : SI001 > pilih SC001 (ada 10 product) > yg dipilih product 1 2 3 4 5 6
+SI001 > pilih SC001 > yg tampil sisa dari product yang belum dibuatkan SI nya > sisa product 7 8 9 10
+- SI validate tetap di form SI dengan tanda 1 pada smart button packing list, biarkan masuk ke PL dengan klik manual oleh user
+
+SI=Shipping Ins
+PL=Packing List

@@ -1,0 +1,191 @@
+Master data =  Selection.Many2one ('jidoka.worklocation''account.account'/'hr.contract'/'mrp.production'/'product.product') = /name = _order = ''
+(<comodel_name=>,<id=>,<string=>) 
+related able=move_id('stock.move')
+
+make views: ir.action.windows & ir.view.ui: tree & form - UndefinedColumn vs Invalid field
+
+target.py .xml
+    _name = 'hr.salary.rule'						
+	contract = fields.Many2one('hr.contract', string='Contract')
+    currency_id = fields.Many2one(related='contract.currency_id', string='Currency')
+    wage = fields.Monetary(related='contract.wage', store=True, currency_field='currency_id')
+    amount_python_compute = fields.Text(string='Python Code',
+        default=''' ''')
+	@api.depends('amount_python_compute', 'contract.wage') def get_jp(self):
+        if self.contract.wage >= 9500000: self.amount_python_compute = 0.03 * self.contract.wage
+       else: self.amount_python_compute = 0.03 * 9500000
+		   
+                            <separator colspan="4" string="Computation"/>
+                            <field name="wage" invisible="1"/>
+                            <field colspan="4" name="amount_python_compute"
+							<field name="contract" invisible="1"/>
+	
+purchase_req/wizard/.py
+    _name = "purchase.request.line.make.purchase.order"
+btn create RFQ>method = def make_purchase_order(self): 
+	for if not purchase:
+                po_data = self._prepare_purchase_order >
+@api.model
+def _prepare_purchase_order_line(self, po, item):
+	product = item.product_id
+	qty = item.product_uom_id._compute_quantity(
+		item.product_qty, product.uom_po_id or product.uom_id
+	)
+	min_qty = item.line_id._get_supplier_min_qty(product, po.partner_id)
+	qty = max(qty, min_qty)
+	date_required = item.line_id.date_required
+	vals = {
+		"no_purchase_request": item.name,
+	}
+	if item.line_id.analytic_tag_ids:
+		vals["analytic_tag_ids"] = [
+			(4, ati) for ati in item.line_id.analytic_tag_ids.ids
+		]
+	self._execute_purchase_line_onchange(vals)
+	return vals
+
+	_inherit = "account.move"
+	field = fields.Same('', related='.')
+	origin = fields.Char('Source Document', compute='_compute_origin')
+	def _compute_origin(self):
+        sale_orders = self.env['sale.order'].search([('name', '=', self.invoice_origin)])
+        self.origin = sale_orders[0].no_ckwi if sale_orders else ''
+			
+	partner_id = fields.Many2one('res.partner')
+	bank_name = fields.Char('Bank Name', compute='_compute_bank_name', store=True)
+    @api.depends('partner_id')
+    def _compute_bank_name(self):
+        for r in self[0]:
+            r.bank_name = self.partner_id.bank_ids.bank_id.name
+			
+	def _create_design_process #crm.sample.request > design.process
+search: other module same model > Many2one > method vals > related= > compute= > self.env.user
+
+	categ_id = fields.Many2one('product.category', string='Category Product' , compute='_compute_categ', store=True,)
+	@api.depends('product_id')
+    def _compute_categ(self):
+        for record in self:
+            if record.product_id:
+                record.categ_id = record.product_id.categ_id.id
+
+rnd/spec d/design/sket warna/oe_chatter	
+from datetime import date or datetime, timedelta
+    _name = 'sket.warna'
+    fields.Date("date",default=date.today()) or .Datetime(default=lambda self: fields.Datetime.now())
+    username = fields.Char()
+	password = fields.Char()
+	
+    @api.model
+    def create(self, vals):
+        if 'user_name' not in vals and 'user_id' in vals:
+            user = self.env['res.users'].browse(vals['user_id'])
+            vals['user_name'] = user.name
+            vals['password'] = user.password
+        return super(sket_warna/LoginLogout, self).create(vals)	
+	def write(self, vals):
+        if 'user_id' in vals:
+            user = self.env['res.users'].browse(vals['user_id'])
+            vals['user_name'] = user.name
+            vals['password'] = user.password
+        if attachment_ids:
+            user_name = self.user_name or self.env.user.name
+            self.message_post(body='Attachments added %s<br/> by %s' % (self.date, user_name), attachment_ids=attachment_ids)
+        return super(sket_warna/LoginLogout, self).write(vals)
+		
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+    
+    spec_design_id = fields.Many2one('spec.design', string='Spec Design')
+    attachment = fields.Binary('Design Image',related='spec_design_id.attachment')
+	
+		<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='name']" position="after">
+          <field name="spec_design_id" invisible="1"/>
+		
+Reyhan
+crm.sample > design.process: new/rename field, .line delete, add
+	def coba(self):
+        to_rnd = self.env['design.process'].create({vals
+		})
+        rnd_s_lines = []
+        for line in self.line_ids:
+            rnd_s_lines.append((0, 0, {vals
+			}))
+        to_rnd.write({'spec_design_ids': rnd_s_lines})
+        return to_rnd
+		
+	def action_approve(self):
+        self.is_show= True
+        to_rnd = self.env['design.process'].create({vals
+		})
+
+        rnd_s_lines = []
+        for line in self.line_ids:
+            rnd_s_lines.append((0, 0, {
+			}))
+        to_rnd.write({'spec_design_ids': rnd_s_lines})
+		return {
+		
+				<header>
+                    <button name="coba" type="object" string="tes aza"/>
+	
+	_name = 'invoice'
+	operation_container_line_ids = fields.One2many(comodel_name='invoice.container.line', string='Product Detail', inverse_name='invoice_id')
+	_name = 'invoice.container.line' =  security
+	
+	_name = 'packing.list'	
+	def action_done(self):
+       if self.state == 'ready':
+            self.write({'state': 'done'})
+            invoice_list = self.env['invoice'].create({vals                 #Query SQL
+                
+            })
+            for line in self.product_line_ids:
+                invoice_line = self.env['invoice.line'].create({vals
+                })
+                invoice_list.write({'product_line_ids': invoice_line})
+            
+            for line in self.operation_container_line_ids:
+                    invoice_c_line = self.env['invoice.container.line'].create({vals
+                    })
+                    invoice_list.write({'operation_container_line_ids': invoice_c_line})
+            return {
+        }
+		
+	mo_no = fields.Char('Mo No.', compute='_compute_mo_no')
+===============================================================================================
+model A value to model B
+_export/SI.py
+
+	def action_validate(self):
+        if self.state == 'draft':
+            self.write({'state': 'done'})
+            packing_list = self.env['packing.list'].create({
+                'name' : self.name, 
+                'to_partner_id': self.to_partner_id.id,
+                'delivery_address_id': self.delivery_address_id.id,
+                'invoice_address_id': self.invoice_address_id.id,
+                'city_deliver': self.city_deliver,
+                'country_of_deliver_id': self.country_of_deliver_id.id,
+                'shipper_id': self.shipper_id.id,
+                'vessel': self.vessel,
+                'peb_no': self.peb_no,
+                'marchandise': self.marchandise,
+                'schedule_date': self.schedule_date,
+                'booking_date': self.booking_date,
+                'cargo_date': self.cargo_date,
+                'to_city_deliver': self.to_city_deliver,
+                'to_partner_country_id': self.to_partner_country_id.id,
+                'no_sc_id' : self.no_sc_id.id,
+                'freight': self.freight,
+                'state': 'draft',
+                'buyer_po' : self.buyer_po,     
+                'shipping_ins_id': self.id        
+            })
+        return {
+            'name': 'Packing List',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'packing.list',
+            'type': 'ir.actions.act_window',
+            'res_id': packing_list.id,
+        }

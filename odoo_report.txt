@@ -1,0 +1,241 @@
+localhost:8069/report/html/module.template_id/1
+print Action dialog & btn Print dialog rearrage: change previous's id
+
+	<record id="" model="ir.actions.report">
+		<field name="name"></field>
+		<field name="model"></field>
+		<field name="report_type">qweb-pdf/xlsx</field>
+        <field name="report_name">qa_qc.report_inspection_tag_card_xls</field>
+		<field name="report_file">module.template_id</field>
+        <field name="print_report_name">'Inspection Tag Card (%s - %s %s)' % (object.start_date,object.end_date,object.type_qc)</field>
+		<!--pdf-->
+		<field name="binding_model_id" ref="jidoka_awb.model_stock_picking_batch"/> = model_id:id = error model
+		<field name="binding_view_types">report</field></record>
+report/report.xml
+	<template id="report_picking">
+        <t t-call="web.html_container">
+			field.One2many
+			picking_ids = stock.picking
+			move_ids_without_package = line/stock.move
+			o.picking_ids.move_ids_without_package
+			<t t-foreach="docs"/"o.object in model" t-as="o"/"move" 
+				t=o.field.field</t>
+			default=vertical <tr>=horizontal
+        </t></template>
+		
+			sheet.set_row(0, 30)
+            sheet.set_column(1, 6, 14) 1-6 width
+			sheet.write('D9',obj.name) / (row, column, value, format)
+			sheet.write_string
+			sheet.merge_range('A9:A11', 'UKURAN INVOICE \n (LUAS PENAMPANG)',table_header)
+			for line in obj.line_ids:
+				sheet.merge_range('I%s:J%s' % (row, row + 5), obj.equal_symbol, header)
+				write=2, merge_range=4, false=Xdata - TypeError: merge_range() missing 2 required positional arguments: 'last_col' and 'data'
+			
+			local variable 'inv' referenced before assignment
+			row_names/row +- 1/row = 8 #will start written on row 8
+			+3 = merged with 3 attachment below it
+			sheet.merge_range('B%s:F%s' % (row, row + 3), line.description or '', table_content)
+			A:I A4 pdf 8.43=75.87 - page 2: J-R
+			("%Y") 2023 - ("%m") 06 - ("%d") 25 - 'dd-MMM-yyyy' 25-Apr-2023
+			
+			row,number=column 0-10
+			sheet.merge_range(row,0,row,0,'',table_header) #1st column 
+            sheet.merge_range(row,1,row,5,'NOTES : %s' % obj.internal_notes, table_content_center2)
+            sheet.merge_range(row,6,'',table_header) #3rd column 
+            sheet.merge_range(row,7,row,8,'',table_header) #4th column 
+			
+			sheet.merge_range(row + 1,7,row,8,'',table_header)
+			vs
+			sheet.merge_range(row,7,row + 1,8,'',table_header)
+
+server 36px local 30px			
+			
+			multi: _inventory/report/quant.py
+			_indonesia_tax/report/.py=if elif else: both / qa_qc/report/.py=if elif
+			_fik_invoice_excel/report, controller, views
+			
+			sum_persentase_harian = format(round(sum(ins.persentase_harian for ins in inspection), 2), ',')
+			<span t-esc="'{0:,.2f}'.format(int(o.amount_total))"/>
+			number_format = workbook.add_format({'num_format':'[$Rp-421]#,##0.00','font_size':10,'align':'center','valign':'vcenter'})
+			number_format.set_right(1)  = border-right
+			
+			kolom=up-down
+			baris=left-right
+			sel
+
+header: 
+page: <table> 
+<table> <thead><tbody> <tfoot>
+field unappear=false o.
+report: stacked </>=no spacing
+table, th, td style:"font-family:'Times New Roman', serif;border-collapse = X border has range
+<div class=table_responsive>
+header isn't displaying <div style="position:relative;">
+t-esc="l.get('field', 0)"
+<td><t t-esc="o.phone or 0"/></td>
+style="line-height:20%;"
+<t t-esc="o.env.user.name" />
+										Nested if else
+										<t t-if="o.invoice_address_id.zip">
+											<span t-esc="o.invoice_address_id.zip"/><br/>
+											<t t-if="o.invoice_address_id.state_id.name">
+												<span t-esc="o.invoice_address_id.state_id.name"/>,
+											</t>
+											<t t-else="">
+												<span t-esc="o.invoice_address_id.zip"/>,<br/>
+											</t>
+											
+											<t-esc/> datetime, binary/image</t>
+											information = fields.Text('Information', strip_style=True)
+											<t t-foreach="move.remark.split('\n')" t-as="remark_line">
+												<span t-esc="remark_line"/><br/>
+											</t>
+										</t>
+										<t t-elif="docs.country_of_deliver_id.name">
+											<span t-esc="docs.country_of_deliver_id.name"/>
+										</t>
+										<t t-esc="sum(line.product_qty for line in o.order_line)"/>
+										<t t-field="line.product_uom.name" groups="uom.group_uom" />
+			if obj.partner_shipping_id.display_name:
+                sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.display_name, field_text)
+				sheet.merge_range('D11:D12', obj.partner_id.name,table_remark)
+            else:
+                if obj.partner_shipping_id.name:
+                    sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.name, field_text)
+                else:
+                    sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.parent_id.name, field_text)
+					
+			if obj.partner_id.name:
+                sheet.merge_range('B10:E11', obj.partner_id.name, buyer_style)
+            elif obj.partner_id.parent_id.name and obj.partner_id.name:
+                sheet.merge_range('B10:E11', f"{obj.partner_id.parent_id.name}, {obj.partner_id.name}", buyer_style)
+            elif obj.partner_id.parent_id.name and obj.partner_id.type:
+                sheet.merge_range('B10:E11', f"{obj.partner_id.parent_id.name}, {obj.partner_id.type}", buyer_style)
+				
+				if line.attachment3:
+                    row += 1
+                else:
+                    row += 1
+					
+			use first value
+			<t t-foreach="o.grading_summary_line_ids[0]" t-as="line"> #display first element of list
+				for ins in inspection:
+                    sheet.write(row, 0, ins.product_pembahanan_id.name if ins.product_pembahanan_id else "", data_format)
+                    sheet.write(row, 9, round(ins.persentase_harian, 2), data_format) 
+                    for line in ins.operation_line_ids:
+                        sheet.write(row, 4, line.ket_masalah_id.name if line.ket_masalah_id else "", data_format)
+                    for move in ins.product_line_ids: 
+                        sheet.write(row, 8, move.tk_pembahanan, data_format)
+						
+one field many value
+fabric_colour_ids = fields.Many2many('res.fabric.colour', string='Colour')
+<field name="fabric_colour_ids" widget="many2many_tags" attrs="{'readonly': [('state', 'in', ('confirm'))]}"/>
+                            fabric_colours = ins.fabric_colour_ids.sorted(key=lambda r: r.id).mapped('name') if ins.fabric_colour_ids else []
+                            if fabric_colours != previous3:
+								sheet.write(row, 2, fabric_colours[0], data_format)
+								for i in range(1, len(fabric_colours)):
+									sheet.write(row + i, 2, fabric_colours[i], data_format)
+								previous3 = fabric_colours
+								
+                            product_template_name = ins.product_template_id.name if ins.product_template_id else ""
+display first value
+                            if fabric_colour_id != previous3:
+                                sheet.write(row, 3, fabric_colour_id, data_format)
+                                previous3 = fabric_colour_id
+								
+display if not similar value
+                            if fabric_colour_id != previous4:
+                                sheet.write(row, 3, fabric_colour_id, data_format)
+                                previous4 = fabric_colour_id
+                            else:
+                                fabric_colour_id = ""
+                            sheet.write(row, 3, fabric_colour_id, data_format)
+
+&gt; > &lt; < &amp; & &rarr; &#8594; -> &larr; <- &#42; * asterisk
+<![CDATA[&nbsp;]] OR &#160; space
+<t t-esc="o.name and ' (' + o.name + ')' or ''"/> = if no value = parentheses wouldn't appear
+\n OR <br/>
+unclosed tag can't inside closed tag <span></span> <hr>
+.straight-line {display: block;border-bottom: 0.5px solid black;margin: 10px 0;}
+		
+						col/rowspan=destroy border
+							<t t-set="first_part" t-value="' '.join(o.vendor_id.name.split(' ')[0:-2]) if vendor_name.split(' ')[0:-2] else ''"/>
+							<tr>
+								<td style="border-left:2px solid black;border-top:1px solid black;"></td>
+								<td style="border-top:1px solid black;"></td>
+								<td style="border-top: 1px solid black;border-bottom:1px solid black;" t-if="first_part"><t t-esc="first_part"/></td>
+							</tr>
+							<t t-set="second_part" t-value="o.vendor_id.name.split(' ')[-2:][0] + ' ' + vendor_name.split(' ')[-2:][1] if vendor_name.split(' ')[-2:] else ''"/>
+							<tr>
+								<td style="border-left:2px solid black;border-top:1px solid black;"></td>
+								<td style="border-top:1px solid black;"></td>
+								<td style="border-top: 1px solid black;border-bottom:1px solid black;" t-if="vendor_name"><t t-esc="second_part"/></td>
+									
+Total: packing_list
+record: pack/means/gross_weight/net_weight
+
+	@api.depends('product_line_ids.record')
+    def _compute_total_record(self):
+		subtotal_record = sum(float(record) for record in self.product_line_ids.mapped('record'))* self.product_line_ids.product_uom_qty
+        self.record = subtotal_record
+shipping.list
+record: pack/means/gross_weight/net_weight
+
+	@api.depends('product_line_ids.pack') #,'product_line_ids.product_uom_qty'
+    def _compute_total_pack(self):
+		subtotal_pack = sum(self.product_line_ids.mapped('pack')) * self.product_line_ids.product_uom_qty
+        self.total_pack = subtotal_pack
+============================================================================================================================================================================
+_name = 'inspection.tag.card'
+type_qc = fields.Selection([
+    ('reguler', 'Reguler')])
+
+<field name="" attrs="{'invisible': [('type_qc', '!=', 'pembahanan')]}"/>
+<field name="" attrs="{'column_invisible': [('parent.type_qc', 'not in', ['proses_pengiriman'])]}"/>
+<field name=""  attrs="{'column_invisible': [('parent.type_qc', 'in', ['proses_pengiriman','pre_finishing','top_coat','packing','bras_component','cushion','kawai_top_coat'])]}"/>
+
+#manufacturing/_samwill/tag_card.xml - model: jenis_kayu: black-border, text-align, auto line-fill
+XPO/rekapitulasi_grading.py
+#inventory /transfers /delivery order /batch transfer/_awb/surat_jalan.xml
+/receipts & PO/receipt
+#rnd/_marketing/spec design.py .xml
+#purchase/purchase_order, quotation, PO reguler
+#Sales/_sale/Sale Confirmation: Total false#CRM/_marketing/sale_confirm.xml 
+
+inventory/inventory adjusment/count .py
+design_process/static/rnd_bom.xml
+_sale/rincian_hardware.py
+/report_hasil_tes_internal_external.py
+qa_qc/qa_qc.xml: Ukuran: pcs
+A. Ukuran & B. Plywood: colspans all
+Sale/ & Purchase/ & Inventory/Product
+Product Label (PDF), (ZPL)
+Product Barcode (PDF), (ZPL)
+Inventory/Lot/Serial Number (PDF), (ZPL)
+CRM & RND
+_crm/sample_req.xml | .py
+_rnd_flow/sample_req.xml
+accounting/customer/invoice, credit notes									
+account.move: INVOICE LOCAL(PDF)
+Shipping Ins: ATTENTION: capital
+
+CRM /Quotation
+/quotation - Sales/Market Quotation or error: footer
+/quotation XLS - Sales/Order to Invoice: collapse, thead column width
+/_sale/sale_mo.xml Sale MO  - Sales/MO
+/_design_process/contract_review [sale.order] - Sales/Contract Review
+/_sale/sale_confirm.xml
+contract_review.xml cr.rv.wizard
+page 1 of 1
+collapse
+ValidationError to print on correct menuitem
+qa_qc/ketidaksesuaian.xml: naming similar to qa_qc report
+Material/_material/tag card
+rename title: B. 1/2 Jadi, Component, Sawn Timber only seq		
+
+report PO: company_id unshown
+Alamat & Item vertical-align:top;
+Tanggal: bulan as word not number
+table: right left border & border-collapse
+kwalitas text: no top border

@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <template id="report_shipping_ins">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                       <div class="header" style="text-align:center;">
+                            <span style="font-weight: bold;"><t t-esc="o.shipper_id.name"/></span>
+                        </div>
+                        <div style="text-align:center; top:25px; position: relative;">
+                            <td> 
+                                <span style="font-weight: bold;" t-esc="o.shipper_id.street"/>
+                                <span style="font-weight: bold;" t-esc="o.shipper_id.street2"/>
+                                <span style="font-weight: bold;" t-esc="o.shipper_id.zip"/>
+                            </td>
+                        </div>
+                        <div style="text-align:center; top:25px; position: relative; ">
+                            <td>
+                                <span style="font-weight: bold;" t-esc="o.shipper_id.state_id.name"/>,
+                                <span style="font-weight: bold;" t-esc="o.shipper_id.country_id.name"/>
+                                <br/>
+                                <br/>
+                            </td>
+                        </div>
+                        <br/><br/>
+                        <div style="margin-top: 10px; text-align: center; font-weight: bold; font-size: 20px;">
+                            <td>SHIPPING INSTRUCTION</td>
+                            <br/>
+                        </div>
+                        <div style="margin-top:10;font-size:12px">
+                            <table width="100%" style="border-collapse: collapse;">
+                                <tr>
+                                <td style="padding: 5px;">No.</td>
+                                <td style="padding: 5px;">:</td>
+                                <td style="padding: 5px;">
+                                    <span t-esc="o.name"/>
+                                </td>
+                                <td></td>
+                                <td><div style="padding-left: 100;">BOOKING DATE</div></td>
+                                 <td>:</td>
+                                <td>
+                                    <span t-esc="o.booking_date.strftime('%d %B %Y')"/>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td style="padding: 5px;">DATE </td> 
+                                <td style="padding: 5px;">:</td>
+                                <td style="padding: 5px;">
+                                    <span t-esc="o.schedule_date.strftime('%d %B %Y')"/>  
+                                </td>
+                                <td></td>
+                                <td><div style="padding-left: 100;">CARGO READY </div></td>
+                                <td>:</td>
+                                <td>
+                                    <span t-esc="o.cargo_date.strftime('%d %B %Y')"/>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td style="padding: 5px;">TO </td>
+                                <td style="padding: 5px;">:</td>
+                                <td style="padding: 5px;">
+                                    <span t-esc="o.to_partner_id.name"/> 
+                                </td>
+                                </tr>
+                                <tr>
+                                <td style="padding: 5px;">ATTENTION </td>
+                                <td style="padding: 5px;">:</td>
+                                <td style="padding: 5px;">
+                                    <span t-esc="o.responsible_id.name"/>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td style="padding: 5px;">CONTAINER </td>
+                                <td style="padding: 5px;">:</td>
+                                <td style="padding: 5px;">
+                                    <span t-esc="o.container_no"/>
+                                </td>
+                                </tr>
+                            </table>
+                            <br/><br/>
+                        </div>
+                        <div>
+                            <td style="text-align:left;">DEAR SIR/MADAM,<br/></td>
+                        </div>
+                        <div>
+                            <td style="text-align:left;">WE HERE WOULD LIKE TO CONFIRM FOR OUR FOLLOWING CARGO <br/><br/></td>
+                        </div>
+                        <div style="margin-top:10px;font-size:12px">
+                            <table width="100%" style="border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 5px;">MERCHANDISE </td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.marchandise"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">QUANTITY </td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.total_qty"/>
+                                        <span t-esc="o.uom_name_line"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">NET WEIGHT </td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.total_net_wght"/>
+                                        <span t-esc="o.weight_uom_name_line"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">GROSS WEIGHT </td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.total_gross_wght"/>
+                                        <span t-esc="o.weight_uom_name_line"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">MEASUREMENT </td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.total_means"/>
+                                        <span t-esc="o.volume_uom_name_line"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">PORT OF LOADING </td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <t t-if="o.city_deliver and docs.country_of_deliver_id.name">
+											<span t-esc="o.city_deliver"/>,<span t-esc="docs.country_of_deliver_id.name"/>
+										</t>
+										<t t-elif="o.city_deliver">
+											<span t-esc="o.city_deliver"/>
+										</t>
+										<t t-elif="docs.country_of_deliver_id.name">
+											<span t-esc="docs.country_of_deliver_id.name"/>
+										</t>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">VESSEL</td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.vessel"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px; vertical-align: top;">DESTINATION</td>
+                                    <td style="padding: 5px; vertical-align: top;">:</td>
+                                    <td style="padding: 5px; vertical-align: top;">
+										<t t-if="o.delivery_address_id.city">
+											<span t-esc="o.delivery_address_id.city"/>,
+										</t>
+										<span t-esc="o.delivery_address_id.state_id.name"/>
+										<span t-esc="o.delivery_address_id.country_id.name"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px; vertical-align: top;">SHIPPER</td>
+                                    <td style="padding: 5px; vertical-align: top;">:</td>
+                                    <td style="padding: 5px; vertical-align: top;">
+										<t t-if="o.shipper_id.name">
+											<span t-esc="o.shipper_id.name"/><br/>
+										</t>
+										<t t-if="o.shipper_id.street">
+											<span t-esc="o.shipper_id.street"/><br/>
+										</t>
+										<t t-if="o.shipper_id.street2">
+											<span t-esc="o.shipper_id.street2"/><br/>
+										</t>
+                                        <span t-esc="o.shipper_id.city"/>
+                                        <span t-esc="o.shipper_id.zip"/>
+                                        <span t-esc="o.shipper_id.state_id.name"/>,
+                                        <span t-esc="o.shipper_id.country_id.name"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px; vertical-align: top;">CONSIGNEE</td>
+                                    <td style="padding: 5px; vertical-align: top;">:</td>
+                                    <td style="padding: 5px; vertical-align: top;">
+										<t t-if="o.delivery_address_id.name">
+											<span t-esc="o.delivery_address_id.name"/><br/>
+										</t>
+										<t t-if="o.delivery_address_id.street">
+											<span t-esc="o.delivery_address_id.street"/><br/>
+										</t>
+                                        <span t-esc="o.delivery_address_id.street2"/>
+                                        <span t-esc="o.delivery_address_id.city"/>
+										<t t-if="o.delivery_address_id.zip">
+											<span t-esc="o.delivery_address_id.zip"/><br/>
+										</t>
+                                        <span t-esc="o.delivery_address_id.state_id.name"/>
+                                        <span t-esc="o.delivery_address_id.country_id.name"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px; vertical-align: top;">NOTIFY PARTY</td>
+                                    <td style="padding: 5px; vertical-align: top;">:</td>
+                                    <td style="padding: 5px; vertical-align: top;">
+										<t t-if="o.to_partner_id.name">
+											<span t-esc="o.to_partner_id.name"/><br/>
+										</t>
+										<t t-if="o.to_partner_id.street">
+											<span t-esc="o.to_partner_id.street"/><br/>
+										</t>
+                                        <span t-esc="o.to_partner_id.street2"/>
+                                        <span t-esc="o.to_partner_id.city"/>
+										<t t-if="o.to_partner_id.zip">
+											<span t-esc="o.to_partner_id.zip"/><br/>
+										</t>
+                                        <span t-esc="o.to_partner_id.state_id.name"/>
+                                        <span t-esc="o.to_partner_id.country_id.name"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">FREIGHT</td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.freight"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">INDICATING</td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.indicating"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">CONTAINER NO.</td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.container_no"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">SEAL NO.</td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.seal_no"/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">PEB NO.</td>
+                                    <td style="padding: 5px;">:</td>
+                                    <td style="padding: 5px;">
+                                        <span t-esc="o.peb_no"/>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div  style="margin-top:20px;">
+                            <td style="text-align:left;">THANK YOU FOR YOUR KIND CO-OPERATION.<br/> 
+                            BEST REGARDS<br/></td>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+        <record id="paperformat_report_jidoka_export_a4" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="report_shipping_ins_pdf" model="ir.actions.report">
+            <field name="name">Shipping Instruction (PDF)</field>
+            <field name="model">shipping.ins</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">jidoka_export.report_shipping_ins</field>
+            <field name="binding_model_id" ref="model_shipping_ins"/>
+            <field name="paperformat_id" ref="paperformat_report_jidoka_export_a4"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

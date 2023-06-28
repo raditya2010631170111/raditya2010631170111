@@ -12,8 +12,6 @@
             </field>
         </record>
         
-
-        <!-- model.name action window -->
         <record id="jidoka_isi_defect_action" model="ir.actions.act_window">
             <field name="name">Defect</field>
             <field name="type">ir.actions.act_window</field>
@@ -27,7 +25,6 @@
                 </p>    
             </field>
         </record>
-        <!-- <menuitem id="level_aql_menu" name="Level AQL" action="level_aql_action" parent="qa_qc.menu_qc_configuration"/> -->
         <menuitem action="jidoka_isi_defect_action" id="menu_isi_defect" parent="qa_qc.menu_qc_configuration" sequence="12"/>
 		
 		<record id="jidoka_category_defect_view_tree" model="ir.ui.view">
