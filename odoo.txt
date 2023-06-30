@@ -1,22 +1,9 @@
 ﻿./ckwi-addons
 ./odoo14/server/odoo/addons
 
- aa_payment_request/models/res_config.py            |   2 +
- aa_payment_request/views/company.xml               |   3 +
- design_process/__manifest__.py                     |   3 +-
- design_process/models/sample_request.py            |   2 +-
- design_process/report/report_design_process.py     |   1 +
- .../report/sample_request_report_pdf.xml           | 239 +++++++++++++++++++++
- design_process/views/sample_request.xml            |   3 +
- fik_sale_mo_report/report/sale_mo_report.xml       |   1 +
- .../report/sample_request_report.py                |   1 +
- .../report/sample_request_report_pdf.xml           |   1 +
- jidoka_marketing/report/sale_confirm.xml           |   1 +
- .../report/sample_request_report_pdf.xml           |   1 +
- jidoka_sale/report/sale_confirm.xml                |   3 +-
- jidoka_sale/report/sale_mo_report.xml              |   1 +
- qa_qc/models/inspection_tag_card.py                | 119 +++++++++-
- qa_qc/views/inspection_tag_card_views.xml          |  16 ++
+ jidoka_export/views/stock_move_views.xml       |   9 ++
+ jidoka_marketing/views/sale.xml                |   1 +
+ jidoka_sale/views/sc_revisi.xml                | 110 ++++++++++++++
 
 init=py,conf=restart & manifest=csv,xml=upgrade - .xml can change .py=restart
 update apps/favorite dashboard/install
