@@ -60,9 +60,7 @@ server 36px local 30px
 			number_format = workbook.add_format({'num_format':'[$Rp-421]#,##0.00','font_size':10,'align':'center','valign':'vcenter'})
 			number_format.set_right(1)  = border-right
 			
-			kolom=up-down
-			baris=left-right
-			sel
+			kolom=up-down - baris=left-right - sel
 
 header: 
 page: <table> 

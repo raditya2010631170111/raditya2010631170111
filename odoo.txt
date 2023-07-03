@@ -1,11 +1,7 @@
 ﻿./ckwi-addons
 ./odoo14/server/odoo/addons
 
- jidoka_export/views/stock_move_views.xml       |   9 ++
- jidoka_marketing/views/sale.xml                |   1 +
- jidoka_sale/views/sc_revisi.xml                | 110 ++++++++++++++
-
-init=py,conf=restart & manifest=csv,xml=upgrade - .xml can change .py=restart
+init=py,conf=restart & manifest=csv,xml=upgrade - .xml can change by .py=restart
 update apps/favorite dashboard/install
 addons: 1 directory before modul, 1 coma
 'psql not found' pg_path
@@ -34,7 +30,7 @@ compute=based field, dependencies=computed based computed
 onchange=warning invalid value
 make value without adding to database:
 constraints verified invariant by python/SQL
-emp_id = error Python
+emp_id = error .py
 	
 constraint
 @api.constrains('rounding') : Method yang memiliki decorator ini berfungsi untuk membuat constraints (pengecekan batasan/aturan) value sebuah field
@@ -364,6 +360,23 @@ tambahan di export
 ex : SI001 > pilih SC001 (ada 10 product) > yg dipilih product 1 2 3 4 5 6
 SI001 > pilih SC001 > yg tampil sisa dari product yang belum dibuatkan SI nya > sisa product 7 8 9 10
 - SI validate tetap di form SI dengan tanda 1 pada smart button packing list, biarkan masuk ke PL dengan klik manual oleh user
-
 SI=Shipping Ins
 PL=Packing List
+
+Revisi btn
+_crm_sample/
+_marketing/sale.py & _sale/sc_revisi.py
+
+adding new field: 
+res.partner: jidoka_respartner
+res.company: aa_payment_request/res_config
+acccount.move: fik_invoice_excel
+
+account.move payment_id failed: 
+	account_payment_id = fields.Many2one('account.payment', compute='_compute_payment')
+    def _compute_payment(self):
+        for move in self:
+            account_payment = self.env['account.payment'].search([('ref', '=', move.name)])
+            move.account_payment_id = account_payment.id
+			
+                    <field name="account_payment_id" invisible="1"/>
