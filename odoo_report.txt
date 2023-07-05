@@ -14,10 +14,6 @@ print Action dialog & btn Print dialog rearrage: change previous's id
 report/report.xml
 	<template id="report_picking">
         <t t-call="web.html_container">
-			field.One2many
-			picking_ids = stock.picking
-			move_ids_without_package = line/stock.move
-			o.picking_ids.move_ids_without_package
 			<t t-foreach="docs"/"o.object in model" t-as="o"/"move" 
 				t=o.field.field</t>
 			default=vertical <tr>=horizontal
@@ -44,10 +40,6 @@ report/report.xml
             sheet.merge_range(row,1,row,5,'NOTES : %s' % obj.internal_notes, table_content_center2)
             sheet.merge_range(row,6,'',table_header) #3rd column 
             sheet.merge_range(row,7,row,8,'',table_header) #4th column 
-			
-			sheet.merge_range(row + 1,7,row,8,'',table_header)
-			vs
-			sheet.merge_range(row,7,row + 1,8,'',table_header)
 
 server 36px local 30px			
 			
@@ -55,10 +47,13 @@ server 36px local 30px
 			_indonesia_tax/report/.py=if elif else: both / qa_qc/report/.py=if elif
 			_fik_invoice_excel/report, controller, views
 			
+			<span t-esc="int(o.total_qty)"/> = 1.00 > 1
+			
+			number format
+			= workbook.add_format({'num_format':'[$Rp-421]#,##0.00','font_size':10,'align':'center','valign':'vcenter'})
+			number_format.set_right(1)  = border-right
 			sum_persentase_harian = format(round(sum(ins.persentase_harian for ins in inspection), 2), ',')
 			<span t-esc="'{0:,.2f}'.format(int(o.amount_total))"/>
-			number_format = workbook.add_format({'num_format':'[$Rp-421]#,##0.00','font_size':10,'align':'center','valign':'vcenter'})
-			number_format.set_right(1)  = border-right
 			
 			kolom=up-down - baris=left-right - sel
 			

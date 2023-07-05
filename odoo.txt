@@ -354,7 +354,7 @@ qa_qc/inspection. SC: have ~total of item UNFINISHED
                             <field name="product_id_domain_ids" options="{'no_create': True, 'no_create_edit': True}" widget="many2many_tags" domain="[('id', 'in', product_tmpl_ids)]" attrs="{'readonly': [('state', 'in', ['confirm'])], 'invisible': [('no_mo_id', '=', False)]}"/>
                             <field name="available_products" invisible="1"/>
                             <field name="product_tmpl_ids" domain="[('id', 'not in', available_products)]" widget="many2many_tags" invisible="1"/>
-	
+
 tambahan di export
 - SC sudah dipilih pada dokumen 1 maka ketika membuat SI baru dengan SC yg sama akn langsung tampil sisa produk yg sudah dipilih sebelumnya
 ex : SI001 > pilih SC001 (ada 10 product) > yg dipilih product 1 2 3 4 5 6
