@@ -61,6 +61,9 @@ server 36px local 30px
 			number_format.set_right(1)  = border-right
 			
 			kolom=up-down - baris=left-right - sel
+			
+			if sum_no_su and sum_no_tk:
+				sum_persentase = sum_no_su / sum_no_tk * 100 + 100 - 100
 
 header: 
 page: <table> 

@@ -363,15 +363,6 @@ SI001 > pilih SC001 > yg tampil sisa dari product yang belum dibuatkan SI nya > 
 SI=Shipping Ins
 PL=Packing List
 
-Revisi btn
-_crm_sample/
-_marketing/sale.py & _sale/sc_revisi.py
-
-adding new field: 
-res.partner: jidoka_respartner
-res.company: aa_payment_request/res_config
-acccount.move: fik_invoice_excel
-
 account.move payment_id failed: 
 	account_payment_id = fields.Many2one('account.payment', compute='_compute_payment')
     def _compute_payment(self):
@@ -380,3 +371,10 @@ account.move payment_id failed:
             move.account_payment_id = account_payment.id
 			
                     <field name="account_payment_id" invisible="1"/>
+ 
+_inherit = model.name - creating new field=error: uninstall module > reinstall it
+res.partner: jidoka_respartner
+res.company: aa_payment_request/res_config
+acccount.move: fik_invoice_excel
+					
+ jidoka_inventory/views/stock_picking_views.xml     |  7 +++
