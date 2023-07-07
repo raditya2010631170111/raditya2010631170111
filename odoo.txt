@@ -31,7 +31,7 @@ onchange=warning invalid value
 make value without adding to database:
 constraints verified invariant by python/SQL
 emp_id = error .py
-	
+
 constraint
 @api.constrains('rounding') : Method yang memiliki decorator ini berfungsi untuk membuat constraints (pengecekan batasan/aturan) value sebuah field
 if self.rounding <= 0:
@@ -378,3 +378,12 @@ res.company: aa_payment_request/res_config
 acccount.move: fik_invoice_excel
 					
  jidoka_inventory/views/stock_picking_views.xml     |  7 +++
+ 
+Saepul: proses pembayaran voucher out
+1 dokumen voucher out bisa memilih beberapa no. bill dan PO
+
+
+    def action_manufactur_order_tes(self):
+        self.ensure_one()
+        if not self.order_line:
+            raise ValidationError("Please add a product")
