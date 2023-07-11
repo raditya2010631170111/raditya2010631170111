@@ -21,6 +21,7 @@ git rm ./ = remove a file
 git reset --hard = discard all
 git status
 git add . git commit -m "" git push origin dev-raditya
+git add jidoka_export/
 git --no-pager log -n <limit> (git lens's tabs commit)
 q ctrl+c = exit
 git reset --soft HEAD~ / ~2 = 2 push before

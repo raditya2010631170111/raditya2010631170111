@@ -15,9 +15,6 @@ python .\odoo-bin -u modulename (/data) -c .\odoo.conf -d databasename --stop-af
 main>dev>clone>HTTP>main>dev/dev-raditya
 merge/pull>dev-r/dev>compare>uncheck delete>create>ask/merge
 git pull>upgrade - depends ['stock', 'base']
-Reyhan: qa_qc/level.aql/categ_id = Many2one product = depends ['product']
-'depends': ['base','crm','product', 'stock', 'resource','sale','jidoka_marketing','sale_crm','mrp','report_xlsx','hr'],
-design_process - crm_sample_request - jidoka_marketing
 debug=odoo running on >edit>model, external - object=foreach/inheret, method=button
 msu_rooster = search menu: technical/views model, click views, find "ir_holiday" = msu_holiday
 clone staging2 > python -m pip install "PyJWT===1.7.1" simplejson pyfcm xlsxwriter --user/copy lib/site-packages> restore database
@@ -28,8 +25,7 @@ upgrade: 1st view > 2nd menuitem
 -delegation: link record of models to parent
 compute=based field, dependencies=computed based computed 
 onchange=warning invalid value
-make value without adding to database:
-constraints verified invariant by python/SQL
+make value without adding to database: constraints verified invariant by python/SQL
 emp_id = error .py
 
 constraint
@@ -309,60 +305,6 @@ push: change of jidoka_sale/sale.order.line/name
 
 seq: crm.sample
 
-qa_qc/inspection. SC: have ~total of item UNFINISHED
-    no_mo_id = fields.Many2one('sale.order', string='No. SC')
-	product_tmpl_ids = fields.Many2many('product.product', 'tag_card_product_tmpl_rel', 'tag_id', 'product_id', string='Item Product', compute='_compute_product_tmpl_ids')
-    product_id_domain_ids = fields.Many2many('product.product', 'tag_card_product_domain_rel_1', 'tag_id', 'product_id', readonly=False, string='Item Product')
-    available_products = fields.Many2many('product.product', 'tag_card_product_domain_rel_2', 'tag_id', 'product_id', compute='_compute_available_products', store=True,readonly=False)
-	
-	@api.depends('product_id_domain_ids')
-    def _compute_available_products(self):
-        for record in self:
-            record.available_products = self._get_default_available_products()
-
-    @api.model
-    def default_get(self, fields_list):
-        defaults = super().default_get(fields_list)
-        if 'available_products' in fields_list:
-            defaults['available_products'] = self._get_default_available_products()
-        return defaults
-
-    def _get_default_available_products(self):
-        previous_record = self.search([], order='id desc', limit=1)
-        if previous_record:
-            return previous_record.available_products + self.product_id_domain_ids
-        return self.product_id_domain_ids
-		
-	def _compute_product_tmpl_ids(self):
-        for record in self:
-            if record.no_mo_id:
-                product_ids = record.no_mo_id.order_line.mapped('product_id')
-                domain = [('id', 'in', product_ids.ids), ('id', 'not in', record.available_products.ids)]
-                record.product_tmpl_ids = self.env['product.product'].search(domain)
-                if not record.product_tmpl_ids:
-                    record.no_mo_id = False
-            else:
-                record.product_tmpl_ids = False
-
-    @api.onchange('no_mo_id')
-    def _onchange_no_mo_id(self):
-        selected_ids = self.search([('no_mo_id', '!=', False)]).filtered(lambda r: r.state == 'sale').mapped('no_mo_id').ids
-        domain = [('id', 'not in', selected_ids), ('state', '=', 'sale')]
-        return {'domain': {'no_mo_id': domain}}
-		
-							<field name="no_mo_id"  domain="[('state', '=', 'sale')]"  attrs="{'readonly': [('state','in',('confirm'))]}"/>
-                            <field name="product_id_domain_ids" options="{'no_create': True, 'no_create_edit': True}" widget="many2many_tags" domain="[('id', 'in', product_tmpl_ids)]" attrs="{'readonly': [('state', 'in', ['confirm'])], 'invisible': [('no_mo_id', '=', False)]}"/>
-                            <field name="available_products" invisible="1"/>
-                            <field name="product_tmpl_ids" domain="[('id', 'not in', available_products)]" widget="many2many_tags" invisible="1"/>
-
-tambahan di export
-- SC sudah dipilih pada dokumen 1 maka ketika membuat SI baru dengan SC yg sama akn langsung tampil sisa produk yg sudah dipilih sebelumnya
-ex : SI001 > pilih SC001 (ada 10 product) > yg dipilih product 1 2 3 4 5 6
-SI001 > pilih SC001 > yg tampil sisa dari product yang belum dibuatkan SI nya > sisa product 7 8 9 10
-- SI validate tetap di form SI dengan tanda 1 pada smart button packing list, biarkan masuk ke PL dengan klik manual oleh user
-SI=Shipping Ins
-PL=Packing List
-
 account.move payment_id failed: 
 	account_payment_id = fields.Many2one('account.payment', compute='_compute_payment')
     def _compute_payment(self):
@@ -376,14 +318,18 @@ _inherit = model.name - creating new field=error: uninstall module > reinstall i
 res.partner: jidoka_respartner
 res.company: aa_payment_request/res_config
 acccount.move: fik_invoice_excel
-					
- jidoka_inventory/views/stock_picking_views.xml     |  7 +++
  
 Saepul: proses pembayaran voucher out
 1 dokumen voucher out bisa memilih beberapa no. bill dan PO
-
 
     def action_manufactur_order_tes(self):
         self.ensure_one()
         if not self.order_line:
             raise ValidationError("Please add a product")
+
+packing.list def action_done = send it's value to invoice
+error: create value/archive it = invoice has mandatory
+
+Reyhan: qa_qc/level.aql/categ_id = Many2one product = depends ['product']
+'depends': ['base','crm','product', 'stock', 'resource','sale','jidoka_marketing','sale_crm','mrp','report_xlsx','hr'],
+design_process - crm_sample_request - jidoka_marketing

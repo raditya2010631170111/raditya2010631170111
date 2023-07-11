@@ -1,0 +1,71 @@
+from odoo import api, fields, models
+
+
+class SaleAdvancePaymentInv(models.Model):
+    _inherit = "sale.advance.payment.inv.revisi"
+
+    @api.model
+    def _default_invoicing_timesheet_enabled(self):
+        if 'active_id' not in self._context and 'active_ids' not in self._context:
+            return False
+        sale_orders = self.env['sc.revisi'].browse(self._context.get('active_id') or self._context.get('active_ids'))
+        order_lines = sale_orders.mapped('order_line_ids').filtered(lambda sol: sol.invoice_status == 'to invoice')
+        product_ids = order_lines.mapped('product_id').filtered(lambda p: p._is_delivered_timesheet())
+        return bool(product_ids)
+
+    date_start_invoice_timesheet = fields.Date(
+        string='Start Date',
+        help="Only timesheets not yet invoiced (and validated, if applicable) from this period will be invoiced. If the period is not indicated, all timesheets not yet invoiced (and validated, if applicable) will be invoiced without distinction.")
+    date_end_invoice_timesheet = fields.Date(
+        string='End Date',
+        help="Only timesheets not yet invoiced (and validated, if applicable) from this period will be invoiced. If the period is not indicated, all timesheets not yet invoiced (and validated, if applicable) will be invoiced without distinction.")
+    invoicing_timesheet_enabled = fields.Boolean(default=_default_invoicing_timesheet_enabled)
+
+    def create_invoices(self):
+        sale_orders = self.env['sc.revisi'].browse(
+            self._context.get('active_ids', [])
+        )
+
+        if self.advance_payment_method == 'delivered' and self.invoicing_timesheet_enabled:
+            if self.date_start_invoice_timesheet or self.date_end_invoice_timesheet:
+                sale_orders.mapped('order_line_ids')._recompute_qty_to_invoice(self.date_start_invoice_timesheet, self.date_end_invoice_timesheet)
+
+            sale_orders.with_context(
+                timesheet_start_date=self.date_start_invoice_timesheet,
+                timesheet_end_date=self.date_end_invoice_timesheet
+            )._create_invoices(final=self.deduct_down_payments)
+
+            if self._context.get('open_invoices', False):
+                return sale_orders.action_view_invoice()
+            return {'type': 'ir.actions.act_window_close'}
+
+        return super(SaleAdvancePaymentInv, self).create_invoices()
+		
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sale_advance_payment_inv_timesheet_view_form_revisi" model="ir.ui.view">
+        <field name="name">sale_timesheet.sale.advance.payment.inv.view.form.revisi</field>
+        <field name="model">sale.advance.payment.inv.revisi</field>
+        <field name="inherit_id" ref="jidoka_sale.view_sale_advance_payment_inv_revisi"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="disable_autofocus">true</attribute>
+            </xpath>
+            <xpath expr="//field[@name='deposit_taxes_id']" position="after">
+                <field name="invoicing_timesheet_enabled" invisible="1"/>
+                <label for="date_start_invoice_timesheet" string="Timesheets Period" attrs="{'invisible': [ '|', ('invoicing_timesheet_enabled', '=', False), ('advance_payment_method', '!=', 'delivered')]}"/>
+                <div class="o_row" attrs="{'invisible': [ '|',('invoicing_timesheet_enabled', '=', False), ('advance_payment_method', '!=', 'delivered')]}">
+                    <field name="date_start_invoice_timesheet"
+                        class="oe_inline" widget="daterange"
+                        options="{'related_end_date': 'date_end_invoice_timesheet'}"
+                        title="Only timesheets not yet invoiced (and validated, if applicable) from this period will be invoiced. If the period is not indicated, all timesheets not yet invoiced (and validated, if applicable) will be invoiced without distinction."/>
+                    <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow"/>
+                    <field name="date_end_invoice_timesheet"
+                        class="oe_inline" widget="daterange"
+                        options="{'related_start_date': 'date_start_invoice_timesheet'}"
+                        title="Only timesheets not yet invoiced (and validated, if applicable) from this period will be invoiced. If the period is not indicated, all timesheets not yet invoiced (and validated, if applicable) will be invoiced without distinction."/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

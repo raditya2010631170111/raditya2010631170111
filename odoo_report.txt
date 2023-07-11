@@ -124,6 +124,20 @@ style="line-height:20%;"
                     for move in ins.product_line_ids: 
                         sheet.write(row, 8, move.tk_pembahanan, data_format)
 						
+			
+            type_dict = {
+                'neraca': 'N E R A C A',
+                'perincian_neraca': 'PENJELASAN POS-POS NERACA',
+                'laba_rugi': 'PERHITUNGAN LABA RUGI',
+                'perincian_rl': 'PENJELASAN POS-POS LABA RUGI',
+                'Cipta Kreasi Wood Industry': 'PT. CIPTA KREASI WOOD INDUSTRY',
+                False: ''
+            }
+			sheet.write('A2',type_dict[obj.type],bold_header)
+			
+			<t t-set="type" t-value="dict([('delivery','Delivery Address'),('contact','Contact'), (False, '')])"/>
+			<t t-esc="type[o.partner_id.type]"/>
+						
 one field many value
 fabric_colour_ids = fields.Many2many('res.fabric.colour', string='Colour')
 <field name="fabric_colour_ids" widget="many2many_tags" attrs="{'readonly': [('state', 'in', ('confirm'))]}"/>

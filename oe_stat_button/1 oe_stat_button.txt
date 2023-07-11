@@ -1,0 +1,141 @@
+<field name="product_id" options="{'no_create': True, 'no_create_edit': True}"/>
+
+Customer Preview, Delivery, Invoices, Manufacturing
+
+design_process/sale.order
+
+	is_revisi = fields.Boolean('is_revisi', related='order_id.is_revisi')
+	@api.onchange('is_revisi')
+    def _onchange_is_revisi(self):
+        for line in self:
+            if not line.is_revisi:
+                line.request_date = False
+============================================================================================================================================================================
+_marketing/sale.order
+from datetime import datetime, timedelta, date
+
+erase STATE_IS_REVISI field & filter, request_date field & method, action_confirm, action_revisi
+
+	is_type = fields.Selection([
+        ('is_so', 'Is SO'),
+        ('is_sc', 'Is SC'),
+        ('is_revisi', 'is revisi')
+        ], string='Type Order', copy=True)
+		
+	def revisi(self):
+        self.write({ # Memindahkan status ke 'rev'
+            'state': 'rev',
+            'is_revisi': False
+        })
+
+        old_request_no = self.name or 'New'
+
+        if old_request_no.endswith('.Rev'):
+            if old_request_no.split('.Rev-')[-1].isdigit():
+                rev_number = int(old_request_no.split('.Rev-')[-1])
+                new_rev_number = rev_number + 1
+                new_request_no = f"{old_request_no.rsplit('.Rev-', 1)[0]}.Rev-{new_rev_number:02d}"
+            else:
+                new_request_no = f"{old_request_no}.Rev-01"
+        else:
+            new_request_no = f"{old_request_no}.Rev-01"
+
+        rev_numbers = [
+            int(x.split('.Rev-')[-1])
+            for x in self.search([('name', 'like', f'{old_request_no.rsplit(".Rev-", 1)[0]}%.Rev-')]).mapped('name')
+        ]
+
+        if rev_numbers:
+            new_rev_number = max(rev_numbers) + 1
+            new_request_no = f"{old_request_no.rsplit('.Rev-', 1)[0]}.Rev-{new_rev_number:02d}"
+		#sc.revisi > sale.order
+        while self.env['sale.order'].search_count([('name', '=', new_request_no)]) > 0: 
+            rev_number = int(new_request_no.split('.Rev-')[-1])
+            new_rev_number = rev_number + 1
+            new_request_no = f"{new_request_no.rsplit('.Rev-', 1)[0]}.Rev-{new_rev_number:02d}"
+
+        new_order = self.copy(default={
+                'name': True,
+                'state': 'rev',
+                'is_revisi' : True,
+                'request_date' : self.order_line.request_date,
+                'order_line': [(0, 0, {
+                    'name_item' : ol.name_item,
+
+                }) for ol in self.order_line]
+            })
+
+        new_order.write({'state': 'sr'})
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'sale.order',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_id': new_order.id,
+            'target': 'current',
+        }
+		
+	def sr(self):
+		self.write({'state' : 'sr_rev'}) 
+
+    @api.model
+    def create(self, vals):
+        cr_date = datetime.now()
+        mounth_cr = cr_date.strftime("%m")
+        yeard_cr = cr_date.strftime("%y")
+        so_no = []
+        nama_so_no = []
+        type_bdg = []
+        state = []
+        state_so = []
+		
+        if vals.get('name', 'New') == 'New':
+            type_bdg = vals.get('document_type', False)
+        if type_bdg == 'marketing_quotation':
+            vals['name'] = self.env['ir.sequence'].next_by_code('sale.order')
+            name = vals['name']
+            vals['name'] = '%s'%(name)
+            vals['state_is_so'] = 'draft'
+            vals['state'] = None
+        elif type_bdg == 'contract_review':
+            vals['name'] = self.env['ir.sequence'].next_by_code('no.cr')
+            name = vals['name']
+            vals['name'] = "CKWI-%s/%s/CR/%s" %(name,mounth_cr,yeard_cr)
+            # vals['state'] = 'cr_to_approve'
+            vals['state'] = 'draft'
+            vals['state_is_so'] = None
+			
+        return super(JidokaSale, self).create(vals)
+============================================================================================================================================================================
+sale.order.line
+	
+	request_date = fields.Date("Ship Date", copy=False,required=True)
+    is_revisi = fields.Boolean('is_revisi', related='order_id.is_revisi')
+
+    @api.onchange('is_revisi')
+    def onchange_is_revisi(self):
+        if self.is_revisi:
+            self.request_date = self.order_id.request_date
+        else:
+            self.request_date = False
+			
+                    <button name="revisi" type="object" string="Revisi SC" class="btn-warning" attrs="{'invisible': ['|',('state', '!=', 'sale'),('is_revisi','=', True)]}"/>
+			
+				<xpath expr="//label[@for='date_order']" position="attributes">
+                    <field name="is_revisi" invisible="1"/>
+                    <field name="request_date" invisible="1"/>
+============================================================================================================================================================================
+jidoka_sale/sale.order
+'depends': ['design_process','sale_stock','sale','account','product','jidoka_marketing','stock'],
+
+        'wizard/sale_invoice_revisi.xml',
+        'wizard/revisi_timset.xml',
+
+access_sale_advance_payment_inv_revisi,access.sale.advance.payment.inv.revisi,model_sale_advance_payment_inv_revisi,sales_team.group_sale_salesman,1,1,1,0
+============================================================================================================================================================================
+	_inherit = "sale.advance.payment.inv"
+#erase def action_view_delivery(self): def action_view_delivery_revisi(self):
+
+	def _prepare_invoice_values(self, order, name, amount, so_line):
+		'name' : order.origin,

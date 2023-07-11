@@ -1,0 +1,174 @@
+	sc.revisi.line
+
+    categ_id = fields.Many2one('product.category', string='categ', related='product_id.categ_id')
+    account_id = fields.Many2one('account.account', string='account', related='product_id.categ_id.property_account_income_categ_id')
+    is_downpayment = fields.Boolean(
+        string="Is a down payment", help="Down payments are made when creating invoices from a sales order."
+        " They are not copied when duplicating a sales order.")
+    invoice_status = fields.Selection([
+        ('upselling', 'Upselling Opportunity'),
+        ('invoiced', 'Fully Invoiced'),
+        ('to invoice', 'To Invoice'),
+        ('no', 'Nothing to Invoice')
+        ], string='Invoice Status', compute='_compute_invoice_status', store=True, readonly=True, default='no')
+    state = fields.Selection(
+        related='sc_rev_id.state', string='Order Status', readonly=True, copy=False, store=True, default='draft')
+
+    price_subtotal = fields.Monetary(compute='_compute_amount', string='Subtotal', readonly=True, store=True)
+    price_tax = fields.Float(compute='_compute_amount', string='Total Tax', readonly=True, store=True)
+    price_total = fields.Monetary(compute='_compute_amount', string='Total', readonly=True, store=True)
+    currency_id = fields.Many2one(related='sc_rev_id.currency_id', depends=['sc_rev_id.currency_id'], store=True, string='Currency', readonly=True)
+    discount = fields.Float(string='Discount (%)', digits='Discount', default=0.0)
+    price_unit = fields.Float('Unit Price', required=True, digits='Product Price', default=0.0)
+    tax_id = fields.Many2many('account.tax', string='Taxes', context={'active_test': False})
+    analytic_tag_ids = fields.Many2many(
+        'account.analytic.tag', string='Analytic Tags',
+        compute='_compute_analytic_tag_ids', store=True, readonly=False,
+        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+    analytic_line_ids = fields.One2many('account.analytic.line', 'so_line', string="Analytic lines")
+    display_type = fields.Selection([
+        ('line_section', "Section"),
+        ('line_note', "Note")], default=False, help="Technical field for UX purpose.")
+    company_id = fields.Many2one(related='sc_rev_id.company_id', string='Company', store=True, readonly=True, index=True)
+	
+    @api.depends('product_id', 'sc_rev_id.date_order', 'sc_rev_id.partner_id')
+    def _compute_analytic_tag_ids(self):
+        for line in self:
+            if not line.display_type and line.state == 'draft':
+                default_analytic_account = line.env['account.analytic.default'].sudo().account_get(
+                    product_id=line.product_id.id,
+                    partner_id=line.sc_rev_id.partner_id.id,
+                    user_id=self.env.uid,
+                    date=line.sc_rev_id.date_order,
+                    company_id=line.company_id.id,
+                )
+                line.analytic_tag_ids = default_analytic_account.analytic_tag_ids
+
+
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    def _compute_amount(self):
+        for line in self:
+            price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+            taxes = line.tax_id.compute_all(price, line.sc_rev_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.sc_rev_id.partner_shipping_id)
+            line.update({
+                'price_tax': sum(t.get('amount', 0.0) for t in taxes.get('taxes', [])),
+                'price_total': taxes['total_included'],
+                'price_subtotal': taxes['total_excluded'],
+            })
+
+    @api.depends('state')
+    def _compute_product_uom_readonly(self):
+        for line in self:
+            line.product_uom_readonly = line.state in ['sale', 'done', 'cancel']
+
+    @api.depends('state', 'product_uom_qty')
+    def _compute_invoice_status(self):
+        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+        for line in self:
+            if line.state not in ('sale', 'done'):
+                line.invoice_status = 'no'
+            elif line.is_downpayment and line.untaxed_amount_to_invoice == 0:
+                line.invoice_status = 'invoiced'
+            elif not float_is_zero(line.qty_to_invoice, precision_digits=precision):
+                line.invoice_status = 'to invoice'
+            elif line.state == 'sale' and line.product_id.invoice_policy == 'order' and\
+                    line.product_uom_qty >= 0.0 and\
+                    float_compare(line.qty_delivered, line.product_uom_qty, precision_digits=precision) == 1:
+                line.invoice_status = 'upselling'
+            elif float_compare(line.qty_invoiced, line.product_uom_qty, precision_digits=precision) >= 0:
+                line.invoice_status = 'invoiced'
+            else:
+                line.invoice_status = 'no'
+				
+	  <field name="domain">
+        ['|',('document_type', '=', 'sale_confirmation'),('state', '=', 'sale'),('is_revisi', '=', False)]
+      </field>
+	  
+	<record id="sale_confirmation_revisi_inherit" model="ir.actions.act_window">
+      <field name="name">Sale Confirmation Revisi</field>
+      <field name="res_model">sale.order</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_mode">tree,form,calendar,pivot,graph,activity</field>
+      <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+      <field name="context">{'default_is_type': 'is_revisi','state': 'sr'}</field>
+      <field name="domain">[('is_revisi', '=', True)]</field>
+    </record>
+	
+	<menuitem id="sale_confirmation_revisi_menu" action="jidoka_sale.sale_confirmation_revisi_inherit" parent="sale.sale_order_menu" name="Sale Confirmation Revisi" sequence="40" groups="sales_team.group_sale_salesman"/>
+	
+	#erase action_confirm_revisi, menuitem sale_confirmation_rev_menu
+	
+		<xpath expr="//button[@name='action_confirm'][1]" position="replace">
+          <button name="action_confirm" string="Confirm" type="object" states="sr" class="btn-warning" />
+        </xpath>
+		
+		<field name="no_mo" attrs="{'column_invisible': ['|',('parent.state', 'not in', ['sale','draft', 'cr', 'mo','cr_to_approve','sr','sr_to_approve']), ('parent.is_revisi', '=', True)]}"/>
+		
+		<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/form/field[@name='name']" position="attributes">
+          <attribute name="attrs">{'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}</attribute>
+        </xpath>
+		
+		
+          <field name="product_id" required="1" string="Item" attrs="{'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}"/>
+          <field name="name_item" attrs="{'invisible': [('parent.state', 'not in', ['draft','cr', 'mo','cr_to_approve','sale', 'done']),('parent.is_revisi','=',False)],'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}" />
+		  <field name="material_finish_id" string="Material" attrs="{'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}"/>
+          <field name="finish_id" attrs="{'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}"/>
+		  <field name="sku" attrs="{'invisible': [('parent.state', 'not in', ['draft','cr', 'mo','cr_to_approve','sale', 'done'])],'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}"/>
+          <field name="request_date" attrs="{'invisible': [('parent.state', 'not in', ['draft','quotation','cr', 'mo','cr_to_approve','sale', 'done'])],'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}"/>
+        <field name="no_mo" attrs="{'invisible': [
+            ('parent.state', 'not in', ['draft', 'cr', 'mo', 'cr_to_approve', 'sale', 'done']),
+            ('parent.is_revisi', '=', True)
+        ], 'readonly': [
+            ('state', 'in', ('cr_to_approve', 'cr', 'mo', 'sr', 'sr_to_approve', 'sent', 'sale', 'done', 'cancel')),
+            ('parent.is_revisi', '=', False)
+        ]}"/>
+		<field name="no_po_cust" attrs="{'invisible': [('parent.state', 'not in', ['draft','cr', 'mo','cr_to_approve','sale', 'done'])],'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}" />
+          <field name="cont_load" attrs="{'invisible': [('parent.state', 'not in', ['draft','cr', 'mo','cr_to_approve','sale', 'done'])],'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}"/>
+          <field name="is_revisi" invisible="1"/>
+		  
+		  <group >
+            <field name="fabric_colour_id" attrs="{'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel')), ('parent.is_revisi','=',False)]}"/>
+			
+		<xpath expr="//page/field[@name='order_line']/form/group/group/field[@name='product_packaging']" position="attributes">
+          <attribute name="attrs">{'readonly': [('state','in', ('sr_to_approve','sr','sale')), ('parent.is_revisi','=',False)]}</attribute>
+		  
+        <xpath expr="//page[@name='order_lines']/field[@name='order_line']/form/group/group/div/field[@name='product_uom_qty']" position="attributes">
+          <attribute name="attrs">{'readonly': [('state','in', ('sr_to_approve','sr','sale')), ('parent.is_revisi','=',False)]}</attribute>
+        </xpath>
+		
+		
+                        <button name="create_invoice_revisi" string="Create Invoice Revisi" type="object" class="btn-primary"/>
+                        <button name="create_invoice" string="Create Invoice test" type="object" class="btn-primary"/>
+                        <button name="458" string="Create Invoice" type="action" class="btn-primary"/>
+                        <button name="458" string="Create Invoice" type="action" context="{'default_advance_payment_method': 'percentage'}"/>      
+                </header>
+				
+				
+							<button class="oe_stat_button" attrs="{'invisible':1}" type="object" name="action_sale_mo" icon="fa-comment">
+                                <field string="Sale MO" name="count_mo_search" widget="statinfo"/>
+                            </button>
+                            <button type="object"
+                                name="action_view_delivery"
+                                class="oe_stat_button"
+                                icon="fa-truck"
+                                attrs="{'invisible': [('delivery_count', '=', 0)]}" groups="base.group_user">
+                                <field name="delivery_count" widget="statinfo" string="Delivery"/>
+                            </button>
+                            <button name="action_view_invoice"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o"
+                                attrs="{'invisible': [('delivery_count', '=', 0)]}" >
+                                <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                            </button>
+                            <button class="oe_stat_button" 
+                                name="action_view_mrp_production" 
+                                type="object" 
+                                icon="fa-wrench" 
+                                groups="mrp.group_mrp_user"
+                                attrs="{'invisible': [('delivery_count', '=', 0)]}">
+                                <field name="mrp_production_count" widget="statinfo" string="Manufacturing"/>
+                            </button>
+							
+                                        <field name="categ_id"/>
+                                        <field name="account_id" invisible="1"/>

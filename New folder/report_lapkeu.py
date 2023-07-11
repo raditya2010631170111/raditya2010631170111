@@ -27,19 +27,23 @@ class ReportLapkeu(models.AbstractModel):
 			top_bottom = workbook.add_format()
 			top_bottom.set_top(1)
 			top_bottom.set_bottom(1)
-            color_text1 = workbook.add_format({'bg_color': '#B0E0E6'})
-            color_text2 = workbook.add_format({'bg_color': 'yellow'})
+            border_blue = workbook.add_format({'bg_color': '#B0E0E6','border':1})
+            color_blue = workbook.add_format({'bg_color': '#B0E0E6'})
+            border_yellow = workbook.add_format({'bg_color': 'yellow','border':1})
+            color_yellow = workbook.add_format({'bg_color': 'yellow'})
             filter = []
-            account_obj = self.env['account.move']
+            account_obj = self.env['account.payment']
+            
+            #JC-216 Report Akunting, Balance Sheet, Profil Loss, Trial Balance, Cash Flow, Partner Ledger, Partner Ageing, Multi Currencies
 
             if obj.type == 'neraca':
-                filter.append(('move_type', '=', 'out_invoice'))
+                filter.append(('payment_type', '=', 'inbound'))
             elif obj.type == 'perincian_neraca':
-                filter.append(('move_type', '=', 'out_invoice'))
+                filter.append(('payment_type', '=', 'inbound'))
             elif obj.type == 'laba_rugi':
-                filter.append(('move_type', '=', 'out_invoice'))
+                filter.append(('payment_type', '=', 'inbound'))
             elif obj.type == 'perincian_rl':
-                filter.append(('move_type', '=', 'out_invoice'))
+                filter.append(('payment_type', '=', 'inbound'))
             filter.append(('date', '>=', start_date))
             filter.append(('date', '<=', end_date))
             account = account_obj.search(filter, order="date asc")
@@ -50,7 +54,7 @@ class ReportLapkeu(models.AbstractModel):
                 sheet.set_column(3, 3, 34)
                 sheet.write('A1',obj.env.company.name,bold_uppercase)
                 sheet.write('A2',obj.type,bold_header)
-                sheet.write('A3','PER %s' % (obj.date.strftime(("%Y-%B-%d")) if obj.date else ""),bold_uppercase)
+                sheet.write('A3','PER %s' % (obj.start_date.strftime(("%Y-%B-%d")) if obj.start_date else ""),bold_uppercase)
                 sheet.write('A5','AKTIVA',bold_header)
                 sheet.write('A7','AKTIVA LANCAR',bold_header)
                 sheet.write('A8','Kas & Bank')
@@ -87,42 +91,42 @@ class ReportLapkeu(models.AbstractModel):
                 sheet.write('A46','JUMLAH HUTANG DAN MODAL',bold_header)
                 
                 for acc in account:	
-                    sheet.write('B8',acc.kas)
-                    sheet.write('B9',acc.piutang_eksport)
-                    sheet.write('B10',acc.piutang_lokal)
-                    sheet.write('B11',acc.piutang_karyawan)
-                    sheet.write('B12',acc.uang_muka)
-                    sheet.write('B13',acc.uang_jaminan)
-                    sheet.write('B14',acc.persediaan)
-                    sheet.write('B15',acc.biaya_dibayar)
-                    sheet.write('B16',acc.pajak_dibayar)
-                    sum_aktiva_lancar = acc.kas + acc.piutang_eksport + acc.piutang_lokal + acc.piutang_karyawan + acc.uang_muka + acc.uang_jaminan + acc.persediaan + acc.biaya_dibayar + acc.pajak_dibayar
+                    sheet.write('B8',acc.amount)
+                    sheet.write('B9',acc.amount)
+                    sheet.write('B10',acc.amount)
+                    sheet.write('B11',acc.amount)
+                    sheet.write('B12',acc.amount)
+                    sheet.write('B13',acc.amount)
+                    sheet.write('B14',acc.amount)
+                    sheet.write('B15',acc.amount)
+                    sheet.write('B16',acc.amount)
+                    sum_aktiva_lancar = acc.amount + acc.amount + acc.amount + acc.amount + acc.amount + acc.amount + acc.amount + acc.amount + acc.amount
                     sheet.write('B17','',border_top)
                     sheet.write('C17',sum_aktiva)
-                    sheet.write('B20',acc.nilai)
-                    sheet.write('B21',acc.penyusutan)
-                    sum_buku = acc.nilai - acc.penyusutan
+                    sheet.write('B20',acc.amount)
+                    sheet.write('B21',acc.amount)
+                    sum_buku = acc.amount - acc.amount
                     sheet.write('B22','',border_top)
                     sheet.write('B22',sum_buku,border_bottom)
                     sum_aktiva = sum_aktiva_lancar + sum_buku
                     sheet.write('C24',sum_aktiva,border_bottom)
                     sheet.write('C25','',border_top)
-                    sheet.write('B29',acc.hutang_dagang)
-                    sheet.write('B30',acc.hutang_bank)
-                    sheet.write('B31',acc.uang_penjualan)
-                    sheet.write('B32',acc_pajak_ymh)
-                    sheet.write('B33',acc.biaya_ymh)
-                    sum_hutang = acc.hutang_dagang + acc.hutang_bank + acc.uang_penjualan + acc_pajak_ymh + acc.biaya_ymh
+                    sheet.write('B29',acc.amount)
+                    sheet.write('B30',acc.amount)
+                    sheet.write('B31',acc.amount)
+                    sheet.write('B32',acc.amount)
+                    sheet.write('B33',acc.amount)
+                    sum_hutang = acc.amount + acc.amount + acc.amount + amount + acc.amount
                     sheet.write('B34','',border_top)
                     sheet.write('C34',sum_hutang)
-                    sheet.write('B37',acc.hutang_lain)
+                    sheet.write('B37',acc.amount)
                     sheet.write('B38','',border_top)
-                    sum_hutang_panjang = acc.hutang_lain
+                    sum_hutang_panjang = acc.amount
                     sheet.write('C38',sum_hutang_panjang)
-                    sheet.write('B41',acc.modal_saham)
-                    sheet.write('B42',acc.laba_tahun_lalu)
-                    sheet.write('B43',acc.laba_tahun_berjalan)
-                    sum_modal = acc.modal_saham + acc.laba_tahun_lalu + acc.laba_tahun_berjalan
+                    sheet.write('B41',acc.amount)
+                    sheet.write('B42',acc.amount)
+                    sheet.write('B43',acc.amount)
+                    sum_modal = acc.amount + acc.amount + acc.amount
                     sheet.write('B44','',border_top)
                     sheet.write('C44',sum_modal,border_bottom)
                     sum_hutang_modal = sum_hutang + sum_hutang_panjang + sum_modal
@@ -136,7 +140,7 @@ class ReportLapkeu(models.AbstractModel):
                 sheet.set_column(4, 4, 25)
                 sheet.write('A1',obj.env.company.name,bold_uppercase)
                 sheet.write('A2',obj.type,bold_header)
-                sheet.write('A3','PER %s' % (obj.date.strftime(("%Y-%B-%d")) if obj.date else ""),bold_uppercase)
+                sheet.write('A3','PER %s' % (obj.start_date.strftime(("%Y-%B-%d")) if obj.start_date else ""),bold_uppercase)
                 sheet.merge_range('A5:B5','POS-POS NERACA',bold_border)
                 sheet.write('C5','JUMLAH',bold_border)
                 sheet.write('D5','TOTAL',bold_border)
@@ -147,10 +151,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row = 6
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
-                    sheet.write(row,1,acc.kas,border_text)
-                    sheet.write(row,3,acc.jumlah,border_text)
-                    sheet.write(row,4,acc.total,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
+                    sheet.write(row,1,acc.journal_id,border_text)
+                    sheet.write(row,3,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -165,10 +169,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -183,10 +187,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -201,10 +205,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -219,10 +223,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -237,10 +241,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -255,10 +259,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -273,10 +277,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -291,10 +295,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -309,10 +313,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -327,10 +331,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -345,10 +349,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -363,10 +367,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -381,10 +385,13 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
+                    #for move in acc.move_id:
+                        #for inv in move.invoice_line_ids:
+                            #sheet.write(row,1,inv.tax_ids,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -399,10 +406,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -417,10 +424,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -435,10 +442,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -455,7 +462,7 @@ class ReportLapkeu(models.AbstractModel):
                 sheet.set_column(6, 6, 25)
                 sheet.merge_range('A1:F1',obj.env.company.name,bold_uppercase2)
                 sheet.merge_range('A2:F2',obj.type,bold_uppercase2)
-                sheet.merge_range('A3:F3','UNTUK TAHUN YANG BERAKHIR PADA %s' % (obj.date.strftime(("%Y-%B-%d")) if obj.date else ""),bold_uppercase2)
+                sheet.merge_range('A3:F3','UNTUK TAHUN YANG BERAKHIR PADA %s' % (obj.start_date.strftime(("%Y-%B-%d")) if obj.start_date else ""),bold_uppercase2)
                 sheet.merge_range('B5:C5','KOMERSIL',bold_header)
                 sheet.write('F5','KOREKSI FISKAL',bold_header2)
                 sheet.write('G5','FISKAL',bold_header)
@@ -579,7 +586,7 @@ class ReportLapkeu(models.AbstractModel):
                 sheet.set_column(4, 4, 25)
                 sheet.write('A1',obj.env.company.name,bold_uppercase)
                 sheet.write('A2',obj.type,bold_header)
-                sheet.write('A3','UNTUK TAHUN YANG BERAKHIR PADA %s' % (obj.date.strftime(("%Y-%B-%d")) if obj.date else ""),bold_uppercase)
+                sheet.write('A3','UNTUK TAHUN YANG BERAKHIR PADA %s' % (obj.start_date.strftime(("%Y-%B-%d")) if obj.start_date else ""),bold_uppercase)
                 sheet.merge_range('A5:B5','POS-POS LABA RUGI',bold_border)
                 sheet.write('C5','JUMLAH',bold_border)
                 sheet.write('D5','TOTAL',bold_border)
@@ -590,10 +597,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row = 6
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
-                    sheet.write(row,1,acc.kas,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
+                    sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_tzext)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -608,10 +615,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -626,10 +633,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -644,10 +651,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -661,11 +668,15 @@ class ReportLapkeu(models.AbstractModel):
                 sheet.write(row,4,'',bold_border)
                 
                 row += 1
-                for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                for acc in account:
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
-                    sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,3,None,border_yellow)
+                    sheet.write(row,4,acc.amount,border_text)
+                    #if acc.quantity == <0
+                        #sheet.write(row,3,None,border_blue)
+                    #elif acc.quantity == <0
+                        #sheet.write(row,3,None,border_yellow)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -680,10 +691,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -698,10 +709,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -716,10 +727,10 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 sheet.write(row,0,'',border_text)
                 sheet.write(row,1,'',border_text)
@@ -734,17 +745,17 @@ class ReportLapkeu(models.AbstractModel):
                 
                 row += 1
                 for acc in account:	
-                    sheet.write(row,0,acc.name,border_text)
+                    sheet.write(row,0,acc.destination_account_id.code,border_text)
                     sheet.write(row,1,acc.partner_id.name,border_text)
                     sheet.write(row,3,None,border_text)
-                    sheet.write(row,4,None,border_text)
+                    sheet.write(row,4,acc.amount,border_text)
                     row += 1
                 
                 row += 1
                 sheet.write(row,0,'Legenda :')
                 row += 1
-                sheet.write(row,0,'',color_text1)
+                sheet.write(row,0,'',color_blue)
                 sheet.write(row,1,'Koreksi negatif')
                 row += 1
-                sheet.write(row,1,'',color_text2)
+                sheet.write(row,0,'',color_yellow)
                 sheet.write(row,1,'Koreksi positif')

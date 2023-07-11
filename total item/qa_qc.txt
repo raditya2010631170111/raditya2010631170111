@@ -1,0 +1,46 @@
+
+qa_qc/inspection. SC: have ~total of item UNFINISHED
+    no_mo_id = fields.Many2one('sale.order', string='No. SC')
+	product_tmpl_ids = fields.Many2many('product.product', 'tag_card_product_tmpl_rel', 'tag_id', 'product_id', string='Item Product', compute='_compute_product_tmpl_ids')
+    product_id_domain_ids = fields.Many2many('product.product', 'tag_card_product_domain_rel_1', 'tag_id', 'product_id', readonly=False, string='Item Product')
+    available_products = fields.Many2many('product.product', 'tag_card_product_domain_rel_2', 'tag_id', 'product_id', compute='_compute_available_products', store=True,readonly=False)
+	
+	@api.depends('product_id_domain_ids')
+    def _compute_available_products(self):
+        for record in self:
+            record.available_products = self._get_default_available_products()
+
+    @api.model
+    def default_get(self, fields_list):
+        defaults = super().default_get(fields_list)
+        if 'available_products' in fields_list:
+            defaults['available_products'] = self._get_default_available_products()
+        return defaults
+
+    def _get_default_available_products(self):
+        previous_record = self.search([], order='id desc', limit=1)
+        if previous_record:
+            return previous_record.available_products + self.product_id_domain_ids
+        return self.product_id_domain_ids
+		
+	def _compute_product_tmpl_ids(self):
+        for record in self:
+            if record.no_mo_id:
+                product_ids = record.no_mo_id.order_line.mapped('product_id')
+                domain = [('id', 'in', product_ids.ids), ('id', 'not in', record.available_products.ids)]
+                record.product_tmpl_ids = self.env['product.product'].search(domain)
+                if not record.product_tmpl_ids:
+                    record.no_mo_id = False
+            else:
+                record.product_tmpl_ids = False
+
+    @api.onchange('no_mo_id')
+    def _onchange_no_mo_id(self):
+        selected_ids = self.search([('no_mo_id', '!=', False)]).filtered(lambda r: r.state == 'sale').mapped('no_mo_id').ids
+        domain = [('id', 'not in', selected_ids), ('state', '=', 'sale')]
+        return {'domain': {'no_mo_id': domain}}
+		
+							<field name="no_mo_id"  domain="[('state', '=', 'sale')]"  attrs="{'readonly': [('state','in',('confirm'))]}"/>
+                            <field name="product_id_domain_ids" options="{'no_create': True, 'no_create_edit': True}" widget="many2many_tags" domain="[('id', 'in', product_tmpl_ids)]" attrs="{'readonly': [('state', 'in', ['confirm'])], 'invisible': [('no_mo_id', '=', False)]}"/>
+                            <field name="available_products" invisible="1"/>
+                            <field name="product_tmpl_ids" domain="[('id', 'not in', available_products)]" widget="many2many_tags" invisible="1"/>
