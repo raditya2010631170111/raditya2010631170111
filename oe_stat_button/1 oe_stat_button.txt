@@ -23,7 +23,7 @@ erase STATE_IS_REVISI field & filter, request_date field & method, action_confir
         ], string='Type Order', copy=True)
 		
 	def revisi(self):
-        self.write({ # Memindahkan status ke 'rev'
+        self.write({
             'state': 'rev',
             'is_revisi': False
         })
@@ -48,22 +48,46 @@ erase STATE_IS_REVISI field & filter, request_date field & method, action_confir
         if rev_numbers:
             new_rev_number = max(rev_numbers) + 1
             new_request_no = f"{old_request_no.rsplit('.Rev-', 1)[0]}.Rev-{new_rev_number:02d}"
-		#sc.revisi > sale.order
-        while self.env['sale.order'].search_count([('name', '=', new_request_no)]) > 0: 
+
+        while self.env['sale.order'].search_count([('name', '=', new_request_no)]) > 0:
             rev_number = int(new_request_no.split('.Rev-')[-1])
             new_rev_number = rev_number + 1
             new_request_no = f"{new_request_no.rsplit('.Rev-', 1)[0]}.Rev-{new_rev_number:02d}"
 
         new_order = self.copy(default={
                 'name': True,
+                'no_ckwi': self.name,
                 'state': 'rev',
                 'is_revisi' : True,
-                'request_date' : self.order_line.request_date,
+                'request_date' : self.order_line[0].request_date,
                 'order_line': [(0, 0, {
                     'name_item' : ol.name_item,
+                    'product_template_id': ol.product_template_id.id,
+                    'product_id': ol.product_id.id,
+                    'material_finishing': ol.material_finishing,
+                    'material_finish_id': ol.material_finish_id.id,
+                    'finish_id': ol.finish_id.id,
+                    'sku': ol.sku,
+                    'cont_load': ol.cont_load,
+                    'product_uom_qty': ol.product_uom_qty,
+                    'product_uom': ol.product_uom.id,
+                    'sku_id': ol.sku_id.id,
+                    'name': ol.name,
+                    'william_fob_price': ol.william_fob_price,
+                    'william_set_price': ol.william_set_price,
+                    'packing_size_p': ol.packing_size_p,
+                    'packing_size_l': ol.packing_size_l,
+                    'packing_size_t': ol.packing_size_t,
+                    'qty_carton': ol.qty_carton,
+                    'cu_ft': ol.cu_ft,
+                    'request_date': ol.request_date,
+                    'inch_40': ol.inch_40,
+                    'inch_40_hq': ol.inch_40_hq,
+                    'fabric_colour_id': ol.fabric_colour_id.id
 
                 }) for ol in self.order_line]
             })
+
 
         new_order.write({'state': 'sr'})
 
@@ -75,6 +99,39 @@ erase STATE_IS_REVISI field & filter, request_date field & method, action_confir
             'res_id': new_order.id,
             'target': 'current',
         }
+
+    def sr(self):
+        self.write({'state' : 'sr_rev'}) 
+
+    @api.model
+    def create(self, vals):
+        # cr_date = vals['create_date']
+        cr_date = datetime.now()
+        mounth_cr = cr_date.strftime("%m")
+        yeard_cr = cr_date.strftime("%y")
+        # name = []
+        so_no = []
+        nama_so_no = []
+        type_bdg = []
+        state = []
+        state_so = []
+
+        if vals.get('name', 'New') == 'New':
+            type_bdg = vals.get('document_type', False)
+        if type_bdg == 'marketing_quotation':
+            vals['name'] = self.env['ir.sequence'].next_by_code('sale.order')
+            name = vals['name']
+            vals['name'] = '%s'%(name)
+            vals['state_is_so'] = 'draft'
+            vals['state'] = None
+        elif type_bdg == 'contract_review':
+            vals['name'] = self.env['ir.sequence'].next_by_code('no.cr')
+            name = vals['name']
+            vals['name'] = "CKWI-%s/%s/CR/%s" %(name,mounth_cr,yeard_cr)
+            vals['state'] = 'draft'
+            vals['state_is_so'] = None
+        
+        return super(JidokaSale, self).create(vals)
 		
 	def sr(self):
 		self.write({'state' : 'sr_rev'}) 

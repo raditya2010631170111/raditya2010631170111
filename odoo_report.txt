@@ -35,6 +35,12 @@ report/report.xml
 			A:I A4 pdf 8.43=75.87 - page 2: J-R
 			("%Y") 2023 - ("%m") 06 - ("%d") 25 - 'dd-MMM-yyyy' 25-Apr-2023
 			
+								('%d-%B-%Y')
+								12-July-2023
+								
+								('%d-%b-%y')
+								12-Jul-23
+			
 			row,number=column 0-10
 			sheet.merge_range(row,0,row,0,'',table_header) #1st column 
             sheet.merge_range(row,1,row,5,'NOTES : %s' % obj.internal_notes, table_content_center2)
@@ -136,6 +142,8 @@ style="line-height:20%;"
 			sheet.write('A2',type_dict[obj.type],bold_header)
 			
 			<t t-set="type" t-value="dict([('delivery','Delivery Address'),('contact','Contact'), (False, '')])"/>
+			
+			<t t-set="status" t-value="{'sesuai': 'V', 'tidak_sesuai': '-', 'n/a': '', False: ''}"/>
 			<t t-esc="type[o.partner_id.type]"/>
 						
 one field many value

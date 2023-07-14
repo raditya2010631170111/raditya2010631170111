@@ -333,3 +333,42 @@ error: create value/archive it = invoice has mandatory
 Reyhan: qa_qc/level.aql/categ_id = Many2one product = depends ['product']
 'depends': ['base','crm','product', 'stock', 'resource','sale','jidoka_marketing','sale_crm','mrp','report_xlsx','hr'],
 design_process - crm_sample_request - jidoka_marketing
+
+Saepul push: checkboxes_many2many
+
+Traceback (most recent call last):
+  File "E:\jidoka\odoo14\server\odoo\http.py", line 641, in _handle_exception
+    return super(JsonRequest, self)._handle_exception(exception)
+  File "E:\jidoka\odoo14\server\odoo\http.py", line 317, in _handle_exception
+    raise exception.with_traceback(None) from new_cause
+KeyError: 'sumber.acuan'
+
+half assed create new model = error
+
+.line fields.Binary
+
+    tes_belasan = fields.One2many('img.att', 'parent_field_name') #inverse
+	
+class AttachImgs(models.Model):
+    _name = 'img.att'
+    parent_field_name = fields.Char(string='Name ')
+    attachment_img = fields.Binary()
+	
+                                <group name="reguler" style="oe_row">
+                                    <group>
+										<field name="tes_belasan" string="Tes Ayun 150 x" widget="one2many_list">
+											<tree editable="bottom">
+												<field name="attachment_img" style="align-text : center;" string="Lampiran" widget="image" options="{'no_store': True, 'size': [300, 280], 'align-item': 'center'}" class="oe_avatar" />
+											</tree>
+										</field>
+                                    </group>
+                                </group>
+								
+using other model's fields via field spec_design_ids
+									<field name="spec_design_ids">
+										<tree/form>
+									</field>
+									
+									
+ jidoka_marketing/views/sale.xml        |  25 +++--
+ jidoka_sale/views/sale_views.xml       |  12 ++-
