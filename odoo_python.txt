@@ -1,0 +1,121 @@
+#
+available_products = fields.Many2many('product.product', compute='_compute_available_products')
+
+    @api.depends('product_id_domain_ids')
+    def _compute_available_products(self):
+        for record in self:
+            record.available_products = self._get_default_available_products()
+#		
+    @api.model
+    def default_get(self, fields_list):
+        defaults = super().default_get(fields_list)
+        if 'available_products' in fields_list:
+            defaults['available_products'] = self._get_default_available_products()
+        return defaults
+
+    def _get_default_available_products(self):
+        previous_record = self.search([], order='id desc', limit=1)
+        if previous_record:
+            return previous_record.available_products + self.product_id_domain_ids
+        return self.product_id_domain_ids
+#
+	@api.onchange('field_name')
+	def _onchange_field_name
+	
+#
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('repeat', 'Repeat'),
+        ('confirm', 'Confirmed'),
+    ], default="draft")
+	
+    def button_draft(self):
+        self.write({
+            'state' : 'repeat',
+        })
+		
+		OR
+		if self.state == 'to_approve':
+			self.state = 'approved'
+
+in button states = if self.field not 
+ValidationError("")
+
+    _name = 'design.detail.bom.line' size_panjang = fields.Float("P") size_lebar = fields.Float("L") size_tebal = fields.Float("T")
+    
+    @api.depends('size_panjang', 'size_lebar','size_tebal','product_qty')
+    def get_calc(self):
+        for cal in self:
+            meter3 = cal.size_panjang * cal.size_lebar * cal.size_tebal
+            meter2 = (cal.size_panjang * cal.size_lebar) + (cal.size_panjang * cal.size_tebal) + (cal.size_lebar * cal.size_tebal)
+    # size_cm
+    #       cal.total_meter_cubic = ((meter3) / 1000000) * cal.product_qty if meter3 > 0 else 0.00
+    #       cal.total_meter_persegi = ((meter2) / 10000) * cal.product_qty if meter2 > 0 else 0.00
+    # size_mm
+            cal.total_meter_cubic = ((meter3) / 1000000000) * cal.product_qty if meter3 > 0 else 0.00
+            cal.total_meter_persegi = ((meter2) / 1000000) * cal.product_qty if meter2 > 0 else 0.0
+
+desin_process/product.product
+size = fields.Selection([('size_cm', 'cm'),('size_mm', 'mm'),], 'Dimensi Uom')
+    @api.depends('rasio', 'size','size_panjang','size_lebar', 'size_tebal')
+    def get_calc_mcubic(self):
+        for record in self:
+            if record.size == 'size_cm':
+                record.total_meter_cubic = (((record.size_panjang * record.size_lebar) * record.size_tebal )/ record.rasio)  / 1000000 if record.rasio != 0 else 0.00
+            else:
+                record.total_meter_cubic = (((record.size_panjang * record.size_lebar) * record.size_tebal ) / record.rasio) / 1000000000 if record.rasio != 0 else 0.00
+    @api.depends('rasio', 'size','size_panjang','size_lebar', 'size_tebal')
+    def get_calc_mpersegi(self):
+        for record in self:
+            if record.size == 'size_cm':
+                record.total_meter_persegi = (((record.size_panjang/record.rasio) * (record.size_lebar/record.rasio)* 2 ) + ((record.size_panjang/record.rasio) * (record.size_tebal/record.rasio) * 2 ) + ((record.size_lebar/record.rasio) * (record.size_tebal/record.rasio) * 2 ))/ 10000 if record.rasio != 0 else 0.00
+            else:
+                record.total_meter_persegi = (((record.size_panjang/record.rasio) * (record.size_lebar/record.rasio)* 2 ) + ((record.size_panjang/record.rasio) * (record.size_tebal/record.rasio) * 2 ) + ((record.size_lebar/record.rasio) * (record.size_tebal/record.rasio) * 2 ))/ 1000000 if record.rasio != 0 else 0.00
+		
+unit internal: botol & unit subcount: liter, ml they both connect
+fleet.vehicle: X model V views of module
+
+design_process/manufacture_order.py mrp.bom = total_meter_ mrp.bom.line = total_meter_1
+/static/src/xml
+							
+fik_equipment_maintenance/m_timetable
+start_d
+end_d
+interval.Integer & i_step: Day/Week/Month/Year
+m_t_horizon.Integer & t_step: Day/Week/Month/Year
+
+last_poll = fields.Datetime('Last Poll', default=lambda self: fields.Datetime.now())
+method = def
+store=True, computed = Save can give back old value
+
+class Picking(models.Model):
+    _name = "stock.picking"
+    show_check_availability = fields.Boolean
+    show_validate = fields.Boolean
+	show_c = fields.Boolean
+	
+	def generate_operation(self):
+        self.show_check_availability= False
+        self.show_c = False
+        self.show_validate = False
+        
+			<field name="model">stock.picking</field>
+				<field name="show_check_availability" invisible="1"/>
+                <field name="show_validate" invisible="1"/>
+                    <button name="action_assign" attrs="{'invisible': [('show_check_availability', '=', False)]}" string="Check Availability" type="object" class="oe_highlight" groups="base.group_user"/><button name="button_validate" attrs="{'invisible': ['|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False)]}" string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"/>
+			<field name="show_c" invisible="1"/>
+			<xpath expr="//header/button[@name='button_validate'][1]" position="attributes">
+				<attribute name="attrs">{'invisible': ['|','|',('is_kayu','=', True),('show_validate','=', False), ('show_c','=', False)]}</attribute>
+			<xpath expr="//button[@name='action_assign']" position="attributes">
+				<attribute name="attrs">{'invisible': [('show_c', '=', False)]}</attribute>
+			</xpath>
+ 
+<notebook><page string=>
+Line 1st=<field><tree><field>
+Under it = <group><div><label></div><field></group><div>
+field icon trash = <div class="oe_clear"/>
+OR
+<group string=>
+2-3rd Form = <field><tree><field>
+Under it = ...
+<div class="oe_chatter"> 

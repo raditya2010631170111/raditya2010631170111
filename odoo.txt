@@ -1,6 +1,97 @@
 ﻿./ckwi-addons
 ./odoo14/server/odoo/addons
 
+SQL/Database.zip: MySQL [6months University]
+Python/.ipynb: Odoo [SCSS, HTML/XML, JS] - [6months University, 6months Work]
+PHP: 43% Laravel [Blade] 15% Code Igniter - [6months University]
+Dart: Xamarin / Flutter [C++ 38% CMake 33%] - [1years University]
+Java: Kotlin
+composer/docker, Laragon/service PostgreSQL, extension: odoo snippet, muk_web_theme, ibo icon builder for odoo
+
+E:\jidoka\odoo14\ckwi-addons git clone <link> <directory> 
+git/python --version
+git branch <create_branch> (git branch), git checkout <enter_branch> 
+git config --global user.name raditya2010631170111 | as205303
+git config --global user.email 2010631170111@student.unsika.ac.id | key-ckwi
+git branch -m = rename -d/-D = delete 
+git push origin --delete <branch>
+git diff .\jidoka_purchase\models\purchase_order.py = worktree
+git blame .\jidoka_purchase\models\purchase_order.py (git blame)
+git rm --cached ./ckwi-addons/design_process/manifest.py = unstage a file
+git reset = unstage all
+git checkout .\jidoka_purchase\report\m.xml = undo commit
+git rm ./ = remove a file
+git reset --hard = discard all
+git status
+git add . git commit -m "" git push origin dev-raditya
+git add jidoka_export/
+git --no-pager log -n <limit> (git lens's tabs commit)
+q ctrl+c = exit
+git reset --soft HEAD~ / ~2 = 2 push before
+cd E:/jidoka/odoo14/server python .\odoo-bin
+
+open folder & add . to workspace, File>Auto Save
+$=python
+ctrl+d=block
+ctrl+c>v/ctrl+d=copy 1line
+terminal=ctrl+`
+ctrl+f > esc
+ctrl+page=tabs
+alt+tab=windows
+win+v=clipboard
+shift+home
+shift+tab=reverse
+cmd = instance
+ask chatgpt state "odoo 14" > google - task backup > push - stop mid-action: git commit/upgrade/create new model = KeyError: 'sumber.acuan'
+
+sofware kerangka kerja=membuat dalam pengembangan situs web, mudah dan cepat, tersedia fungsi-fungsi siap pakai untuk mengelola akses ke pangkalan data, pengelolaan templat, dan pengelolaan sesi. Walaupun ditargetkan untuk pengembangan laman web dinamis , ini juga bisa diaplikasikan ke laman web statis . kelebihan FW 1. website lebih scalable/mudah dikembangkan 2. terdapat namespace dan tampilan untuk mengorganisir dan mengatur sumber daya website 3. proses pengembangan lebih cepat=hemat waktu karena Laravel dikombinasikan dgn komponen FW lain untuk mengembangkan website Struktur FW - MVC (Model Views Controller) User updates> Controller manipulates> Model updates> View <sees User Artisan/Virtual Host = disimpan dimana2 vs Laravel > buka folder > = hanya di dir webserver app = program yg kita buat>http 	> Controllers	> Middleware > Authenticate	> Models bootstrap > cache config = konfigurasi program kita buat database > migrations > dbms > seeder = generate data ke tabel2 public = folder menampilkan yg diliat user resource = UI yg diliat user routes = pintu gerbang seluruh recourse > web.php = membuat link laravel vendor = library dlm program dibuat artisan = file inputan menjalankan artisan composer.json = tmpt mendefinisikan library composer yg dipakai
+composer self-update
+composer global update --ignore-platform-reqs
+composer update --ignore-platform-reqs
+composer install --ignore-platform-reqs
+php artisan help make:seed
+composer > C:\laragon\bin\php\php.exe
+Laragon>kanan>PHP>version>7.4>php.ini>memory limit = 25 MB > -1 //unlimited //php -r "echo ini_get('memory_limit').PHP_EOL;"
+cd C:\laragon\www\kuliah_web_fw > composer create-project --prefer-dist laravel/laravel
+cd C:\laragon\www\kuliah_web_fw\laravel > composer install 
+php artisan serv
+open folder kuliah_web_fw> cd .\laravel\ > php artisan key:generate
+P5 Routes/web.php
+P6 app/http/Controllers php artisan make:controller Barang --resource
+web.php> use app\Http\Controllers\Barang;
+P7 resource > views > utama.blade.php, barang.blade.php
+P9 Migration 127.0.0.1/phpmyadmin/ //menyimpan log update hapus, history
+laragon>tools>quick add>phymyadmin
+.env //konfig //koneksi ke database DB_DATABASE=kuliah_web_fw
+php artisan make:migration //perubahan struktur database/TD=create file untuk merubah
+php artisan migrate:rollback --step=2 //eksekusi up() > create yes //eksekusi down()
+php artisan migrate:status
+P10 app/Models/product.php php artisan make:model Products
+P11 Barang.php> use App\Models\Products;
+composer require laravelcollective/html "~6.0"
+composer require laracasts/flash
+P12 Postman mengubah model menjadi JSON
+routes>api.php
+P13 config/app.php
+composer require maatwebsite/excel --with-all-dependencies
+php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider"
+app/Exports - php artisan make:export PlaystationsExport --model=Playstations
+app/Imports - php artisan make:import PlaystationsImport --model=Playstations
+$data = object
+Products = model
+
+pur1 (bijan): list (list, model), detail
+UTS: splash screen, login - tugaspraktikum7 = shared_pref & sqlite - tugaspraktikum9 = sqlite & consume API
+% flutter pub add provider
+% flutter pub add http
+quicktype.io
+paste JSON > auto to use in model
+
+case-sensitif - model_stock_picking = snake_case
+fields.Float = camelCase
+CONTRAINT_ = ALL_CAPS
+#/""" """"
+
 init=py,conf=restart & manifest=csv,xml=upgrade - .xml can change by .py=restart
 update apps/favorite dashboard/install
 addons: 1 directory before modul, 1 coma
@@ -57,11 +148,6 @@ widget="priority"/"radio"/"selection"=X create edit/readonly='1'
 after, before, replace, inside menyisipkan, attribute: readonly/domain
 invisible, required, column_invisible
 
-	self.write({'state': 'draft_to_approval'})
-	OR
-	if self.state == 'to_approve':
-		self.state = 'approved'
-
 status noupdate=True > False
 
 		advanced view/default btn Filters
@@ -110,95 +196,6 @@ status noupdate=True > False
 				<field name="grading_summary_count" widget="statinfo" string="Grading Summary"/>
 				<field name='grading_summary_ids' invisible="1"/>
 			</button></xpath>
-						
-btn top right corner: 
-<div name="button_box" position="inside">
-	<button class="oe_stat_button" attrs="{'invisible'}" type="object" name= icon="fa-comment">
-		<field string= name=" widget="statinfo"/></button></div>
-		
-column invisible = unless written on state-s
-
-in button states = if self.field not 
-ValidationError("")
-
-    _name = 'design.detail.bom.line' size_panjang = fields.Float("P") size_lebar = fields.Float("L") size_tebal = fields.Float("T")
-    
-    @api.depends('size_panjang', 'size_lebar','size_tebal','product_qty')
-    def get_calc(self):
-        for cal in self:
-            meter3 = cal.size_panjang * cal.size_lebar * cal.size_tebal
-            meter2 = (cal.size_panjang * cal.size_lebar) + (cal.size_panjang * cal.size_tebal) + (cal.size_lebar * cal.size_tebal)
-    # size_cm
-    #       cal.total_meter_cubic = ((meter3) / 1000000) * cal.product_qty if meter3 > 0 else 0.00
-    #       cal.total_meter_persegi = ((meter2) / 10000) * cal.product_qty if meter2 > 0 else 0.00
-    # size_mm
-            cal.total_meter_cubic = ((meter3) / 1000000000) * cal.product_qty if meter3 > 0 else 0.00
-            cal.total_meter_persegi = ((meter2) / 1000000) * cal.product_qty if meter2 > 0 else 0.0
-
-desin_process/product.product
-size = fields.Selection([('size_cm', 'cm'),('size_mm', 'mm'),], 'Dimensi Uom')
-    @api.depends('rasio', 'size','size_panjang','size_lebar', 'size_tebal')
-    def get_calc_mcubic(self):
-        for record in self:
-            if record.size == 'size_cm':
-                record.total_meter_cubic = (((record.size_panjang * record.size_lebar) * record.size_tebal )/ record.rasio)  / 1000000 if record.rasio != 0 else 0.00
-            else:
-                record.total_meter_cubic = (((record.size_panjang * record.size_lebar) * record.size_tebal ) / record.rasio) / 1000000000 if record.rasio != 0 else 0.00
-    @api.depends('rasio', 'size','size_panjang','size_lebar', 'size_tebal')
-    def get_calc_mpersegi(self):
-        for record in self:
-            if record.size == 'size_cm':
-                record.total_meter_persegi = (((record.size_panjang/record.rasio) * (record.size_lebar/record.rasio)* 2 ) + ((record.size_panjang/record.rasio) * (record.size_tebal/record.rasio) * 2 ) + ((record.size_lebar/record.rasio) * (record.size_tebal/record.rasio) * 2 ))/ 10000 if record.rasio != 0 else 0.00
-            else:
-                record.total_meter_persegi = (((record.size_panjang/record.rasio) * (record.size_lebar/record.rasio)* 2 ) + ((record.size_panjang/record.rasio) * (record.size_tebal/record.rasio) * 2 ) + ((record.size_lebar/record.rasio) * (record.size_tebal/record.rasio) * 2 ))/ 1000000 if record.rasio != 0 else 0.00
-		
-unit internal: botol & unit subcount: liter, ml they both connect
-fleet.vehicle: X model V views of module
-
-design_process/manufacture_order.py mrp.bom = total_meter_ mrp.bom.line = total_meter_1
-/static/src/xml
-							
-fik_equipment_maintenance/m_timetable
-start_d
-end_d
-interval.Integer & i_step: Day/Week/Month/Year
-m_t_horizon.Integer & t_step: Day/Week/Month/Year
-
-last_poll = fields.Datetime('Last Poll', default=lambda self: fields.Datetime.now())
-method = def
-store=True, computed = Save can give back old value
-
-class Picking(models.Model):
-    _name = "stock.picking"
-    show_check_availability = fields.Boolean
-    show_validate = fields.Boolean
-	show_c = fields.Boolean
-	
-	def generate_operation(self):
-        self.show_check_availability= False
-        self.show_c = False
-        self.show_validate = False
-        
-			<field name="model">stock.picking</field>
-				<field name="show_check_availability" invisible="1"/>
-                <field name="show_validate" invisible="1"/>
-                    <button name="action_assign" attrs="{'invisible': [('show_check_availability', '=', False)]}" string="Check Availability" type="object" class="oe_highlight" groups="base.group_user"/><button name="button_validate" attrs="{'invisible': ['|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False)]}" string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"/>
-			<field name="show_c" invisible="1"/>
-			<xpath expr="//header/button[@name='button_validate'][1]" position="attributes">
-				<attribute name="attrs">{'invisible': ['|','|',('is_kayu','=', True),('show_validate','=', False), ('show_c','=', False)]}</attribute>
-			<xpath expr="//button[@name='action_assign']" position="attributes">
-				<attribute name="attrs">{'invisible': [('show_c', '=', False)]}</attribute>
-			</xpath>
- 
-<notebook><page string=>
-Line 1st=<field><tree><field>
-Under it = <group><div><label></div><field></group><div>
-field icon trash = <div class="oe_clear"/>
-OR
-<group string=>
-2-3rd Form = <field><tree><field>
-Under it = ...
-<div class="oe_chatter"> 
 ============================================================================================================================================================================
 
 	many_source_document_ids Many2one >
@@ -236,6 +233,8 @@ Under it = ...
 				
 	inspection:/data
 ===========================================================================================================================================================================	
+
+column invisible = unless written on state-s
 
 attachment document qa_qc/.xml
 									<group name="ditolak"  attrs="{'invisible' : [('keputusan', '!=', 'tolak')]}" class="oe_row">
@@ -303,8 +302,6 @@ avoid singleton: if else: self.order_line[0].no_mo
 auto string if no set: no_pi = No Pi
 push: change of jidoka_sale/sale.order.line/name
 
-seq: crm.sample
-
 account.move payment_id failed: 
 	account_payment_id = fields.Many2one('account.payment', compute='_compute_payment')
     def _compute_payment(self):
@@ -334,41 +331,8 @@ Reyhan: qa_qc/level.aql/categ_id = Many2one product = depends ['product']
 'depends': ['base','crm','product', 'stock', 'resource','sale','jidoka_marketing','sale_crm','mrp','report_xlsx','hr'],
 design_process - crm_sample_request - jidoka_marketing
 
-Saepul push: checkboxes_many2many
-
-Traceback (most recent call last):
-  File "E:\jidoka\odoo14\server\odoo\http.py", line 641, in _handle_exception
-    return super(JsonRequest, self)._handle_exception(exception)
-  File "E:\jidoka\odoo14\server\odoo\http.py", line 317, in _handle_exception
-    raise exception.with_traceback(None) from new_cause
-KeyError: 'sumber.acuan'
-
-half assed create new model = error
-
-.line fields.Binary
-
     tes_belasan = fields.One2many('img.att', 'parent_field_name') #inverse
-	
-class AttachImgs(models.Model):
-    _name = 'img.att'
-    parent_field_name = fields.Char(string='Name ')
-    attachment_img = fields.Binary()
-	
-                                <group name="reguler" style="oe_row">
-                                    <group>
-										<field name="tes_belasan" string="Tes Ayun 150 x" widget="one2many_list">
-											<tree editable="bottom">
-												<field name="attachment_img" style="align-text : center;" string="Lampiran" widget="image" options="{'no_store': True, 'size': [300, 280], 'align-item': 'center'}" class="oe_avatar" />
-											</tree>
-										</field>
-                                    </group>
-                                </group>
 								
-using other model's fields via field spec_design_ids
-									<field name="spec_design_ids">
+									<field name="spec_design_ids"> #use model's fields
 										<tree/form>
 									</field>
-									
-									
- jidoka_marketing/views/sale.xml        |  25 +++--
- jidoka_sale/views/sale_views.xml       |  12 ++-
