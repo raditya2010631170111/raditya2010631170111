@@ -46,10 +46,6 @@ def _prepare_purchase_order_line(self, po, item):
 
 	_inherit = "account.move"
 	field = fields.Same('', related='.')
-	origin = fields.Char('Source Document', compute='_compute_origin')
-	def _compute_origin(self):
-        sale_orders = self.env['sale.order'].search([('name', '=', self.invoice_origin)])
-        self.origin = sale_orders[0].no_ckwi if sale_orders else ''
 			
 	partner_id = fields.Many2one('res.partner')
 	bank_name = fields.Char('Bank Name', compute='_compute_bank_name', store=True)
@@ -189,3 +185,27 @@ _export/SI.py
             'type': 'ir.actions.act_window',
             'res_id': packing_list.id,
         }
+		
+====================================
+fik_invoice_excel/model.py
+
+	origin = fields.Char('Source Document', compute='_compute_origin')
+	def _compute_origin(self):
+        sale_orders = self.env['sale.order'].search([('name', '=', self.invoice_origin)])
+        self.origin = sale_orders[0].no_ckwi if sale_orders else ''
+		
+	
+    account_payment_id = fields.Many2one('account.payment', compute='_compute_payment')
+
+    def _compute_payment(self):
+        for move in self:
+            account_payment = self.env['account.payment'].search([('ref', '=', move.name)])
+            move.account_payment_id = account_payment.id
+			
+    bank_name = fields.Char('Bank Name',
+        compute='_compute_bank_name', store=True)
+    @api.depends('partner_id')
+    def _compute_bank_name(self):
+        for r in self[0]:
+            r.bank_name = self.partner_id.bank_ids.bank_id.name
+====================================

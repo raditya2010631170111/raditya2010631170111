@@ -1,6 +1,16 @@
 localhost:8069/report/html/module.template_id/1
 print Action dialog & btn Print dialog rearrage: change previous's id
 
+<tr>
+	<td colspan="2" width="20%"></td>
+</tr>
+<tr>
+	<td width="5%"></td> = width 5%
+	<td></td> =  width 15%
+</tr>
+pdf: default=wrap = force new enter
+xls: default=not wrap
+
 	<record id="" model="ir.actions.report">
 		<field name="name"></field>
 		<field name="model"></field>
@@ -18,7 +28,7 @@ report/report.xml
 				t=o.field.field</t>
 			default=vertical <tr>=horizontal
         </t></template>
-		
+									row,number=column 0-10
 			sheet.set_row(0, 30)
             sheet.set_column(1, 6, 14) 1-6 width
 			sheet.write('D9',obj.name) / (row, column, value, format)
@@ -32,22 +42,19 @@ report/report.xml
 			row_names/row +- 1/row = 8 #will start written on row 8
 			+3 = merged with 3 attachment below it
 			sheet.merge_range('B%s:F%s' % (row, row + 3), line.description or '', table_content)
-			A:I A4 pdf 8.43=75.87 - page 2: J-R
-			("%Y") 2023 - ("%m") 06 - ("%d") 25 - 'dd-MMM-yyyy' 25-Apr-2023
+								("%Y") 2023 - ("%m") 06 - ("%d") 25 
+								'dd-MMM-yyyy' 25-Apr-2023
+								('%d-%B-%Y') 12-July-2023
+								('%d-%b-%y') 12-Jul-23
 			
-								('%d-%B-%Y')
-								12-July-2023
-								
-								('%d-%b-%y')
-								12-Jul-23
-			
-			row,number=column 0-10
-			sheet.merge_range(row,0,row,0,'',table_header) #1st column 
-            sheet.merge_range(row,1,row,5,'NOTES : %s' % obj.internal_notes, table_content_center2)
-            sheet.merge_range(row,6,'',table_header) #3rd column 
-            sheet.merge_range(row,7,row,8,'',table_header) #4th column 
+			#92d050 dark green/hunter
+			#FFC0CB light pink
+			#D2691E chocolate
+			#B0E0E6 cyan
+			yellow
 
-server 36px local 30px			
+server 36px local 30px
+A:I A4 pdf 8.43=75.87 - page 2: J-R			
 			
 			multi: _inventory/report/quant.py
 			_indonesia_tax/report/.py=if elif else: both / qa_qc/report/.py=if elif
@@ -66,17 +73,8 @@ server 36px local 30px
 			if sum_no_su and sum_no_tk:
 				sum_persentase = sum_no_su / sum_no_tk * 100 + 100 - 100
 
-header: 
-page: <table> 
-<table> <thead><tbody> <tfoot>
-field unappear=false o.
-report: stacked </>=no spacing
 table, th, td style:"font-family:'Times New Roman', serif;border-collapse = X border has range
 <div class=table_responsive>
-header isn't displaying <div style="position:relative;">
-t-esc="l.get('field', 0)"
-<td><t t-esc="o.phone or 0"/></td>
-style="line-height:20%;"
 <t t-esc="o.env.user.name" />
 										Nested if else
 										<t t-if="o.invoice_address_id.zip">
@@ -99,6 +97,10 @@ style="line-height:20%;"
 										</t>
 										<t t-esc="sum(line.product_qty for line in o.order_line)"/>
 										<t t-field="line.product_uom.name" groups="uom.group_uom" />
+										
+										t-esc="l.get('field', 0)"
+										<td><t t-esc="o.phone or 0"/></td>
+
 			if obj.partner_shipping_id.display_name:
                 sheet.merge_range(4, 7, 4, 8, obj.partner_shipping_id.display_name, field_text)
 				sheet.merge_range('D11:D12', obj.partner_id.name,table_remark)
@@ -204,6 +206,39 @@ record: pack/means/gross_weight/net_weight
     def _compute_total_pack(self):
 		subtotal_pack = sum(self.product_line_ids.mapped('pack')) * self.product_line_ids.product_uom_qty
         self.total_pack = subtotal_pack
+		
+		
+
+    hasil_uji = fields.Selection([
+        ('berhasil', 'Sesuai'),
+        ('gagal', 'Tidak Sesuai'),
+    ])
+	
+                            <td style="border: 1px solid black; padding-left: 5px; text-align:center;">
+                                <label class="checkbox"><input type="checkbox" t-att-checked="o.is_berhasil_checked"></input></label>
+                            </td>
+							
+vs 
+					<table width="100%" style="border-collapse:collapse;font-size:12px;">
+						<tr>
+							<td width="2%" style="border: 1px solid black;font-weight:bold;text-align:center;">
+								<span t-if="o.pemeriksaan == 'sesuai'">V</span>
+							</td>
+						<tr>
+							<td style="border: 1px solid black;font-weight:bold;text-align:center;">
+								<span t-if="o.pemeriksaan == 'tidak_sesuai'">V</span>
+							</td>
+						</tr>
+                    </table>
+					
+			report xls
+					
+            filter = []
+            stock_obj = self.env['stock.move']
+            stock = stock_obj.search(filter, order="date asc")
+			
+			report pdf
+			make field.Many2one
 ============================================================================================================================================================================
 _name = 'inspection.tag.card'
 type_qc = fields.Selection([
@@ -257,3 +292,21 @@ Alamat & Item vertical-align:top;
 Tanggal: bulan as word not number
 table: right left border & border-collapse
 kwalitas text: no top border
+
+2 - rencana pemakaian bahan baku
+Inventory/Product/Product Category: Sawn Timber
+1 - status assembling setengah/STATUS KIRIM Period, Start Date, End Date, No SC, Location
+Manufacturing/M Orders/Group by No SC
+1 - status assembling setengah/SUMMARY exactly like Stock Card: Period, Start Date, End Date, Product, Location + IF REFERENCE "Product Quantity Update" give it keterangan dari manufacture order/No SC berapa = Product Quantity Update (E23-1228)"
+1 - status assembling setengah/RENCANA PROSES = rekap order - No SC = PO - Period, Start Date, End Date
+ 
+ ctrl + k = comment
+ ctrl + u = lowercase
+ ctrl + shift + u = uppercase
+ 
+ click A-Z > resize column
+
+===================================
+stock_card_report: product, location_id/manufacturing_report: location_id, location_dest_id
+static/src/css/report.css = same
+		 /js/...js

@@ -331,6 +331,56 @@ Reyhan: qa_qc/level.aql/categ_id = Many2one product = depends ['product']
 'depends': ['base','crm','product', 'stock', 'resource','sale','jidoka_marketing','sale_crm','mrp','report_xlsx','hr'],
 design_process - crm_sample_request - jidoka_marketing
 
+===================================									
+<field name="state" decoration-success="state == 'confirm'" decoration-info="state == 'draft'" decoration-danger="state == 'repeat'" widget="badge" optional="show"/>
+state uninclude=white, success=green, info=blue, warning=yellow, danger=red
+
+display only draft,confirm - repeat=invisible, visible if state in repeat=
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm" />
+
+===================================
+				if two condition = OR
+				<xpath expr="//button[@name='button_validate'][1]" position="before">
+					<button name="button_validate_without_backorder" type="object" class="oe_highlight" string="Validate" attrs="{ 'invisible': ['|','|',('is_kayu','=',False),('grading_done','=',False),('show_validate','=',False)] }"/>
+					<button name="button_grading" type="object" class="oe_highlight" string="Grading" attrs="{ 'invisible': [('state','not in',['ready','confirmed']),('picking_type_code', '!=', 'outgoing')] }"/>
+					<field name='grading_done' invisible="1"/>
+				</xpath>
+				
+				!= not in 
+				= in
+				
+				if two condition use ['|', = AND
+				
+				<xpath expr="//button[@name='button_validate'][1]" position="before">
+					<button name="button_validate_without_backorder" type="object" class="oe_highlight" string="Validate" attrs="{ 'invisible': ['|','|',('is_kayu','=',False),('grading_done','=',False),('show_validate','=',False)] }"/>
+					<button name="button_grading" type="object" class="oe_highlight" string="Grading" attrs="{ 'invisible': ['|', ('picking_type_code', '!=', 'incoming'),('state','not in',['ready','confirmed'])] }"/>
+					<field name='grading_done' invisible="1"/>
+				</xpath>
+				
+Origina
+					<button name="button_validate" attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')), ('show_validate', '=', False)]}" string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user"/> -  blue
+                    <button name="button_validate" attrs="{'invisible': ['|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False)]}" string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"/> - white
+						
+grading validate-blue validate-white
+grading if in deiivery "ckwi/out"=invisibe vs "ckwi/in" di receipt
+Overide Purchase/stock.picking "Vaidate"
+Sales/CR>Sale MO sale.order delivery
+				<xpath expr="//header/button[@name='button_validate'][1]" position="attributes">
+					<!-- <attribute name="string"> Validate Bukan Kayu</attribute> -->
+					<attribute name="attrs">{'invisible': ['|',('is_kayu','=', True),('show_validate','=', False)]}</attribute>
+				</xpath>
+					
+Purchase/receipt
+				<xpath expr="//button[@name='button_validate'][1]" position="before">
+					<button name="button_validate_without_backorder" type="object" class="oe_highlight" string="Validate" attrs="{ 'invisible': ['|','|',('is_kayu','=',False),('grading_done','=',False),('show_validate','=',False),('is_delivery','=', True)] }"/>
+===================================
+		
+	
+kanban_image = odoo/js/if .Binary=thumbnail else if .Many2many=placeholder
+qa_qc/tes.kntruksi & tes.kntruksi.line
+design_prcess/spec.design & _marketing/attachment.py design.image
+
+
     tes_belasan = fields.One2many('img.att', 'parent_field_name') #inverse
 								
 									<field name="spec_design_ids"> #use model's fields
