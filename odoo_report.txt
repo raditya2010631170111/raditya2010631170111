@@ -299,14 +299,17 @@ Inventory/Product/Product Category: Sawn Timber
 Manufacturing/M Orders/Group by No SC
 1 - status assembling setengah/SUMMARY exactly like Stock Card: Period, Start Date, End Date, Product, Location + IF REFERENCE "Product Quantity Update" give it keterangan dari manufacture order/No SC berapa = Product Quantity Update (E23-1228)"
 1 - status assembling setengah/RENCANA PROSES = rekap order - No SC = PO - Period, Start Date, End Date
- 
- ctrl + k = comment
- ctrl + u = lowercase
- ctrl + shift + u = uppercase
- 
- click A-Z > resize column
+=====================================
 
-===================================
+_inventory: stock card/_manufacturing_report: summary pivot
+Manufacture Order: stock.move & .line - is_initial
+dt = date_from
+Rekap Order: stock.move
+            ('date', '>=', date_from),
+Rekap Gudang: stock.move.line
+
 stock_card_report: product, location_id/manufacturing_report: location_id, location_dest_id
 static/src/css/report.css = same
 		 /js/...js
+		 
+.name vs .display_name
