@@ -1,3 +1,19 @@
+Kontribusi pada Metode Memecahkan masalah yang orang lain sudah pernah mengerjakan sebelumnya, tetapi dengan metode yang berbeda
+Model penelitian yang kontribusi ada pada method improvement
+Judul: QUALITY ASSURANCE PADA SISTEM ERP EQUIP MODUL PURCHASE DAN INVENTORY DI PT JIDOKA SYSTEM INDONESIA
+
+Kontribusi pada Metode: Penerapan Quality Assurance pada modul Purchase dan INVENTORY
+
+Masalah: Sistem ERP Equip
+
+Sarjana SE: Rekayasa Perangkat Lunak
+Lingkup: Computing, security - IT Platform and Infrastructure, Software - Digital Transformation and Intelligence
+
+
+
+
+
+
 Seminar Proposal
 Apa urgensi penelitian skripsi yang dipilih?
 Apa yang membedakan penelitian ini dibandingkan dengan penelitian lain
@@ -12,13 +28,23 @@ Sidang Skripsi
 5. Jadi apa kesimpulan yang kamu dapatkan dari penelitian ini?
 6. Mengapa kamu memilih sumber-sumber bacaan ini? Coba terangkan apa yang kamu baca?
 
-Membuat surat jalan (delivery order) pabrik pada truk PT PANASONIC MANUFACTURING INDONESIA
-PROSES PEMBUATAN SURAT JALAN (DELIVERY ORDER) PADA DIVISI PRODUCTION PLANNING CONTROL (PPC) BUSINESS UNIT AIR CONDITIONER PT PANASONIC MANUFACTURING INDONESIA
-
 Algoritma Python: method
 Looping, calculation: AMount & Taxes
 Algoritma Narasi & Pseudo Code: if else
 Algoritma Flowchart: ganjil or genap
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 1. How do you rate your english skills from 1-10 ?
 English 8: Listening 9, Reading 8, Speaking 7 & Writing 9
