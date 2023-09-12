@@ -47,13 +47,26 @@ ask chatgpt state "odoo 14" > google - task backup > push - stop mid-action: git
 ctrl + k = comment
 ctrl + u = lowercase
 ctrl + shift + u = uppercase
-
 click A-Z > resize column
 
 Docs
 Insert/Break = create Section 1,2,3 = different first page
 Tanda Tangan
 Docs > Drawing > di menu Insert > New > opsi Scribble > pakai mouse > Save and Close
+
+CTRL+T CTRL+J = daftar pustaka
+"Repeat Header Row" = table
+Block table > Penomoran = auto numbering
+
+Block > Convert Text to Table
+Block > Alt+A+S = sort by abc
+
+### + Enter
+=== --- ___ *** ~~~
+
+.pptx > View > tampilan kerangka = easy copas
+
+Som AI = skripsi
  
 sofware kerangka kerja=membuat dalam pengembangan situs web, mudah dan cepat, tersedia fungsi-fungsi siap pakai untuk mengelola akses ke pangkalan data, pengelolaan templat, dan pengelolaan sesi. Walaupun ditargetkan untuk pengembangan laman web dinamis , ini juga bisa diaplikasikan ke laman web statis . kelebihan FW 1. website lebih scalable/mudah dikembangkan 2. terdapat namespace dan tampilan untuk mengorganisir dan mengatur sumber daya website 3. proses pengembangan lebih cepat=hemat waktu karena Laravel dikombinasikan dgn komponen FW lain untuk mengembangkan website Struktur FW - MVC (Model Views Controller) User updates> Controller manipulates> Model updates> View <sees User Artisan/Virtual Host = disimpan dimana2 vs Laravel > buka folder > = hanya di dir webserver app = program yg kita buat>http 	> Controllers	> Middleware > Authenticate	> Models bootstrap > cache config = konfigurasi program kita buat database > migrations > dbms > seeder = generate data ke tabel2 public = folder menampilkan yg diliat user resource = UI yg diliat user routes = pintu gerbang seluruh recourse > web.php = membuat link laravel vendor = library dlm program dibuat artisan = file inputan menjalankan artisan composer.json = tmpt mendefinisikan library composer yg dipakai
 composer self-update
