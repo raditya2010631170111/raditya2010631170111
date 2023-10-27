@@ -29,6 +29,9 @@ git --no-pager log -n <limit> (git lens's tabs commit)
 q ctrl+c = exit
 git reset --soft HEAD~ / ~2 = 2 push before
 cd E:/jidoka/odoo14/server python .\odoo-bin
+main>dev>clone>HTTP>main>dev/dev-raditya
+merge/pull>dev-r/dev>compare>uncheck delete>create>ask/merge
+git pull>upgrade - depends ['stock', 'base']
 
 open folder & add . to workspace, File>Auto Save
 $=python
@@ -86,14 +89,11 @@ addons: 1 directory before modul, 1 coma
 'psql not found' pg_path
 pgadmin user pwd odoo16pwd=conf db_user = odoo install user pwd, privileges=blue icon
 master pwd (X admin)=.conf admin_passwd "access denied"
-git > odoo16 > postgresql 15 > pgadmin port random 5432 8069 8072>properties create 
-environment>edit>path C:\jidoka\odoo16\phyton & \Scripts 
-.\server python .\odoo-bin 
+1) pgadmin port random 5432/3 8069/70 8072>properties create 
+2) environment>edit>System variable>Path>New C:\jidoka\odoo16\phyton & \Scripts 
+3) .\server python .\odoo-bin 
 .\odoo_training_jidoka python .\odoo-bin scaffold jidokaacademy
 python .\odoo-bin -u modulename (/data) -c .\odoo.conf -d databasename --stop-after-init
-main>dev>clone>HTTP>main>dev/dev-raditya
-merge/pull>dev-r/dev>compare>uncheck delete>create>ask/merge
-git pull>upgrade - depends ['stock', 'base']
 debug=odoo running on >edit>model, external - object=foreach/inheret, method=button
 msu_rooster = search menu: technical/views model, click views, find "ir_holiday" = msu_holiday
 clone staging2 > python -m pip install "PyJWT===1.7.1" simplejson pyfcm xlsxwriter --user/copy lib/site-packages> restore database
