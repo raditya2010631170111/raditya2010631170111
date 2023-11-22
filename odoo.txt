@@ -3,6 +3,29 @@ Python/.ipynb: Odoo [SCSS, HTML/XML, JS] - [6months University, 6months Work]
 PHP: 43% Laravel [Blade] 15% Code Igniter - [6months University]
 Dart: Xamarin / Flutter [C++ 38% CMake 33%] - [1years University]
 Java: Kotlin
+http://localhost:8069/web?debug=1
+
+base_accounting_kit, 'report_xlsx' jidoka_respartner 
+'depends': ['base', 'account', 'sale', 'account_check_printing', 'base_account_budget'],
+app_odoo_customize, muk_web_theme
+jidoka_awb
+aa_payment_request: hr, jidoka_work_location, jidoka_account_voucher
+account_move_name_sequence
+jidoka_indonesia_taxs: l10n_id_efaktur
+jidoka_purchase 
+'depends': ['base','purchase','purchase_requisition','jidoka_inventory','report_xlsx','account', 'qa_qc', 'stock','purchase_stock','product','purchase_order_type'],
+jidoka_inventory
+'depends': ['stock','contacts','purchase','report_xlsx','delivery','product','uom','base'],
+qa_qc: jidoka_rnd_flow: jidoka_export: purchase_request
+'depends': ['stock','product', 'jidoka_inventory','jidoka_material','jidoka_sale'],
+jidoka_material
+'depends': ['mrp', 'stock', 'jidoka_sale' ,'product', 'jidoka_inventory', 'design_process'],
+jidoka_sale
+'depends': ['design_process','sale_stock','sale','account','product','jidoka_marketing','stock','sales_team'],
+design_process
+'depends': ['base','crm','product', 'stock', 'resource','sale','jidoka_marketing','sale_crm','mrp','report_xlsx','hr'],
+jidoka_crm_sample_request
+'depends': ['stock', 'base', 'crm', 'mrp', 'sale', 'jidoka_marketing', 'design_process'],
 
 git config --global user.email "2010631170111@student.unsika.ac.id"
 git config user.name "raditya2010631170111"
