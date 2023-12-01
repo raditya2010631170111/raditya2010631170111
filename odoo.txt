@@ -5,6 +5,12 @@ Dart: Xamarin / Flutter [C++ 38% CMake 33%] - [1years University]
 Java: Kotlin
 http://localhost:8069/web?debug=1
 
+Python.exe: pip install notebook
+jupyter notebook
+pandoc-3.1.9-windows-x86_64.msi pandoc --version
+python.exe -m pip install --upgrade pip
+pip install pandas numpy plotly matplotlib wordcloud
+
 base_accounting_kit, 'report_xlsx' jidoka_respartner 
 'depends': ['base', 'account', 'sale', 'account_check_printing', 'base_account_budget'],
 app_odoo_customize, muk_web_theme

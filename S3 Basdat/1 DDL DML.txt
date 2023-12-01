@@ -1,0 +1,63 @@
+cd\
+cd xampp\mysql\bin
+mysql -u root
+use rumah_sakit;
+create database rumah_sakit;
+drop database rumah_sakit;
+
+create table dokter (
+kd_dokter int(11) not null,
+nama_dokter varchar(30) not null,
+spesialis varchar(30)not null,
+jenis_kelamin char(10),
+alamat varchar(50)not null,
+email varchar(30)not null );
+
+alter table periksa rename to periksa_pasien;
+
+alter table pasien
+add tempat_lahir varchar (20)
+after jenis_kelamin;
+
+alter table dokter
+change jenis_kelamin jk enum ('pria','wanita');
+
+//Menghapus Kolom
+alter table dokter drop status;
+
+//Merubah Ukuran/Tipe kolom
+alter table pasien modify jk enum ('pria','wanita');
+
+//Menambah Nilai Default
+alter table obat
+modify stok int (4) not null default '0';
+
+// FOREIGN KEY = MUL
+alter table pembayaran
+add foreign key (kd_ruangan)
+references ruangan (kd_ruangan)
+on delete cascade
+on update cascade;
+
+// Menambah Primary
+alter table resep add primary key <no_resep>;
+
+// Menghapus Foreign 
+show create table pembayaran;
+alter table pembayaran drop kd_dokter;
+
+//Merubah nama kolom tabel
+alter table pasien
+change jenis_kelamin jk char (10);
+
+DML
+insert into pasien values
+('10001','ardi','pria','jakarta','1992-05-02','Jl. nangka no 10','23'),
+('10002','firna','wanita','bekasi','1995-01-01','Jl, pekan raya no 90','21'),
+('10003','jeffrey','pria','bandung','1995-09-11','Jl. raya cakung no 1','21'),
+('10004','glenn','pria','jakarta','2000-12-12','Jl. tanjungan no 13','15'),
+('10005','asri','wanita','bekasi','1996-11-10','Jl. merdeka no 89','20');
+
+update pasien set alamat='jl. markisa no 5' where kd_pasien='10001';
+
+delete_from resep where no resep='ROB05';

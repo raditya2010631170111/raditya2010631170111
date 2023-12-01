@@ -1,0 +1,41 @@
+﻿super key Nim, Nama, alamat, Tgl_lahir.
+
+Candidate contoh: nim, nama(jika tidak ada nilai yang berulang didalamnya).
+
+Primary Key harus merupakan atribut yang benar-benar unik dan tidak boleh ada nilai NULL. Contoh: NIM 
+
+Alternate 
+field yang tidak dipilih (primary) disebut dengan alternate key.
+
+Basdat = Normal = Programmer
+Relasi = Tabel =  File 
+Attribut = Kolom = Field 
+Derajat = Attribut-s
+Tupel = Baris = Record 
+Cardinality = Tupel-s
+Domain = Nilai-s
+
+CHAR 255 karakter. 
+VARCHAR (huruf, angka, spesial karakter) 65535 karakter
+TEXT 65.535 bytes
+TINYTEXT	255 karakter
+MEDIUMTEXT 16,777,215 karakter
+LONGTEXT 4,294,967,295 karakter
+
+INT	positif atau negatif	-2147483648 s/d 2147483647
+FLOAT	Menyimpan data bilangan pecahan positif atau negatif	3.402823466E+38 s/d -1.175494351E-38, 0, dan 1.175494351E-38 s/d 3.402823466E+38.
+DOUBLE	-1.79…E+308 s/d -2.22…E-308, 0, dan 2.22…E-308 s/d 1.79…E+308
+DECIMAL / NUMERIC	-1.79…E+308 s/d -2.22…E-308, 0, dan 2.22…E-308 s/d 1.79…E+308
+
+DATE (YYYY-MM-DD), Tahun-Bulan-Hari.	1000-01-01 s/d 9999-12-31
+TIME	(HH:MM:SS), Jam, Menit, Detik.	-838:59:59 s/d +838:59:59
+DATETIME	Tanggal dan Waktu	1000-01-01 00:00:00 s/d 9999-12-31 23:59:59 
+YEAR	Menyimpan data Tahun	1900 s/d 2155
+
+BLOB	Binary Large OBjects untuk menyimpan data berupa binary object.	65.535 bytes
+TINYBLOB	255 bytes
+MEDIUMBLOB	16.777.215 bytes
+LONGBLOB	4.294.967.295 byte
+
+BOOLEAN	Membadingkan tipe data numberic 0 = False, dan 1 = True.
+ENUM	Menyimpan data dalam bentuk String tertentu yang telah tersedia pada parameter-nya.

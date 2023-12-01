@@ -1,0 +1,19 @@
+Draw io 
+
+Conceptual Flowchart
+Entitas/Table = Rectagle
+Attribut/Kolom = Circle
+Relasi/Key = Belah Ketupat
+
+Physical Entity Relation
+
+Table: Fakultas
+PK: id_Fakultas
+nama_fakultas
+
+Table: Program Studi
+PK: id_prodi
+Copy kata PK ke bawah, ubah jadi FK
+FK: id_fakultas
+
+Garis: One to Many

@@ -1,0 +1,75 @@
+CI3 PHP <7.3
+Git Base (Composer [laravel/CI4])
+composer create-project codeigniter4/appstarter project-root
+composer create-project codeigniter4/appstarter ci4 --ignore-platform-reqs
+
+Laravel/CI3/Odoo - PHP 5.6
+composer//docker, Laragon/xampp/service PostgreSQL, extension: odoo snippet, muk_web_theme, ibo icon builder for odoo
+php spark serve/php artisan serve/odoo in service.exe
+env # database.default.database = folder_name
+
+xampp/htdocs /ci3/app/config/.php
+$config['base_url'] = 'http://localhost/ci3';
+
+#if error
+C:\xampp\php\php.ini
+search ;extension=intl ;extension=zip
+change to extension=intl extension=zip
+
+P13 App\Config\App.php base_url = http://localhost:8080/
+P5 app/Config/Routes.php use App\Controllers\ExtendsController;
+P6 cd app/Controllers php spark make:controller ExtendsController
+P7 app\Views utama.blade.php, barang.blade.php
+P9 app\Database\Migrations 
+php spark migrate:create Mahasiswa
+php spark migrate:create Extends
+
+xampp > mysql start > admin > create database, table, 4 column > navbar "insert"
+app/Config/Database.php
+
+	public array $default = [
+        'username'     => root,
+        'database'     => 'PWF_CI4',
+    ];
+Model
+BaseController
+use App\Models\MahasiswaModel;
+search “InitController”
+$this->mahasiswaModel = new \App\Models\MahasiswaModel();
+
+git init
+git add, git commit
+git remote, git push -u origin master
+
+env
+# CI_ENVIRONMENT = production
+
+install bootstrap via composer
+
+database>operation>rename database>go
+
+git init
+git remote add origin https://github.com/Framework-Web-5D-2023/Tugas3-RadityaAjiSasmoyo
+git remote -v
+git push -u origin master
+
+database
+table: browser: data table
+structure: edit kolom
+
+NULL > checkboxed //avoid must filled
+A_I //avoid duplicated primary
+
+UTS
+error_reporting(E_ERROR | E_PARSE)
+
+composer.json
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+		
+composer.lock
+"content-hash": "1a8c509ab015c7426367c62fad2d7552",
+
+
+======================
+.gitignore = do not clone to git these files

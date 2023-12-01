@@ -1,0 +1,52 @@
+FUNGSI AGREGAT
+//SUM
+Select sum (nama_field_nilai) from nama_table;
+
+//COUNT
+Select count * from nama_table
+
+//AVG
+Select nama_matkul,avg(nilai) as rata_rata
+from nilai
+where nama_matkul='Algoritma';
+
+//MAX
+select nama_mhs, nama_matkul, max(nilai) as nilai_tertinggi
+from nilai
+where nama_matkul='Algoritma';
+
+//MIN
+select nama_mhs, nama_matkul, min(nilai) as nilai_terendah 
+from nilai
+where nama_matkul='PTI';
+
+//Group By
+select nim, nama_mhs, max(nilai) as terbesar, min(nilai) as terkecil 
+from nilai group by nim;
+
+select nama_matkul, avg(nilai) as rata-rata
+from nilai group by nama_matkul;
+
+//Having
+select nim, nama_mhs, avg(nilai) as rata-rata
+from nilai group by nim
+having avg(nilai)>80;
+
+Operasi Himpunan
+//UNION = distinct ke 4 kolom ditampil ke 2 kolom
+select nip, nama_dosen from dafter_dosen
+union
+select kd_matkul, nama_matkul from mata_kuliah
+order by nip asc
+
+//INTERSECT = exist 2 table
+select dafter_dosen.nip, daftar_dosen.nama_dosen, mata_kuliah.nama_matkul
+from daftar_dosen
+join mata_kuliah
+on daftar_dosen.nip=mata_kuliah.nip;
+
+//Minus = not exist 2 table
+select dd.nip, dd.nama_dosen, mk.nama_matkul
+from daftar_dosen as dd left join mata_kuliah as mk
+on dd.nip=mk.nip
+where mk.nip is null;

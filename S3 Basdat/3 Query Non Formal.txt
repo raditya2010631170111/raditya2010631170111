@@ -1,0 +1,64 @@
+BAHASA QUERY FORMAL NON PROSEDURAL
+//Join Query
+select kd_periksa, diagnosa, tindakan, nama_dokter from periksa_pasien -> inner join dokter on periksa_pasien.kd_dokter=dokter.kd_dokter;
+
+//Query Multi-tabel
+select pasien.nama, dokter.nama_dokter, periksa_pasien.diagnosa, tindakan, biaya_tindakan
+from pasien, dokter, periksa_pasien
+where pasien.kd_pasien = periksa_pasien.kd_pasien and
+dokter.kd_dokter = periksa_pasien.kd_dokter;
+
+//where
+select pasien.nama, dokter.nama_dokter, periksa_pasien.diagnosa, tindakan, biaya_tindakan
+from pasien, dokter, periksa_pasien
+where pasien.kd_pasien = periksa_pasien.kd_pasien and
+dokter.kd_dokter = periksa_pasien.kd_dokter
+and biaya_tindakan >= '300000';
+
+ATAU dgn Alias
+select P.nama, D.nama dokter, PP.tindakan, biaya_tindakan
+from pasien P, dokter D, periksa_pasien PP
+where P.kdpasien = PP.kd_pasien and D. kd_dokter = PP.kd_dokter
+and biaya_tindakan >='300000';
+
+//OPERATOR NATURAL JOIN = Tanpa Mirip, diurutukan belaka
+select pasien.nama, periksa_pasien.tindakan, biaya_tindakan
+from pasien natural join periksa_pasien;
+
+Outer Join - bisa NULL tergantung tabel mana yg difokuskan
+//Left Join - fokus kiri = lbh 1 data = 1NULL
+select pasien.kd_pasien, nama, periksa_pasien.kd_pasien, diagnosa, tindakan
+from pasien left join periksa_pasien
+on pasien.kd_pasien=periksa_pasien.kd_pasien;
+
+//Right Join - fokus kanan = kurang 1 data = hilang 1 data kiri
+select pasien.kd_pasien, nama, periksa_pasien.kd_pasien, diagnosa, tindakan
+from pasien right join periksa_pasien
+on pasien.kd_pasien=periksa_pasien.kd_pasien;
+
+BAHASA QUERY FORMAL KOMERSIAL
+//Subquery
+select pasien.nama, periksa_pasien.biaya_tindakan
+from pasien, periksa_pasien
+where pasien.kd_pasien = periksa_pasien.kd_pasien
+and periksa_pasien.biaya_tindakan = (select max(biaya_tindakan) from periksa_pasien);
+
+//Exist - menampilkan yg ada kd_pasien
+select nama from pasien
+where exists (select * from periksa_pasien
+where kd_pasien=pasien.kd_pasien);
+
+//Non Exist - menampilkan tidak ada kd_pasien
+select nama from pasien
+where not exists (select * from periksa_pasien
+where kd_pasien=pasien.kd_pasien);
+
+//Any - menampilkan semua kecuali biaya_tindakan terendah
+select kd_periksa, biaya_tindakan
+from periksa_pasien
+where biaya_tindakan > any (select biaya_tindakan from periksa_pasien);
+
+//All 
+select biaya_tindakan from periksa_pasien
+where biaya_tindakan < all (select biaya_tindakan from periksa_pasien
+where kd_periksa = 'PP10003');

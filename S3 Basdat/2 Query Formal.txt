@@ -1,0 +1,82 @@
+BAHASA QUERY FORMAL PROSEDURAL
+//Menampilkan seluruh tabel
+select * from dokter;
+
+//Menampilkan kolom tertentu tabel
+select nama_dokter,alamat from dokter;
+
+//Menfilter/Menyeleksi data tabel
+select kd_dokter, nama_dokter, no_telp from dokter where alamat ='jl. pemuda no 44';
+
+kondisi WHERE, lebih besar (>) , lebih kecil (<), tidak sama (<>) 
+Operator logika: Not (!), AND (&&), OR (||)
+Operator Arimatika: Tambah, Kurang ( + , - ), Kali, Bagi ( * , / ). Modulus ( % )
+
+karakter LIKE: 
+_ : satu karakter 
+% : panjang tidak terbatas, termasuk tidak ada karakter
+
+//Operator Relasional
+//Operasi Perbandingan
+= Sama dengan
+<> atau != Tidak Sama dengan
+< Kurang dari
+<= Kurang dari atau Sama dengan
+> Lebih dari
+>= Lebih dari atau Sama dengan
+Between Berada pada batas tertentu
+IN Berada di Dalam
+Is Null Cek Null
+Is Not Null Cek bukan Null
+Like Pencarian
+
+//Mengurutkan hasil tampilan 
+select * from dokter order by nama_dokter asc;
+
+//Membatasi hasil query 
+select * from dokter order by nama_dokter asc limit 0,3;
+
+//Pencarian Data Tabel
+select * from pasien where nama like 'jeffrey';
+
+select * from pasien where nama like'a%';
+
+//Perintah where
+//select
+select * from pasien where tempat_tinggal='jakarta';
+
+//update
+update dokter set alamat ='jl. sudirman no 50' where kd_dokter='50001';
+select * from dokter;
+
+//delete
+delete from periksa_pasien where kd_periksa='PP10005';
+select * from periksa_pasien;
+
+select * from obat where stok >=150 order by stok;
+
+//Operator AND
+select * from pasien where nama = 'ardi' and tempat_tinggal = 'jakarta';
+
+//Operator OR 
+select * from pasien where nama ='ardi' or tempat_tinggal ='bekasi';
+
+//Operator NOT
+select * from pasien where not tempat_tinggal ='bekasi';
+
+//Distinct = data sama ditampilkan 1x di 1 baris = apabila 2 baris maka harus mirip kedua
+select * from pasien;
+select distinct tempat_tinggal from pasien;
+select distinct nama, tempat_tinggal from pasien order by tempat_tinggal;
+
+//Between
+select * from pasien where usia between '21' and '23';
+
+//In
+select kd_pasien, nama, alamat from pasien where nama in ('jeffrey');
+
+//As = alias nickname
+select dok.nama_dokter, dok.spesialis, dok.no_telp from dokter as dok;
+
+//Merubah judul kolom
+select nama_dokter as nama, no_telp as no_handphone from dokter;
