@@ -3,14 +3,11 @@ Git Base (Composer [laravel/CI4])
 composer create-project codeigniter4/appstarter project-root
 composer create-project codeigniter4/appstarter ci4 --ignore-platform-reqs
 
-Laravel/CI3/Odoo - PHP 5.6
-composer//docker, Laragon/xampp/service PostgreSQL, extension: odoo snippet, muk_web_theme, ibo icon builder for odoo
-php spark serve/php artisan serve/odoo in service.exe
+laravel composer laragon/www php artisan serv / CI4 xampp/htdocs php spark serv php 5.6 / odoo docker service: PostgreSQL
 env # database.default.database = folder_name
 
 xampp/htdocs /ci3/app/config/.php
 $config['base_url'] = 'http://localhost/ci3';
-
 #if error
 C:\xampp\php\php.ini
 search ;extension=intl ;extension=zip
@@ -23,6 +20,7 @@ P7 app\Views utama.blade.php, barang.blade.php
 P9 app\Database\Migrations 
 php spark migrate:create Mahasiswa
 php spark migrate:create Extends
+php spark migrate:refresh
 
 xampp > mysql start > admin > create database, table, 4 column > navbar "insert"
 app/Config/Database.php
@@ -70,6 +68,60 @@ composer.json
 composer.lock
 "content-hash": "1a8c509ab015c7426367c62fad2d7552",
 
+php spark migrate
+:refresh = destroy, :rollback
+
+php spark make:seeder <>
+php spark db:seed <>
+
 
 ======================
 .gitignore = do not clone to git these files
+
+composer require fakerphp/faker
+
+000webhost:
+Upload Website > ./public_html > unzipper.php + project-root.zip
+> dashboard > klik domain > /unzipper.php > unzip it
+
+./root/public/* > ./public_html
+./root > ./
+
+website menyuruh saya untuk memindahkan direktori "public" dari direktori root coding saya, disini saya namai "project-root" ke direktori yang merebuka buat bernama "public_html"
+maka saat ini ada 2 direktori awal: project-root dan public_html berisi folder public.  
+
+./root/public/index.php
+// require FCPATH . '../app/Config/Paths.php'; //if public in root
+require FCPATH . '../project-root/app/Config/Paths.php'; //if public outside root
+
+./root/env uncomment
+CI_ENVIRONMENT = production
+app.baseURL = 'https://mahasiswamanager.000webhostapp.com'
+database.default.hostname = localhost
+database.default.database = id21640852_ci4
+database.default.username = id21640852_ajiraditsasmoyo
+database.default.password = @As205303
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
+
+./root/app/Common.php
+if (! function_exists('putenv')) {
+    function putenv(string $assignment) {}
+}
+
+// Config/App.php
+  public string $baseURL = 'https://mahasiswamanager.000webhostapp.com/';
+// Database.php
+  public array $default = [
+    'username'     => 'id21640852_ajiraditsasmoyo',
+    'password'     => 'Aa1!Bb2@Cc3#Dd4%',
+    'database'     => 'id21640852_ci4',
+
+/If project is too much
+C:\xampp\php\php.ini
+max_execution_time=300
+C:\xampp\phpMyAdmin\config.inc.php
+$cfg['Servers'][$i]['favorite'] = 'pma__favorite';
+$cfg['ExecTimeLimit'] = 300;
+clear broswer cac

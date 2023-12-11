@@ -1,12 +1,35 @@
 MVC (Model Views Controller) User updates> Controller manipulates> Model updates> View <sees User Artisan/Virtual Host = disimpan dimana2 vs Laravel > buka folder > = hanya di dir webserver app = program yg kita buat>http 	> Controllers	> Middleware > Authenticate	> Models bootstrap > cache config = konfigurasi program kita buat database > migrations > dbms > seeder = generate data ke tabel2 public = folder menampilkan yg diliat user resource = UI yg diliat user routes = pintu gerbang seluruh recourse > web.php = membuat link laravel vendor = library dlm program dibuat artisan = file inputan menjalankan artisan composer.json = tmpt mendefinisikan library composer yg dipakai
+
+create composer.lock
+//laravel 9.2 uses instead of database/seeds
+"autoload": {
+    "classmap": [
+        "database/seeders"
+composer require fideloper/proxy
 composer self-update
 composer global update --ignore-platform-reqs
-composer update --ignore-platform-reqs
 composer install --ignore-platform-reqs
-php artisan help make:seed
+composer update --ignore-platform-reqs
+composer validate
+
+composer require maatwebsite/excel
+composer require realrashid/sweet-alert --with-all-dependencies
+if "barryvdh/laravel-dompdf": "*", =  false
+"barryvdh/laravel-dompdf": "^2.0", =  correct
+
+DOWNLOAD
+PHP 8.3 Non Thread Safe > C:\laragon\bin\php
+Tools > Quick add > Configuration
+*phpmyadmin=https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip
+Tools > Quick add > Configuration > phpmyadmin
+http://localhost/phpmyadmin
+
 composer > C:\laragon\bin\php\php.exe
-Laragon>kanan>PHP>version>7.4>php.ini>memory limit = 25 MB > -1 //unlimited //php -r "echo ini_get('memory_limit').PHP_EOL;"
-cd C:\laragon\www\kuliah_web_fw > composer create-project --prefer-dist laravel/laravel
+Laragon>kanan>PHP>version>7.4>php.ini>memory_limit = 512M > -1 //unlimited //php -r "echo ini_get('memory_limit').PHP_EOL;"
+cd C:\laragon\www\kuliah_web_fw > composer create-project --prefer-dist laravel/laravel:^9.2 laravel
+php.ini ;extension=zip
+php artisan --version / composer.json = Laravel 10.34.2
+
 cd C:\laragon\www\kuliah_web_fw\laravel > composer install 
 php artisan serv
 open folder kuliah_web_fw> cd .\laravel\ > php artisan key:generate
@@ -18,12 +41,18 @@ P9 Migration 127.0.0.1/phpmyadmin/ //menyimpan log update hapus, history
 laragon>tools>quick add>phymyadmin
 .env //konfig //koneksi ke database DB_DATABASE=kuliah_web_fw
 php artisan make:migration //perubahan struktur database/TD=create file untuk merubah
+php artisan migrate
 php artisan migrate:rollback --step=2 //eksekusi up() > create yes //eksekusi down()
 php artisan migrate:status
 P10 app/Models/product.php php artisan make:model Products
+
 P11 Barang.php> use App\Models\Products;
+adding things on composer.json
+cmd cd .\root
 composer require laravelcollective/html "~6.0"
 composer require laracasts/flash
+app\config.php
+
 P12 Postman mengubah model menjadi JSON
 routes>api.php
 P13 config/app.php
@@ -33,3 +62,17 @@ app/Exports - php artisan make:export PlaystationsExport --model=Playstations
 app/Imports - php artisan make:import PlaystationsImport --model=Playstations
 $data = object
 Products = model
+
+database\seeder\DatabaseSeeder.php
+php artisan make:seeder SeederClassName
+php artisan db:seed
+php artisan db:seed --class=SeederClassName
+composer require barryvdh/laravel-dompdf --with-all-dependencies
+
+php artisan migrate:fresh drop and migrate table
+
+config/filter.php
+/validation.php
+app/Entities/Users.php
+app/Filters/Auth.php
+publicAPI = rajaongkir

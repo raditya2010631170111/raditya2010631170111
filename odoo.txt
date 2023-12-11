@@ -5,6 +5,8 @@ Dart: Xamarin / Flutter [C++ 38% CMake 33%] - [1years University]
 Java: Kotlin
 http://localhost:8069/web?debug=1
 
+.js,.csv,.html,.rst,.po,.pot,.md,.css,.scss,.txt
+
 Python.exe: pip install notebook
 jupyter notebook
 pandoc-3.1.9-windows-x86_64.msi pandoc --version
