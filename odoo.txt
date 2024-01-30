@@ -5,6 +5,14 @@ Dart: Xamarin / Flutter [C++ 38% CMake 33%] - [1years University]
 Java: Kotlin
 http://localhost:8069/web?debug=1
 
+from IPython.display import display, Image
+image_url = 'https://raw.githubusercontent.com/raditya2010631170111/python/python-colaboratory/DV/UAS_1.png'
+display(Image(url=image_url))
+
+from google.colab import files
+netflix.to_csv('netflix_cleaned.csv', index=False)
+files.download('netflix_cleaned.csv')
+
 .js,.csv,.html,.rst,.po,.pot,.md,.css,.scss,.txt
 
 Python.exe: pip install notebook
@@ -12,6 +20,11 @@ jupyter notebook
 pandoc-3.1.9-windows-x86_64.msi pandoc --version
 python.exe -m pip install --upgrade pip
 pip install pandas numpy plotly matplotlib wordcloud
+
+xampp: delete database
+Go to wamp/apps/phpmyadmin3.5.1/libraries
+Open the file called "config.default.php"
+Go to line 653 and change $cfg['AllowUserDropDatabase'] = false; to true
 
 base_accounting_kit, 'report_xlsx' jidoka_respartner 
 'depends': ['base', 'account', 'sale', 'account_check_printing', 'base_account_budget'],
@@ -35,6 +48,7 @@ design_process
 jidoka_crm_sample_request
 'depends': ['stock', 'base', 'crm', 'mrp', 'sale', 'jidoka_marketing', 'design_process'],
 
+git remote v- = check link repo
 git config --global user.email "2010631170111@student.unsika.ac.id"
 git config user.name "raditya2010631170111"
 E:\jidoka\odoo14\ckwi-addons git clone <link> <directory> 

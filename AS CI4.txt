@@ -87,9 +87,6 @@ Upload Website > ./public_html > unzipper.php + project-root.zip
 ./root/public/* > ./public_html
 ./root > ./
 
-website menyuruh saya untuk memindahkan direktori "public" dari direktori root coding saya, disini saya namai "project-root" ke direktori yang merebuka buat bernama "public_html"
-maka saat ini ada 2 direktori awal: project-root dan public_html berisi folder public.  
-
 ./root/public/index.php
 // require FCPATH . '../app/Config/Paths.php'; //if public in root
 require FCPATH . '../project-root/app/Config/Paths.php'; //if public outside root
@@ -125,3 +122,6 @@ C:\xampp\phpMyAdmin\config.inc.php
 $cfg['Servers'][$i]['favorite'] = 'pma__favorite';
 $cfg['ExecTimeLimit'] = 300;
 clear broswer cac
+
+    "require-dev": {
+        "fakerphp/faker": "^1.23",

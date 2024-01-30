@@ -1,0 +1,92 @@
+class SaleOrderLine(models.Model):
+    _name = 'sale.order.line'
+	
+	name = fields.Text(string='Description', required=True)
+	product_id = fields.Many2one(
+        'product.product', string='Product', domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
+        change_default=True, ondelete='restrict', check_company=True)  # Unrequired company
+
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'		
+	
+	name = fields.Text('Description', 
+        compute='_compute_name', readonly=False,store=True )
+	name_item = fields.Char('Name')
+	material_finish_id = fields.Many2one('design.material', string='Material')
+	fabric_colour_id = fields.Many2one('res.fabric.colour', string='Fabric Colour')
+	
+	@api.depends('material_finish_id','fabric_colour_id.name','finish_id.name','name_item')
+    def _compute_name(self):
+        material = self.material_finish_id.name
+        for r in self:
+            # product = r.product_id.name
+            # sku = r.sku_id.name
+            # sku = r.sku
+            # cust_ref = r.cust_ref
+            # product_qty = r.product_uom_qty
+            # product_uom = r.product_uom.name
+            fabric_colour = r.fabric_colour_id.name
+            # material = r.material_finishing
+            finish = r.finish_id.name
+            name_item = r.name_item
+
+            # if product == False:
+            #     product = ''
+            if fabric_colour == False:
+                fabric_colour = ''
+            if material == False:
+                material = ''
+            if finish == False:
+                finish = ''
+            if name_item == False:
+                name_item = ''
+            # if sku == False:
+            #     sku = ''
+            # if product_qty == False:
+            #     product_qty = '-'
+            # r.name = "%s %s %s %s %s" %(product,material, finish, sku, fabric_colour)
+            # self.name = "%s \n%s %s \n%s" %(product,material, finish,fabric_colour)
+            self.name = "%s \n%s %s \n%s" %(name_item,material, finish,fabric_colour)
+			
+	<record id="view_order_form_inherit_sale" model="ir.ui.view">
+      <field name="name">sale.order.view.form.inherit</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+		<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/form/group/group/field[@name='product_id']" position="replace">
+          <field name="product_id" required="1" string="Item" 
+          attrs="{'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel'))]}"/>
+          <field name="name_item" attrs="{'invisible': [('parent.state', 'not in', ['draft','cr', 'mo','cr_to_approve','sale', 'done'])],'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel'))]}" />
+          <field name="material_finish_id" string="Material"  
+          attrs="{'readonly': [('state','in',('sr','sr_to_approve','sent','sale','done','cancel'))]}"/> 
+        </xpath>
+
+odoo 14			
+method _compute_name is so that field name sale.order.line is filled with value from field material_finish_id, name_item, fabric_colour_id, etc. But field product_id for some reason also fill it's value to field name even though i didn't included that field on the method
+
+make a new field or something like check_product and linked to product_id
+and add check_product on the method and set it to True to prevent product_id's value filled on it
+
+
+here's the neat thing
+so, field name is filled by value from these
+
+	name_item = fields.Char('Name')
+	material_finish_id = fields.Many2one('design.material', string='Material')
+	fabric_colour_id = fields.Many2one('res.fabric.colour', string='Fabric Colour')
+	
+example i fill value:
+name_item = with "test"
+material_finish_id = with "Woodkind"
+fabric_colour_id = with "Red"
+
+it will display on field name:
+"test
+Woodkind Red"
+
+but if i fill value of product_id, instead of adding new word to those word that already filled, product_id value erased them and fill field name alone
+but if i refill one of field like field name_item with "test"
+
+the old value will reappear:
+"test
+Woodkind Red"

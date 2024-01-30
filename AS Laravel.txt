@@ -71,8 +71,6 @@ composer require barryvdh/laravel-dompdf --with-all-dependencies
 
 php artisan migrate:fresh drop and migrate table
 
-config/filter.php
-/validation.php
-app/Entities/Users.php
-app/Filters/Auth.php
-publicAPI = rajaongkir
+///
+artisan
+vendor/
