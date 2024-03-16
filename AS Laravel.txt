@@ -5,9 +5,9 @@ delete old composer.lock
 "autoload": {
     "classmap": [
         "database/seeders"
+composer self-update = update the composer
 composer validate
 composer update --ignore-platform-reqs = create composer.lock
-composer self-update
 composer global update --ignore-platform-reqs
 composer install --ignore-platform-reqs
 
