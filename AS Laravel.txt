@@ -1,24 +1,23 @@
 MVC (Model Views Controller) User updates> Controller manipulates> Model updates> View <sees User Artisan/Virtual Host = disimpan dimana2 vs Laravel > buka folder > = hanya di dir webserver app = program yg kita buat>http 	> Controllers	> Middleware > Authenticate	> Models bootstrap > cache config = konfigurasi program kita buat database > migrations > dbms > seeder = generate data ke tabel2 public = folder menampilkan yg diliat user resource = UI yg diliat user routes = pintu gerbang seluruh recourse > web.php = membuat link laravel vendor = library dlm program dibuat artisan = file inputan menjalankan artisan composer.json = tmpt mendefinisikan library composer yg dipakai
 
-create composer.lock
+delete old composer.lock
 //laravel 9.2 uses instead of database/seeds
 "autoload": {
     "classmap": [
         "database/seeders"
-composer require fideloper/proxy
+composer validate
+composer update --ignore-platform-reqs = create composer.lock
 composer self-update
 composer global update --ignore-platform-reqs
 composer install --ignore-platform-reqs
-composer update --ignore-platform-reqs
-composer validate
 
+composer require fideloper/proxy
 composer require maatwebsite/excel
 composer require realrashid/sweet-alert --with-all-dependencies
 if "barryvdh/laravel-dompdf": "*", =  false
 "barryvdh/laravel-dompdf": "^2.0", =  correct
 
-DOWNLOAD
-PHP 8.3 Non Thread Safe > C:\laragon\bin\php
+DOWNLOAD PHP 8.3 Non Thread Safe > C:\laragon\bin\php
 Tools > Quick add > Configuration
 *phpmyadmin=https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip
 Tools > Quick add > Configuration > phpmyadmin
