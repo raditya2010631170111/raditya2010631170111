@@ -22,6 +22,7 @@ Tools > Quick add > Configuration
 *phpmyadmin=https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip
 Tools > Quick add > Configuration > phpmyadmin
 http://localhost/phpmyadmin
+.env username, password
 
 composer > C:\laragon\bin\php\php.exe
 Laragon>kanan>PHP>version>7.4>php.ini>memory_limit = 512M > -1 //unlimited //php -r "echo ini_get('memory_limit').PHP_EOL;"
