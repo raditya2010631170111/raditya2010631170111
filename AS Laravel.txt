@@ -74,3 +74,97 @@ php artisan migrate:fresh drop and migrate table
 ///
 artisan
 vendor/
+=======================================================
+Migration
+modul mahasiswa
+users(create_users), job_table(create_job), my_job_table(create_my_job)
+
+modul mitra
+jobs(create-job), company(create-company-account), applied(create-applied-jobs)
+
+modul laporan: unggah-penilaian-bimbingan-aktivitas(laporan)
+
+Models:
+M.mitra
+AppliedJobs.php
+CompanyModels.php
+JobsModels.php
+
+conflict:
+route/web.php 
+(/logout)
+
+style.css
+(/beranda) M.Mahasiswa: login=seeder, Middleware
+(/)
+</unggah)
+
+app/Http/Controllers
+M.mitra 
+Home.php
+JobControllers.php
+LoginControllers.php
+RegisControllers.php
+applyJobs.php
+editProfile.php
+
+M.mahasiswa
+DaftarLamaranController.php
+HalamanController.php
+JobController.php
+SessionController.php
+
+app/Providers
+M.mitra
+AppServiceProvider.php
+use Illuminate\Pagination\Paginator;
+        Paginator::useBootstrapFive();
+RouteServiceProvider.php
+    public const HOME = '/home'; > '/';
+	
+config/auth.php
+            'model' => App\Models\CompanyModels::class,
+		
+M.mahasiswa
+app/Http
+Kernel.php		
+app/Http/Middleware
+ValidateSignature.php
+isLogin.php
+isTamu.php
+	  
+M.mitra
+resource/views
+/companies
+/komponen
+/layouts
+template.blade.php
+/login
+welcome.blade.php
+
+M.mahasiswa
+/layout
+/pages
+/sesi
+
+
+M.mitra			
+public/css/style.css
+	  /img/
+M.mahasiswa
+	  /style.css
+	  /fonts/
+	  /javascript/
+	  /jobs
+	  /modul_mahasiswa-2
+	  /modul_mahasiswa
+m.laporan
+	  /assets/
+	  /img_laporan/
+	  /js/
+	  /vendors_template/
+==============================================
+useless chage:
+app/Http/Middleware/Authenticate.php	
+app/Exception/Handler.php
+app/Config
